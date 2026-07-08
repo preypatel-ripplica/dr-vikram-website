@@ -1,0 +1,2937 @@
+.homePage {
+  --page-gutter: clamp(18px, 2.5vw, 32px);
+  --content-max: 1240px;
+  --section-pad: clamp(28px, 3vw, 48px);
+  --section-space: 72px;
+  width: 100%;
+  padding: 0 var(--page-gutter);
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.hero,
+.aboutSection,
+.expertsSection,
+.treatmentsSection,
+.symptomGuideSection,
+.roboticVisionSection,
+.roboticMovementSection,
+.testimonialsSection,
+.finalCtaSection {
+  --page-gutter: clamp(18px, 2.5vw, 32px);
+  --content-max: 1240px;
+  --section-pad: clamp(28px, 3vw, 48px);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.aboutSection,
+.expertsSection,
+.treatmentsSection,
+.symptomGuideSection,
+.roboticVisionSection,
+.roboticMovementSection,
+.testimonialsSection,
+.finalCtaSection {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.revealPending {
+  opacity: 0.001;
+  transform: translateY(56px) scale(0.97);
+  filter: blur(12px);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChild {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealChildVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChildVisible:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+.revealChildVisible:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.revealChildVisible:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+.hero,
+.aboutSection,
+.expertsSection,
+.treatmentsSection,
+.symptomGuideSection,
+.roboticVisionSection,
+.roboticMovementSection,
+.testimonialsSection {
+  max-width: var(--content-max);
+}
+
+.hero {
+  --hero-visual-edge: max(var(--section-pad), calc((100% - 1240px) / 2 + 48px));
+  max-width: 1600px;
+  position: relative;
+  height: 728px;
+  overflow: hidden;
+  border-radius: 32px;
+  background:
+    url("/assets/figma/home/bg.svg") center / cover no-repeat,
+    #d6f1f6;
+}
+
+.heroCopy {
+  position: absolute;
+  left: max(var(--section-pad), calc((100% - 1240px) / 2 + 48px));
+  top: 113px;
+  z-index: 2;
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #6d8389;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heroText h1,
+.aboutCopy h2 {
+  margin: 0;
+  color: #2c2b3b;
+  font-weight: 500;
+}
+
+.heroText h1 {
+  width: 560px;
+  font-size: 56px;
+  letter-spacing: -1.4px;
+  line-height: 66px;
+}
+
+.heroText h1 span,
+.aboutCopy h2 span {
+  color: #3dc1be;
+}
+
+.heroText p {
+  width: 560px;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+  line-height: 26px;
+}
+
+.heroActions {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.primaryAction,
+.secondaryAction,
+.aboutButton {
+  min-height: 61px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 16px 24px;
+  border-radius: 36px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(29.082px);
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.primaryAction {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+  box-shadow: 0 18px 40px rgba(17, 152, 163, 0.18);
+}
+
+.secondaryAction,
+.aboutButton {
+  border: 1px solid #3dc1be;
+  color: #3dc1be;
+}
+
+.primaryAction:hover,
+.secondaryAction:hover,
+.aboutButton:hover {
+  transform: translateY(-2px);
+}
+
+.aboutButton:hover {
+  background: rgba(61, 193, 190, 0.08);
+}
+
+.heroVisual {
+  position: absolute;
+  right: calc(var(--hero-visual-edge) - 80px);
+  top: 0;
+  width: min(43vw, 683px);
+  height: 728px;
+}
+
+.heroVisual img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.heroCard {
+  position: absolute;
+  right: calc(var(--hero-visual-edge) + 374px);
+  top: 400px;
+  z-index: 3;
+  width: 176px;
+  height: 149px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 0;
+  border-radius: 28px;
+  background: #ffffff;
+  filter: drop-shadow(0 24px 40px rgba(18, 83, 91, 0.12));
+}
+
+.heroCardSecondary {
+  position: absolute;
+  right: calc(var(--hero-visual-edge) - 80px);
+  top: 558px;
+  z-index: 3;
+  width: 265px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 18px 8px 8px;
+  border-radius: 26px;
+  background: #ffffff;
+  filter: drop-shadow(0 24px 40px rgba(18, 83, 91, 0.12));
+}
+
+.heroPatientAvatars {
+  display: flex;
+  justify-content: center;
+  width: 136px;
+  height: 44px;
+  margin-bottom: 16px;
+}
+
+.heroPatientAvatar {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: block;
+  overflow: hidden;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: #edf5f6;
+}
+
+.heroPatientAvatar + .heroPatientAvatar {
+  margin-left: -13.2px;
+}
+
+.heroPatientAvatar img {
+  object-fit: cover;
+}
+
+.heroPatientAvatar:nth-child(2) img {
+  object-position: 52% 18%;
+}
+
+.heroPatientAvatar:nth-child(3) img {
+  object-position: 65% 50%;
+}
+
+.heroPatientAvatar:nth-child(4) img {
+  object-position: 48% 50%;
+}
+
+.heroCard strong {
+  color: #2c2b3b;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 1;
+}
+
+.heroCard > span:not(.heroPatientAvatar) {
+  margin-top: 7px;
+  color: #8c8c90;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.heroExperienceIcon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #3dc1be;
+  color: #ffffff;
+}
+
+.heroExperienceIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.heroCardSecondary strong {
+  color: #2c2b3b;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.15px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.aboutSection {
+  max-width: var(--content-max);
+  margin-top: 72px;
+  padding: 0 var(--section-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(40px, 4vw, 64px);
+}
+
+.aboutCopy {
+  width: 520px;
+  flex: 0 0 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  align-items: flex-start;
+}
+
+.aboutHeadingGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.aboutCopy h2 {
+  width: 520px;
+  font-size: 34px;
+  letter-spacing: -0.8px;
+  line-height: 45px;
+}
+
+.aboutStats {
+  width: 578px;
+  flex: 0 0 578px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.aboutStatsColumn {
+  width: 281px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.aboutStatCard {
+  width: 281px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px;
+  border-radius: 24px;
+  color: #2c2b3b;
+}
+
+.aboutHappy,
+.aboutExperience {
+  height: 161px;
+}
+
+.aboutHappy {
+  background: #f0fbfc;
+}
+
+.aboutTreatments {
+  height: 271px;
+  background: #f1f0fe;
+}
+
+.aboutExperience {
+  background: #dcf6f7;
+}
+
+.aboutStatCard strong {
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -1.44px;
+  line-height: 64px;
+}
+
+.aboutStatCard span {
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.32;
+}
+
+.aboutTreatments span,
+.aboutExperience span {
+  color: #2c2b3b;
+}
+
+.aboutDoctorImage {
+  position: relative;
+  width: 281px;
+  height: 271px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #d6f1f6;
+}
+
+.aboutDoctorImage img {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.expertsSection {
+  max-width: 1280px;
+  margin-top: var(--section-space);
+  padding: 0;
+}
+
+.expertsInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+  align-items: center;
+}
+
+.expertsHeader {
+  width: 723px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+}
+
+.expertsHeader h2 {
+  width: 723px;
+  margin: 0;
+  color: #032126;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1.38px;
+  line-height: normal;
+}
+
+.expertsContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.expertTopRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.expertImageCard {
+  position: relative;
+  flex: 0 0 625px;
+  width: 625px;
+  height: 442px;
+  overflow: hidden;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(214, 241, 246, 0) 46%, rgba(3, 33, 38, 0.13) 100%),
+    #d6f1f6;
+}
+
+.expertImageCard img {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.expertImageCard::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(214, 241, 246, 0) 52%, rgba(3, 33, 38, 0.22) 100%);
+}
+
+.expertProfileCard {
+  width: 631px;
+  height: 442px;
+  align-self: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  border-radius: 24px;
+  background: #f0fbfc;
+}
+
+.expertProfileText {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  color: #2c2b3b;
+}
+
+.expertNameBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.expertNameBlock h3 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -1.44px;
+  line-height: 64px;
+}
+
+.expertNameBlock p,
+.expertProfileText > p,
+.expertChecks p {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: 1.32;
+}
+
+.expertChecks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.expertChecks p {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.expertChecks svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  color: #032126;
+}
+
+.expertFeatureGrid {
+  width: 100%;
+  min-height: 133px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.expertFeatureCard {
+  min-height: 133px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #f0fbfc;
+  text-align: left;
+}
+
+.expertFeatureIcon {
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(61, 193, 190, 0.2);
+  border-radius: 47px;
+  background: #ffffff;
+  color: #3dc1be;
+  filter: drop-shadow(0 1px 22.55px rgba(17, 152, 163, 0.2));
+}
+
+.expertFeatureIcon svg {
+  width: 38px;
+  height: 38px;
+}
+
+.expertFeatureCard h3 {
+  width: 100%;
+  margin: 0 0 6px;
+  color: #2c2b3b;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.66px;
+  line-height: normal;
+}
+
+.expertFeatureCard p {
+  width: 100%;
+  margin: 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.32;
+}
+
+.treatmentsSection {
+  margin-top: 48px;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  overflow: visible;
+}
+
+.treatmentsTop {
+  width: 100%;
+  padding: 0 var(--section-pad);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.treatmentsTitleBlock {
+  width: 436px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.treatmentsTitleBlock h2 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -1.44px;
+  line-height: 64px;
+}
+
+.treatmentsIntro {
+  width: 535px;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: 1.32;
+}
+
+.treatmentsViewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 22px 0 32px;
+}
+
+.treatmentsViewport::before,
+.treatmentsViewport::after {
+  display: none;
+  content: "";
+}
+
+.treatmentsTrack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  will-change: transform;
+}
+
+.treatmentsTrackNext {
+  animation: treatmentsSlideNext 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.treatmentsTrackPrevious {
+  animation: treatmentsSlidePrevious 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.keyTreatmentCard {
+  position: relative;
+  width: 360px;
+  height: 352px;
+  flex: 0 0 360px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 28px;
+  border-radius: 24px;
+  background: #f1f0fe;
+  color: #2c2b3b;
+  cursor: pointer;
+  opacity: 0.58;
+  transform: scale(0.94);
+  transition:
+    opacity 260ms ease,
+    box-shadow 260ms ease,
+    background 260ms ease,
+    transform 260ms ease;
+}
+
+.keyTreatmentCard::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, #f1f0fe 8.52%, rgba(241, 240, 254, 0) 100%);
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+.keyTreatmentCard:hover {
+  opacity: 0.86;
+  transform: scale(0.97);
+  box-shadow: 0 16px 36px rgba(24, 54, 68, 0.07);
+}
+
+.featuredTreatment {
+  width: 430px;
+  height: 400px;
+  flex-basis: 430px;
+  opacity: 1;
+  transform: scale(1);
+  cursor: pointer;
+  box-shadow: 0 16px 36px rgba(24, 54, 68, 0.07);
+}
+
+.featuredTreatment:hover {
+  opacity: 1;
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 24px 54px rgba(24, 54, 68, 0.14);
+}
+
+.featuredTreatment:hover::after {
+  opacity: 0.9;
+}
+
+.featuredTreatment:hover .treatmentCardImage {
+  opacity: 0.34;
+  transform: scale(1.04);
+}
+
+.featuredTreatment::after {
+  opacity: 1;
+}
+
+.treatmentCardImage {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.26;
+  transition:
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.treatmentCardTitleRow,
+.treatmentBullets {
+  position: relative;
+  z-index: 2;
+}
+
+.treatmentCardTitleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.treatmentCardTitleRow h3 {
+  width: 255px;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.78px;
+  line-height: normal;
+}
+
+.treatmentArrow {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: grid;
+  place-items: center;
+  color: #2c2b3b;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.treatmentArrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.keyTreatmentCard:hover .treatmentArrow,
+.featuredTreatment .treatmentArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.featuredTreatment:hover .treatmentArrow {
+  color: #178b99;
+  transform: translateX(4px);
+}
+
+.featuredTreatment:hover .treatmentBullets {
+  transform: translateY(-2px);
+}
+
+.treatmentBullets {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.featuredTreatment .treatmentBullets {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.treatmentBullets p {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: #2c2b3b;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: 1.32;
+}
+
+.treatmentBullets svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  color: #2c2b3b;
+}
+
+.treatmentsFooter {
+  width: 100%;
+  padding: 0 var(--section-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.viewAllTreatments {
+  min-height: 61px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border: 1px solid #3dc1be;
+  border-radius: 36px;
+  color: #3dc1be;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.viewAllTreatments svg {
+  width: 20px;
+  height: 20px;
+}
+
+.viewAllTreatments:hover {
+  background: rgba(61, 193, 190, 0.08);
+  transform: translateY(-2px);
+}
+
+.treatmentControls {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.treatmentNavButton {
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  padding: 16.32px;
+  border: 1.36px solid #322d53;
+  border-radius: 42.16px;
+  background: transparent;
+  color: #322d53;
+  cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease, color 180ms ease;
+}
+
+.treatmentNavButton svg {
+  width: 35.36px;
+  height: 35.36px;
+}
+
+.treatmentNavButton:hover {
+  background: #322d53;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+@keyframes treatmentsSlideNext {
+  from {
+    transform: translateX(388px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes treatmentsSlidePrevious {
+  from {
+    transform: translateX(-388px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.symptomGuideSection {
+  margin-top: 48px;
+  padding: 0 var(--section-pad);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.symptomGuideInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  align-items: center;
+}
+
+.symptomGuideHeader {
+  width: 723px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+}
+
+.symptomGuideHeader h2 {
+  width: 723px;
+  margin: 0;
+  color: #032126;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1.38px;
+  line-height: normal;
+}
+
+.symptomGuidePanel {
+  width: 100%;
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+  padding: clamp(28px, 3vw, 44px);
+  border-radius: 32px;
+  background: #f0fbfc;
+}
+
+.symptomQuestionCard {
+  flex: 1 1 auto;
+  height: 660px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 39.33px;
+  border-radius: 28px;
+  background: #ffffff;
+}
+
+.symptomProgressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.symptomProgressHeader span {
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+}
+
+.symptomProgressHeader button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #39c3cf;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.symptomProgressTrack {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e9f0f2;
+}
+
+.symptomProgressTrack span {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: #39c3cf;
+  transition: width 260ms ease;
+}
+
+.symptomQuestionBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.symptomQuestionBody h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.72px;
+  line-height: normal;
+}
+
+.symptomOptions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 18px;
+}
+
+.symptomOptions button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15.5px 19.5px;
+  border: 1.5px solid #e9f0f2;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #2c2b3b;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.symptomOptions button:hover,
+.selectedSymptomOption {
+  border-color: rgba(57, 195, 207, 0.55) !important;
+  background: #f8feff !important;
+  box-shadow: 0 12px 26px rgba(24, 54, 68, 0.06);
+  transform: translateY(-1px);
+}
+
+.symptomOptions button span {
+  color: #2c2b3b;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.5px;
+}
+
+.symptomQuestionFooter {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 4px;
+}
+
+.symptomBackButton,
+.symptomContinueButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 36px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.symptomBackButton {
+  min-width: 92px;
+  padding: 16px 20px;
+  border: 1px solid #e9f0f2;
+  background: #ffffff;
+  color: rgba(44, 43, 59, 0.62);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.symptomBackButton:disabled {
+  visibility: hidden;
+}
+
+.symptomContinueButton {
+  min-width: 121px;
+  padding: 16px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.symptomContinueButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.symptomContinueButton:not(:disabled):hover,
+.symptomBackButton:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.symptomSideCards {
+  width: 380px;
+  align-self: stretch;
+  flex: 0 0 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.symptomInfoCard,
+.symptomNextCard,
+.symptomHelpCard {
+  width: 100%;
+  border-radius: 24px;
+  background: #ffffff;
+}
+
+.symptomInfoCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 28px;
+}
+
+.symptomRoundIcon,
+.symptomHelpIcon,
+.symptomNextCard li span {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.symptomRoundIcon {
+  width: 52px;
+  height: 52px;
+  background: #f0fbfc;
+  color: #39c3cf;
+}
+
+.symptomRoundIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.symptomInfoCard p {
+  width: 324px;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24.75px;
+}
+
+.symptomInfoCard a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 16px;
+  border: 1px solid #3dc1be;
+  border-radius: 36px;
+  color: #3dc1be;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.symptomNextCard {
+  padding: 29px;
+  border: 1px solid rgba(44, 180, 192, 0.1);
+}
+
+.symptomNextCard h3 {
+  margin: 0 0 16px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19.5px;
+}
+
+.symptomNextCard ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+}
+
+.symptomNextCard li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #2c2b3b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20.3px;
+}
+
+.symptomNextCard li span {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 0.748px solid rgba(61, 193, 190, 0.2);
+  background: #ffffff;
+  color: #39c3cf;
+  filter: drop-shadow(0 0.748px 6.05px rgba(17, 152, 163, 0.13));
+}
+
+.symptomNextCard li svg {
+  width: 16px;
+  height: 16px;
+}
+
+.symptomHelpCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  background: #dcf6f7;
+  color: #2c2b3b;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.symptomHelpCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(24, 54, 68, 0.06);
+}
+
+.symptomHelpIcon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  background: rgba(57, 195, 207, 0.15);
+  color: #39c3cf;
+}
+
+.symptomHelpIcon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.symptomHelpCard span:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.symptomHelpCard strong {
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16.9px;
+}
+
+.symptomHelpCard small {
+  padding-top: 2px;
+  color: #3dc1be;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.symptomHelpCard > svg {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  color: #39c3cf;
+}
+
+.symptomDisclaimer {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.4);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.roboticVisionSection {
+  margin-top: var(--section-space);
+  padding: 0 var(--section-pad);
+}
+
+.roboticVisionInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  align-items: center;
+}
+
+.roboticVisionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.roboticVisionHeader h2 {
+  margin: 0;
+  color: #032126;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1.38px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.roboticVisionHeader h2 span {
+  color: #3dc1be;
+}
+
+.roboticVisionPanel {
+  width: 100%;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  padding: clamp(28px, 3vw, 44px);
+  border-radius: 32px;
+  background: #f0fbfc;
+}
+
+.roboticComparisonColumn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.roboticComparisonCard {
+  --comparison-position: 50%;
+  position: relative;
+  width: 100%;
+  height: 430px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: linear-gradient(141deg, #e8fbfc 0%, #bfeff2 100%);
+  box-shadow: 0 18px 50px rgba(20, 150, 160, 0.12);
+}
+
+.roboticBaseImage,
+.roboticStandardOverlay {
+  position: absolute;
+  inset: 0;
+}
+
+.roboticBaseImage img,
+.roboticStandardOverlay img {
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.roboticStandardOverlay {
+  overflow: hidden;
+  clip-path: inset(0 calc(100% - var(--comparison-position)) 0 0);
+  background: linear-gradient(139deg, #edf5f6 0%, #dce9eb 100%);
+}
+
+.standardPill,
+.roboticPill,
+.standardCaption,
+.roboticCaption {
+  position: absolute;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.standardPill,
+.roboticPill {
+  top: 18.84px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.standardPill {
+  left: 22.22px;
+  color: rgba(3, 33, 38, 0.6);
+}
+
+.roboticPill {
+  right: 14px;
+  color: #39c3cf;
+}
+
+.standardCaption,
+.roboticCaption {
+  bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  opacity: 1;
+  transition: opacity 160ms ease;
+}
+
+.standardCaption {
+  left: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #6e7480;
+}
+
+.roboticCaption {
+  right: 20px;
+  background: rgba(240, 251, 252, 0.85);
+  color: #178b99;
+}
+
+.comparisonCaptionHidden {
+  opacity: 0;
+}
+
+.comparisonDivider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--comparison-position);
+  z-index: 5;
+  width: 2px;
+  transform: translateX(-1px);
+  background: #ffffff;
+}
+
+.comparisonHandle {
+  position: absolute;
+  top: 204px;
+  left: var(--comparison-position);
+  z-index: 6;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #2c2b3b;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 8px 14px rgba(38, 38, 55, 0.18));
+  pointer-events: none;
+}
+
+.comparisonHandle svg {
+  width: 28px;
+  height: 14px;
+}
+
+.comparisonRange {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.roboticComparisonHint {
+  margin: 0;
+  color: #8c8c90;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+  white-space: nowrap;
+}
+
+.roboticVisionCopyCard {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 36px;
+  border-radius: 32px;
+  background: #ffffff;
+  filter: drop-shadow(0 18px 25px rgba(38, 38, 55, 0.08));
+}
+
+.roboticVisionCopy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 12px;
+}
+
+.roboticVisionCopy h3 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.56px;
+  line-height: 33.6px;
+}
+
+.roboticVisionCopy p {
+  width: 100%;
+  margin: 0;
+  color: #6e7480;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 25.5px;
+}
+
+.roboticTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.roboticTags span {
+  min-height: 39.5px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #f1f0fe;
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19.5px;
+}
+
+.roboticNote {
+  width: 100%;
+  margin: 0;
+  padding: 16px 18px 16px 21px;
+  border-left: 3px solid #39c3cf;
+  border-radius: 20px;
+  background: #f3fbfc;
+  color: #505666;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+.roboticVisionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 25px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 36px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.roboticVisionButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(17, 152, 163, 0.18);
+}
+
+.roboticMovementSection {
+  margin-top: var(--section-space);
+  padding: 0 var(--section-pad);
+}
+
+.roboticMovementInner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  align-items: center;
+}
+
+.roboticMovementHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.roboticMovementHeader h2 {
+  margin: 0;
+  color: #032126;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1.38px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.roboticMovementHeader h2 span {
+  color: #3dc1be;
+}
+
+.roboticMovementPanel {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  padding: 50px 52px;
+  border-radius: 40px;
+  background: #f0fbfc;
+}
+
+.movementVisualCard {
+  align-self: stretch;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 32px;
+  background: #ffffff;
+}
+
+.movementToggle {
+  align-self: center;
+  display: flex;
+  gap: 3px;
+  align-items: flex-start;
+  margin-top: 20px;
+  padding: 4px;
+  border-radius: 999px;
+  background: #f0f4f5;
+}
+
+.movementToggle button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #8c8c90;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.movementToggle .activeMovementToggle {
+  background: #ffffff;
+  color: #2c2b3b;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(24, 54, 68, 0.1);
+}
+
+.movementImageWrap {
+  position: relative;
+  width: 100%;
+  height: 327px;
+  margin-top: 0;
+}
+
+.movementImageWrap img {
+  object-fit: contain;
+  object-position: center;
+  animation: movementImageFade 240ms ease;
+}
+
+.movementRangeWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px 20px;
+}
+
+.movementRangeWrap span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 33.5px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: #f0f4f5;
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19.5px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.movementRangeWrap .roboticRangePill {
+  background: #3dc1be;
+  color: #ffffff;
+}
+
+.movementCopyCard {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 39.33px;
+  border-radius: 32px;
+  background: #ffffff;
+  filter: drop-shadow(0 4px 10px rgba(24, 54, 68, 0.05));
+}
+
+.movementCopy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+.movementCopy h3 {
+  width: 408px;
+  max-width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 32.5px;
+}
+
+.movementCopy p {
+  width: 408px;
+  max-width: 100%;
+  margin: 0;
+  color: #6e7480;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 25.5px;
+}
+
+.movementComparisonRows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.movementComparisonRows button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15.5px 19.5px;
+  border: 1.5px solid transparent;
+  border-radius: 16px;
+  background: #f5f7f8;
+  color: #6e7480;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.movementComparisonRows button:hover,
+.movementComparisonRows .activeMovementRow {
+  border-color: rgba(57, 195, 207, 0.35);
+  background: #f0fbfc;
+  color: #2c2b3b;
+}
+
+.movementComparisonRows button:hover {
+  transform: translateY(-1px);
+}
+
+.movementComparisonRows span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.movementComparisonRows strong {
+  color: #8c8c90;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19.5px;
+}
+
+.movementNote {
+  width: 100%;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f3fbfc;
+  color: #505666;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20.8px;
+}
+
+.activeMovementNote {
+  padding-left: 19px;
+  border-left: 3px solid #39c3cf;
+}
+
+.movementButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 25px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 36px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.movementButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(17, 152, 163, 0.18);
+}
+
+@keyframes movementImageFade {
+  from {
+    opacity: 0.72;
+    transform: scale(1.012);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealPending,
+  .revealVisible,
+  .revealChild,
+  .revealChildVisible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+.testimonialsSection {
+  margin-top: var(--section-space);
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+  align-items: center;
+  overflow: visible;
+  padding: 0;
+}
+
+.testimonialsHeader {
+  width: 723px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.testimonialsHeader h2 {
+  width: 723px;
+  margin: 0;
+  color: #032126;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1.38px;
+  line-height: normal;
+}
+
+.testimonialRailWrap {
+  position: relative;
+  width: 100%;
+}
+
+.testimonialRail {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 0 10px;
+}
+
+.testimonialRail::before,
+.testimonialRail::after {
+  display: none;
+  content: "";
+}
+
+.testimonialTrack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  will-change: transform;
+}
+
+.testimonialTrackNext {
+  animation: treatmentsSlideNext 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonialTrackPrevious {
+  animation: treatmentsSlidePrevious 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonialReviewCard {
+  width: 360px;
+  height: 340px;
+  flex: 0 0 360px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px;
+  border-radius: 28px;
+  background: #f8f9f9;
+  backdrop-filter: blur(8px);
+  color: #2c2b3b;
+  cursor: pointer;
+  opacity: 0.58;
+  transform: scale(0.94);
+  transition:
+    opacity 260ms ease,
+    box-shadow 260ms ease,
+    transform 260ms ease;
+}
+
+.testimonialReviewCard:hover {
+  opacity: 0.86;
+  transform: scale(0.97);
+  box-shadow: 0 16px 36px rgba(24, 54, 68, 0.07);
+}
+
+.featuredTestimonial {
+  width: 466px;
+  height: 440px;
+  flex-basis: 466px;
+  opacity: 1;
+  transform: scale(1);
+  cursor: default;
+  box-shadow: 0 16px 36px rgba(24, 54, 68, 0.07);
+}
+
+.featuredTestimonial:hover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.testimonialReviewTop {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.testimonialPerson {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.testimonialAvatar {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;
+  overflow: hidden;
+  border-radius: 35px;
+  background: #dce9eb;
+}
+
+.testimonialAvatar img {
+  object-fit: cover;
+}
+
+.testimonialReviewCard:nth-child(2) .testimonialAvatar img {
+  object-position: 50% 50%;
+}
+
+.testimonialReviewCard:nth-child(3) .testimonialAvatar img {
+  object-position: 48% 20%;
+}
+
+.testimonialPerson h3,
+.testimonialPerson p {
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.32;
+  white-space: nowrap;
+}
+
+.testimonialPerson h3 {
+  color: #2c2b3b;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+}
+
+.testimonialPerson p {
+  padding-top: 4px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 14px;
+  letter-spacing: -0.28px;
+}
+
+.testimonialRating {
+  display: grid;
+  grid-template-columns: 25.714px 42.857px;
+  align-items: start;
+  gap: 8.57px;
+  color: rgba(44, 43, 59, 0.6);
+}
+
+.testimonialRating svg {
+  width: 25.714px;
+  height: 25.714px;
+  margin-top: 2.14px;
+  color: #f6b743;
+}
+
+.testimonialRating span {
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 25.714px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.testimonialReviewCard blockquote {
+  width: 100%;
+  margin: 0;
+  color: rgba(3, 33, 38, 0.4);
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: -0.52px;
+  line-height: normal;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.featuredTestimonial blockquote {
+  font-size: 26px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.testimonialReviewCard blockquote strong {
+  color: rgba(3, 33, 38, 0.8);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+}
+
+.testimonialControls {
+  position: absolute;
+  right: var(--section-pad);
+  top: -92px;
+  display: flex;
+  gap: 12px;
+}
+
+.testimonialControls button {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(50, 45, 83, 0.18);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #322d53;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(24, 54, 68, 0.06);
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.testimonialControls button:hover {
+  background: #322d53;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.testimonialControls svg {
+  width: 22px;
+  height: 22px;
+}
+
+.finalCtaSection {
+  position: relative;
+  width: calc(100% + (var(--page-gutter) * 2));
+  max-width: none;
+  margin: 0 calc(var(--page-gutter) * -1);
+  min-height: 465px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 52px;
+  padding: 96px var(--section-pad) 88px;
+  overflow: hidden;
+  background: #ffffff;
+  text-align: center;
+}
+
+.finalCtaSection::before {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(2600px, 160vw);
+  height: 476px;
+  content: "";
+  pointer-events: none;
+  background: url("/images/bg_2.svg") center top / 100% auto no-repeat;
+  transform: translateX(-50%);
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 82%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+
+.finalCtaContent {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 758px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.finalCtaLabel {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.finalCtaLabel svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #6d8389;
+}
+
+.finalCtaText {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.finalCtaText h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 60px;
+  font-weight: 500;
+  letter-spacing: -1.8px;
+  line-height: 72px;
+}
+
+.finalCtaText h2 span {
+  color: #39c3cf;
+}
+
+.finalCtaText p {
+  width: 612px;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+  line-height: 26px;
+}
+
+.finalCtaActions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+.finalCtaPrimary,
+.finalCtaSecondary {
+  min-height: 61px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 16px 24px;
+  border-radius: 36px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(29.082px);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.finalCtaPrimary {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+}
+
+.finalCtaSecondary {
+  border: 1px solid #3dc1be;
+  color: #3dc1be;
+}
+
+.finalCtaPrimary:hover,
+.finalCtaSecondary:hover {
+  transform: translateY(-2px);
+}
+
+.finalCtaPrimary:hover {
+  box-shadow: 0 18px 40px rgba(17, 152, 163, 0.18);
+}
+
+.finalCtaSecondary:hover {
+  background: rgba(61, 193, 190, 0.08);
+}
+
+@media (max-width: 1280px) {
+  .aboutSection {
+    gap: 64px;
+  }
+
+  .symptomGuidePanel {
+    padding: 36px;
+  }
+
+  .roboticVisionPanel {
+    padding: 40px;
+  }
+
+  .roboticMovementPanel {
+    padding: 40px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    height: auto;
+    padding: 48px 24px 0;
+  }
+
+  .heroCopy,
+  .heroVisual,
+  .heroCard,
+  .heroCardSecondary {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+  }
+
+  .heroCopy,
+  .heroText h1,
+  .heroText p {
+    width: 100%;
+  }
+
+  .heroVisual {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 683 / 728;
+    margin-top: 56px;
+  }
+
+  .heroCard,
+  .heroCardSecondary {
+    display: none;
+  }
+
+  .aboutSection {
+    max-width: 760px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: 0;
+  }
+
+  .aboutCopy,
+  .aboutStats {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .aboutCopy {
+    gap: 48px;
+  }
+
+  .expertsSection {
+    max-width: 760px;
+    padding: 0;
+  }
+
+  .treatmentsSection {
+    max-width: 760px;
+    padding: 40px 0;
+  }
+
+  .symptomGuideSection {
+    max-width: 760px;
+    padding: 0;
+  }
+
+  .roboticVisionSection {
+    max-width: 760px;
+    padding: 0;
+  }
+
+  .roboticMovementSection {
+    max-width: 760px;
+    padding: 0;
+  }
+
+  .testimonialsSection {
+    max-width: 760px;
+    padding: 0;
+  }
+
+  .treatmentsTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .treatmentsTitleBlock,
+  .treatmentsIntro {
+    width: 100%;
+  }
+
+  .symptomGuideHeader,
+  .symptomGuideHeader h2 {
+    width: 100%;
+  }
+
+  .symptomGuidePanel {
+    flex-direction: column;
+  }
+
+  .symptomSideCards {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .symptomInfoCard p {
+    width: 100%;
+  }
+
+  .roboticVisionHeader,
+  .roboticVisionHeader h2 {
+    width: 100%;
+  }
+
+  .roboticVisionHeader h2 {
+    white-space: normal;
+  }
+
+  .roboticVisionPanel {
+    flex-direction: column;
+  }
+
+  .roboticComparisonColumn,
+  .roboticVisionCopyCard {
+    width: 100%;
+  }
+
+  .roboticMovementHeader,
+  .roboticMovementHeader h2 {
+    width: 100%;
+  }
+
+  .roboticMovementHeader h2 {
+    white-space: normal;
+  }
+
+  .roboticMovementPanel {
+    flex-direction: column;
+  }
+
+  .movementVisualCard,
+  .movementCopyCard {
+    width: 100%;
+  }
+
+  .testimonialsHeader,
+  .testimonialsHeader h2 {
+    width: 100%;
+  }
+
+  .expertsHeader,
+  .expertsHeader h2 {
+    width: 100%;
+  }
+
+  .expertTopRow {
+    flex-direction: column;
+  }
+
+  .expertImageCard,
+  .expertProfileCard {
+    width: 100%;
+  }
+
+  .expertImageCard {
+    flex: none;
+  }
+
+  .expertFeatureGrid {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .homePage {
+    --page-gutter: 12px;
+  }
+
+  .heroText h1 {
+    font-size: 44px;
+    letter-spacing: -1.2px;
+    line-height: 52px;
+  }
+
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .aboutSection {
+    margin-top: var(--section-space);
+    gap: 40px;
+  }
+
+  .aboutCopy h2 {
+    width: 100%;
+    font-size: 32px;
+    letter-spacing: -0.96px;
+    line-height: 42px;
+  }
+
+  .aboutStats {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .aboutStatsColumn {
+    width: 100%;
+  }
+
+  .aboutStatCard,
+  .aboutDoctorImage {
+    width: 100%;
+  }
+
+  .aboutHappy,
+  .aboutExperience {
+    min-height: 150px;
+    height: auto;
+  }
+
+  .aboutTreatments,
+  .aboutDoctorImage {
+    min-height: 220px;
+    height: auto;
+  }
+
+  .expertsSection {
+    margin-top: var(--section-space);
+  }
+
+  .treatmentsSection {
+    margin-top: var(--section-space);
+    gap: 40px;
+  }
+
+  .symptomGuideSection {
+    margin-top: var(--section-space);
+    gap: 18px;
+  }
+
+  .roboticVisionSection {
+    margin-top: var(--section-space);
+  }
+
+  .roboticMovementSection {
+    margin-top: var(--section-space);
+  }
+
+  .testimonialsSection {
+    margin-top: var(--section-space);
+    gap: 40px;
+  }
+
+  .finalCtaSection {
+    width: 100%;
+    margin: 0;
+    gap: 40px;
+    padding: 72px 18px 80px;
+  }
+
+  .finalCtaText h2 {
+    font-size: 38px;
+    letter-spacing: 0;
+    line-height: 46px;
+  }
+
+  .finalCtaText p {
+    width: min(100%, 612px);
+    font-size: 17px;
+  }
+
+  .finalCtaActions {
+    width: 100%;
+    max-width: 360px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .finalCtaPrimary,
+  .finalCtaSecondary {
+    width: 100%;
+  }
+
+  .symptomGuideInner {
+    gap: 40px;
+  }
+
+  .symptomGuideHeader h2 {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+    line-height: 46px;
+  }
+
+  .symptomGuidePanel {
+    gap: 24px;
+    padding: 20px;
+    border-radius: 28px;
+  }
+
+  .symptomQuestionCard {
+    height: auto;
+    min-height: 0;
+    gap: 30px;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .symptomQuestionBody h3 {
+    font-size: 22px;
+    letter-spacing: -0.66px;
+  }
+
+  .symptomOptions button {
+    white-space: normal;
+  }
+
+  .symptomQuestionFooter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .symptomBackButton,
+  .symptomContinueButton {
+    width: 100%;
+  }
+
+  .symptomBackButton:disabled {
+    display: none;
+  }
+
+  .symptomDisclaimer {
+    white-space: normal;
+    text-align: left;
+  }
+
+  .roboticVisionInner {
+    gap: 40px;
+  }
+
+  .roboticVisionHeader {
+    gap: 20px;
+  }
+
+  .roboticVisionHeader h2 {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+    line-height: 46px;
+  }
+
+  .roboticVisionPanel {
+    gap: 28px;
+    padding: 20px;
+    border-radius: 28px;
+  }
+
+  .roboticComparisonCard {
+    height: 340px;
+    border-radius: 24px;
+  }
+
+  .comparisonHandle {
+    top: 144px;
+  }
+
+  .roboticCaption {
+    bottom: 12px;
+    right: 20px;
+    max-width: calc(100% - 40px);
+  }
+
+  .roboticPill {
+    right: 12px;
+  }
+
+  .roboticComparisonHint {
+    white-space: normal;
+  }
+
+  .roboticVisionCopyCard {
+    padding: 28px;
+    border-radius: 26px;
+  }
+
+  .roboticVisionCopy h3 {
+    font-size: 24px;
+    letter-spacing: -0.48px;
+    line-height: 30px;
+  }
+
+  .roboticMovementInner {
+    gap: 40px;
+  }
+
+  .roboticMovementHeader {
+    gap: 20px;
+  }
+
+  .roboticMovementHeader h2 {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+    line-height: 46px;
+  }
+
+  .roboticMovementPanel {
+    gap: 28px;
+    padding: 20px;
+    border-radius: 28px;
+  }
+
+  .movementVisualCard {
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    min-height: 0;
+    border-radius: 26px;
+  }
+
+  .movementImageWrap {
+    min-height: 260px;
+    aspect-ratio: 713 / 530;
+  }
+
+  .movementRangeWrap {
+    padding: 12px 16px 18px;
+  }
+
+  .movementToggle button {
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+
+  .movementCopyCard {
+    order: 2;
+    padding: 28px;
+    border-radius: 26px;
+  }
+
+  .movementCopy h3 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .movementComparisonRows button {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .testimonialsHeader {
+    gap: 20px;
+  }
+
+  .testimonialsHeader h2 {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+    line-height: 46px;
+  }
+
+  .testimonialReviewCard {
+    width: calc(100vw - 48px);
+    height: 390px;
+    flex-basis: calc(100vw - 48px);
+    padding: 28px 24px;
+    border-radius: 28px;
+  }
+
+  .testimonialReviewTop {
+    align-items: flex-start;
+  }
+
+  .testimonialPerson {
+    gap: 14px;
+  }
+
+  .testimonialAvatar {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
+
+  .testimonialPerson h3 {
+    font-size: 18px;
+  }
+
+  .testimonialRating {
+    grid-template-columns: 20px 34px;
+    gap: 7px;
+  }
+
+  .testimonialRating svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .testimonialRating span {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .testimonialReviewCard blockquote {
+    font-size: 22px;
+  }
+
+  .testimonialReviewCard blockquote strong {
+    font-size: 21px;
+  }
+
+  .testimonialControls {
+    position: static;
+    justify-content: flex-end;
+    margin-top: 18px;
+  }
+
+  .treatmentsTitleBlock h2 {
+    font-size: 38px;
+    letter-spacing: -1.14px;
+    line-height: 48px;
+  }
+
+  .treatmentsIntro {
+    font-size: 18px;
+  }
+
+  .keyTreatmentCard {
+    width: calc(100vw - 48px);
+    max-width: 411px;
+    flex-basis: calc(100vw - 48px);
+  }
+
+  .treatmentCardTitleRow h3 {
+    width: auto;
+    font-size: 24px;
+  }
+
+  .treatmentBullets p {
+    font-size: 18px;
+  }
+
+  .treatmentsFooter {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .treatmentControls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .expertsHeader h2 {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+    line-height: 46px;
+  }
+
+  .expertImageCard {
+    height: 420px;
+  }
+
+  .expertProfileCard {
+    padding: 32px;
+  }
+
+  .expertNameBlock h3 {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+    line-height: 46px;
+  }
+}

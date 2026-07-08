@@ -1,0 +1,1163 @@
+.patientSupportPage {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.revealPending {
+  opacity: 0.001;
+  transform: translateY(56px) scale(0.97);
+  filter: blur(12px);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChild {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealChildVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChildVisible:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+.revealChildVisible:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.heroSection {
+  position: relative;
+  width: min(calc(100% - clamp(40px, 6vw, 80px)), 1600px);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 32px;
+  background:
+    url("/assets/figma/home/bg.svg") center / cover no-repeat,
+    #d6f1f6;
+  padding: 72px clamp(28px, 3.75vw, 60px);
+}
+
+.heroInner {
+  width: min(100%, 1255px);
+  min-height: 332.5px;
+  display: flex;
+  align-items: center;
+  gap: 196px;
+  margin: 0 auto;
+}
+
+.heroCopy {
+  width: 659px;
+  flex: 0 0 659px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.headingGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.shieldIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.heroText {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.heroText h1 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 60px;
+  font-weight: 500;
+  letter-spacing: -1.8px;
+  line-height: 72px;
+}
+
+.heroText p {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+  line-height: 26px;
+}
+
+.countryWrap {
+  width: 659px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 8.34px;
+  align-items: flex-start;
+  padding-top: 28px;
+}
+
+.countryPill {
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 13px;
+  border: 1px solid rgba(57, 195, 207, 0.3);
+  border-radius: 999px;
+  background: rgba(57, 195, 207, 0.14);
+  color: #2c2b3b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.consultCard {
+  width: 400px;
+  height: 332.5px;
+  flex: 0 0 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 29px 33px;
+  border: 1px solid #e9f0f2;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 0 16px 24px rgba(44, 43, 59, 0.12);
+}
+
+.consultCard h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19.5px;
+  white-space: nowrap;
+}
+
+.stepList {
+  width: 334px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 18px 0 20px;
+}
+
+.stepItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #6e7480;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  white-space: nowrap;
+}
+
+.stepIcon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #f0fbfc;
+}
+
+.videoButton {
+  width: 100%;
+  min-height: 61px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 16px 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 36px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(29.082px);
+}
+
+.availability {
+  width: 334px;
+  height: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0;
+  padding-top: 10px;
+  color: #8c8c90;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.howSection,
+.checklistSection {
+  width: 100%;
+  padding: 0 60px;
+}
+
+.howSection {
+  margin-top: 120px;
+}
+
+.checklistSection {
+  margin-top: 120px;
+}
+
+.sectionStack {
+  width: min(100%, 1280px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  margin: 0 auto;
+}
+
+.centeredHeading {
+  width: min(100%, 723px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.centeredHeading h2 {
+  width: 100%;
+  margin: 0;
+  color: #032126;
+  font-size: 46px;
+  font-weight: 500;
+  letter-spacing: -1.38px;
+  line-height: normal;
+}
+
+.timelinePanel {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  padding: 48px;
+  border-radius: 36px;
+  background: #f0fbfc;
+}
+
+.timelineRail {
+  position: absolute;
+  left: 79px;
+  top: 77px;
+  width: 1px;
+  height: calc(100% - 154px);
+  background: #e9f0f2;
+}
+
+.timelineList {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 31px;
+}
+
+.timelineIcon {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2.462px solid #e9f0f2;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(44, 43, 59, 0.04);
+}
+
+.timelineCard {
+  min-width: 0;
+  flex: 1 1 auto;
+  min-height: 124px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 21.5px 25.5px;
+  border: 1.5px solid #e9f0f2;
+  border-radius: 20px;
+  background: #ffffff;
+  text-align: left;
+}
+
+.timelineCopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stepMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepMeta span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 15px;
+  text-transform: uppercase;
+}
+
+.blue {
+  color: #5b8bf5;
+}
+
+.cyan {
+  color: #39c3cf;
+}
+
+.orange {
+  color: #f59e0b;
+}
+
+.green {
+  color: #10b981;
+}
+
+.stepMeta i {
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: #e9f0f2;
+}
+
+.stepMeta small {
+  color: #8c8c90;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  line-height: 15px;
+}
+
+.timelineCard h3 {
+  margin: 6px 0 0;
+  color: #2c2b3b;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.timelineCard p {
+  max-width: 914px;
+  margin: 6px 0 0;
+  color: #6e7480;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+.checklistPanel {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  padding: 48px;
+  border-radius: 36px;
+  background: #f0fbfc;
+}
+
+.checklistTable {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  border: 1px solid #e9f0f2;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(44, 43, 59, 0.05);
+}
+
+.checklistRow {
+  width: 100%;
+  min-height: 61px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e9f0f2;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+.checklistRow:last-child {
+  border-bottom: 0;
+}
+
+.checklistRowActive {
+  background: #f0fbfc;
+}
+
+.checklistRow input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.fakeCheckbox {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #e9f0f2;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.checklistRowActive .fakeCheckbox {
+  border: 2.063px solid #39c3cf;
+  background: #39c3cf;
+}
+
+.checklistAside {
+  width: 380px;
+  flex: 0 0 380px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.progressCard {
+  width: 100%;
+  height: 253.594px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px 24px;
+  border-radius: 24px;
+  background: #d6f1f6;
+}
+
+.progressCard strong {
+  color: #39c3cf;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 63px;
+}
+
+.progressCard > span {
+  color: #6e7480;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+  border-radius: 999px;
+  background: rgba(57, 195, 207, 0.2);
+}
+
+.progressTrack span {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: #39c3cf;
+  transition: width 180ms ease;
+}
+
+.progressCard p {
+  width: 252px;
+  margin: 20px 0 0;
+  color: #6e7480;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20.8px;
+}
+
+.helpCard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: #dcf6f7;
+  color: #2c2b3b;
+  text-decoration: none;
+}
+
+.helpIcon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(57, 195, 207, 0.15);
+}
+
+.helpCard > span:nth-child(2) {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.helpCard strong {
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16.9px;
+}
+
+.helpCard small {
+  padding-top: 2px;
+  color: #3dc1be;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.faqSection {
+  width: min(100%, 1280px);
+  margin: 120px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 80px 0;
+}
+
+.faqHeading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.faqHeading h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 64px;
+}
+
+.faqList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: 36px;
+  border: 1px solid #e9f0f2;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(44, 43, 59, 0.05);
+}
+
+.faqItem {
+  width: 100%;
+  background: #ffffff;
+}
+
+.faqItem:not(:last-child) {
+  border-bottom: 1px solid #e9f0f2;
+}
+
+.faqButton {
+  width: 100%;
+  min-height: 79px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 24px;
+  border: 0;
+  background: #ffffff;
+  color: #2c2b3b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faqButton img {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  transition: transform 180ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  margin: -10px 0 0;
+  padding: 0 24px 28px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.homeTestimonialsWrap {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.homeTestimonialsWrap > section {
+  margin-top: 0;
+}
+
+.patientTestimonials {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  margin-top: 40px;
+  padding: 0 60px;
+}
+
+.testimonialTrack {
+  width: min(100%, 1400px);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.testimonialCard {
+  width: 466px;
+  height: 440px;
+  flex: 0 0 466px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 32px;
+  border-radius: 32px;
+  background: #f8f9f9;
+  backdrop-filter: blur(8px);
+}
+
+.testimonialTop {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.patient {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.patient img {
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;
+  border-radius: 35px;
+  object-fit: cover;
+  object-position: 56% center;
+}
+
+.patient span {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.patient strong {
+  color: #2c2b3b;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  line-height: 1.32;
+}
+
+.patient small {
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+  line-height: 1.32;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 25.714px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.testimonialCard p {
+  width: 100%;
+  margin: 0;
+  color: rgba(3, 33, 38, 0.4);
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: -0.52px;
+  line-height: normal;
+}
+
+.testimonialCard p strong {
+  color: rgba(3, 33, 38, 0.8);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.32px;
+}
+
+.appointmentWrap {
+  width: 100%;
+  margin-top: 120px;
+}
+
+.finalCta {
+  position: relative;
+  width: 100%;
+  min-height: 565px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+  padding: 100px 32px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.finalCta::before {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(2600px, 160vw);
+  height: 476px;
+  content: "";
+  pointer-events: none;
+  background: url("/images/bg_2.svg") center top / 100% auto no-repeat;
+  transform: translateX(-50%);
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 82%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 12%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+
+.finalCtaHeading {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 758px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.finalCtaHeading > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.finalCta h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 60px;
+  font-weight: 500;
+  letter-spacing: -1.8px;
+  line-height: 72px;
+}
+
+.finalCta h2 span {
+  color: #39c3cf;
+}
+
+.finalCta p {
+  width: min(100%, 612px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+  line-height: 26px;
+}
+
+.finalCtaActions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.primaryCta,
+.secondaryCta {
+  min-height: 61px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: 36px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(29.082px);
+}
+
+.primaryCta {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+}
+
+.secondaryCta {
+  border: 1px solid #3dc1be;
+  color: #3dc1be;
+}
+
+@media (max-width: 1300px) {
+  .heroInner {
+    gap: clamp(40px, 8vw, 120px);
+  }
+
+  .timelinePanel,
+  .checklistPanel {
+    padding: 36px;
+  }
+
+  .timelineRail {
+    left: 67px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .heroInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 48px;
+  }
+
+  .heroCopy {
+    width: min(100%, 659px);
+    flex-basis: auto;
+  }
+
+  .countryWrap {
+    width: min(100%, 659px);
+  }
+
+  .howSection,
+  .checklistSection,
+  .patientTestimonials {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .checklistPanel {
+    flex-direction: column;
+  }
+
+  .checklistAside {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .timelineCard p {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 720px) {
+  .heroSection {
+    width: calc(100% - 24px);
+    padding: 56px 20px;
+    border-radius: 28px;
+  }
+
+  .heroText h1 {
+    font-size: 40px;
+    letter-spacing: -1px;
+    line-height: 50px;
+  }
+
+  .heroText p {
+    font-size: 16px;
+    letter-spacing: -0.24px;
+    line-height: 24px;
+  }
+
+  .consultCard {
+    width: 100%;
+    height: auto;
+    min-height: 332.5px;
+    flex-basis: auto;
+    padding: 28px 24px;
+  }
+
+  .stepList,
+  .availability {
+    width: 100%;
+  }
+
+  .stepItem,
+  .consultCard h2,
+  .availability {
+    white-space: normal;
+  }
+
+  .centeredHeading h2 {
+    font-size: 34px;
+    letter-spacing: -0.8px;
+    line-height: 44px;
+  }
+
+  .howSection,
+  .checklistSection {
+    margin-top: 80px;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .sectionStack {
+    gap: 36px;
+  }
+
+  .timelinePanel,
+  .checklistPanel {
+    padding: 16px;
+    border-radius: 28px;
+  }
+
+  .timelineRail {
+    display: none;
+  }
+
+  .timelineList {
+    gap: 12px;
+  }
+
+  .timelineItem {
+    gap: 10px;
+  }
+
+  .timelineIcon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .timelineIcon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .timelineCard {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .timelineCard p {
+    font-size: 13px;
+    line-height: 20.8px;
+  }
+
+  .checklistPanel {
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .checklistTable {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .checklistRow {
+    min-height: auto;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .checklistRow > span:first-child {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .fakeCheckbox {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+    margin-top: 1px;
+  }
+
+  .checklistAside {
+    gap: 14px;
+  }
+
+  .progressCard {
+    height: auto;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .progressCard strong {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .progressTrack {
+    margin-top: 14px;
+  }
+
+  .progressCard p {
+    width: 100%;
+    margin-top: 14px;
+    font-size: 12.5px;
+    line-height: 20px;
+  }
+
+  .helpCard {
+    gap: 12px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .helpIcon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .faqSection {
+    width: calc(100% - 40px);
+    padding-top: 56px;
+  }
+
+  .faqHeading h2 {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+    line-height: 42px;
+  }
+
+  .testimonialCard {
+    width: 320px;
+    flex-basis: 320px;
+    padding: 24px;
+  }
+
+  .testimonialCard p,
+  .testimonialCard p strong {
+    font-size: 22px;
+  }
+
+  .finalCta h2 {
+    font-size: 38px;
+    letter-spacing: -1px;
+    line-height: 48px;
+  }
+
+  .finalCtaActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

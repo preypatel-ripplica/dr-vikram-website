@@ -1,0 +1,490 @@
+.blogsPage {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.revealPending {
+  opacity: 0.001;
+  transform: translateY(48px) scale(0.985);
+  filter: blur(10px);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 820ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChild {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.revealChildVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 680ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 680ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChildVisible:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.revealChildVisible:nth-child(3) {
+  transition-delay: 150ms;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.shieldIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 565px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+  padding: 100px 32px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.hero::before {
+  position: absolute;
+  left: 50%;
+  top: 64px;
+  width: min(1800px, 112vw);
+  height: 476px;
+  content: "";
+  pointer-events: none;
+  background: url("/images/bg_2.svg") center top / 100% auto no-repeat;
+  opacity: 1;
+  transform: translateX(-50%);
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
+.heroHeading,
+.heroArrow {
+  position: relative;
+  z-index: 1;
+}
+
+.heroHeading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.heroText {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.heroText h1 {
+  width: min(100%, 920px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 60px;
+  font-weight: 500;
+  letter-spacing: -1.8px;
+  line-height: 72px;
+}
+
+.heroText h1 span {
+  color: #39c3cf;
+}
+
+.heroText p {
+  width: min(100%, 612px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+  line-height: 26px;
+}
+
+.heroArrow {
+  position: relative;
+  width: 32px;
+  height: 58px;
+  flex: 0 0 58px;
+}
+
+.blogGridSection {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  padding: 0;
+}
+
+.tabsWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tabs {
+  width: 517.203px;
+  max-width: calc(100vw - 40px);
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: #f0f4f5;
+}
+
+.tabs button {
+  flex: 1 1 0;
+  min-height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #8c8c90;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-transform: capitalize;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 160ms ease, box-shadow 160ms ease, color 160ms ease;
+}
+
+.tabs button.activeTab {
+  background: #ffffff;
+  color: #2c2b3b;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(24, 54, 68, 0.1);
+}
+
+.blogGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 33px 24px;
+}
+
+.blogCard {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 28px;
+  border-radius: 24px;
+  background: #f0fbfc;
+}
+
+.blogImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 347 / 201;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.blogImageAsset {
+  object-fit: cover;
+  object-position: 56% center;
+}
+
+.cardBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 16.5px;
+  white-space: nowrap;
+}
+
+.blue {
+  background: rgba(91, 139, 245, 0.09);
+  color: #5b8bf5;
+}
+
+.orange {
+  background: rgba(245, 158, 11, 0.09);
+  color: #f59e0b;
+}
+
+.pink {
+  background: rgba(236, 72, 153, 0.09);
+  color: #ec4899;
+}
+
+.dot {
+  color: rgba(3, 33, 38, 0.5);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+  line-height: 1.32;
+}
+
+.readTime {
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.blogCard h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.72px;
+  line-height: normal;
+}
+
+.blogCard p {
+  width: 100%;
+  margin: 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.32;
+}
+
+.readMore {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+  color: #032126;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.readMore img {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.faqSection {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 80px 0;
+}
+
+.faqHeading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.faqHeading h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 64px;
+}
+
+.faqList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  margin-top: 36px;
+  border: 1px solid #e9f0f2;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(44, 43, 59, 0.05);
+}
+
+.faqItem {
+  width: 100%;
+  background: #ffffff;
+}
+
+.faqItem:not(:last-child) {
+  border-bottom: 1px solid #e9f0f2;
+}
+
+.faqButton {
+  width: 100%;
+  min-height: 79px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 24px;
+  border: 0;
+  background: #ffffff;
+  color: #2c2b3b;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faqButton img {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  transition: transform 180ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.faqAnswer {
+  width: 100%;
+  margin: -10px 0 0;
+  padding: 0 24px 28px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@media (max-width: 1320px) {
+  .blogGridSection,
+  .faqSection {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (max-width: 980px) {
+  .hero {
+    min-height: auto;
+    padding: 72px 20px;
+  }
+
+  .heroText h1 {
+    font-size: 44px;
+    letter-spacing: -1.2px;
+    line-height: 54px;
+  }
+
+  .blogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .heroText h1 {
+    font-size: 36px;
+    letter-spacing: -0.8px;
+    line-height: 44px;
+  }
+
+  .heroText p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .tabsWrap {
+    display: none;
+  }
+
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .blogCard {
+    padding: 24px 20px;
+  }
+
+  .faqHeading h2 {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+    line-height: 42px;
+  }
+
+  .faqButton {
+    padding: 22px 20px;
+  }
+}

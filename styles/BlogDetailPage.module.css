@@ -1,0 +1,770 @@
+.blogDetailPage {
+  width: 100%;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.hero {
+  width: min(100%, 1400px);
+  margin: 0 auto;
+  padding: 80px 60px 0;
+}
+
+.readTime {
+  margin: 0 0 29px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+}
+
+.hero h1 {
+  width: min(100%, 1288px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 52.9px;
+}
+
+.heroSummary {
+  width: min(100%, 1155px);
+  max-width: 1155px;
+  margin: 16px 0 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 28.9px;
+}
+
+.heroImage {
+  position: relative;
+  width: 100%;
+  height: 430px;
+  margin-top: 32px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f0fbfc;
+}
+
+.heroImage img,
+.experienceImage img {
+  object-fit: cover;
+  object-position: 56% center;
+}
+
+.heroImage::after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 79.1%;
+  content: "";
+  background: linear-gradient(90deg, rgba(44, 43, 59, 0.35) 0%, rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+.heroImage span {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.bodyShell {
+  width: min(100%, 1400px);
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  margin: 50px auto 0;
+  padding: 0 60px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 92px;
+  width: 220px;
+  flex: 0 0 220px;
+  padding: 60px 0 40px;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebarNav a {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 9px 12px 9px 14px;
+  border-left: 2px solid transparent;
+  border-radius: 10px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 19.5px;
+  text-decoration: none;
+}
+
+.sidebarNav .activeNavItem {
+  padding-left: 12px;
+  background: #f0fbfc;
+  color: #178b99;
+  font-weight: 600;
+}
+
+.sidebarCta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 32px;
+  padding: 20px 16px;
+  border-radius: 20px;
+  background: #dcf6f7;
+}
+
+.sidebarCta strong {
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19.5px;
+}
+
+.sidebarCta p {
+  width: 188px;
+  margin: 8px 0 14px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.sidebarCta a,
+.continueButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 62px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sidebarCta a {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.article {
+  width: 980px;
+  max-width: 980px;
+  flex: 0 0 980px;
+}
+
+.overviewAnchor {
+  height: 0;
+  scroll-margin-top: 120px;
+}
+
+.contentSection,
+.symptomSection,
+.faqSection {
+  width: 100%;
+  border-bottom: 1px solid #e9f0f2;
+  scroll-margin-top: 120px;
+}
+
+.contentSection {
+  padding: 56px 0 57px;
+}
+
+.contentSection:first-of-type {
+  padding-top: 60px;
+}
+
+.symptomSection {
+  padding: 80px 0 81px;
+}
+
+.faqSection {
+  padding: 80px 0;
+}
+
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.shieldIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.sectionHeading h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 64px;
+}
+
+.sectionHeading h2 span {
+  color: #39c3cf;
+}
+
+.richText {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 24px;
+}
+
+.richText p,
+.optionContent p,
+.smallNote {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26.4px;
+}
+
+.articleSubsection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.articleSubsection h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40.8px;
+}
+
+.articleSubsection .richText {
+  margin-top: 0;
+}
+
+.sizeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.sizeCard {
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 24px;
+  border: 2px solid #e9f0f2;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.sizeCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sizeIcon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid #e9f0f2;
+  border-radius: 18px;
+  background: #f7fafb;
+}
+
+.sizeCard strong {
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.sizeCard p {
+  margin: 12px 0 0;
+  color: #6e7480;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.optionCard {
+  min-height: 137px;
+  display: flex;
+  gap: 22px;
+  padding: 26px 28px;
+  border: 1px solid #e9f0f2;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.optionIcon {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #dcf6f7;
+}
+
+.optionContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.optionHeader {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.optionHeader h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.optionHeader span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f0fbfc;
+  color: #178b99;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.noteBox {
+  width: 100%;
+  margin: 22px 0 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #f5f0ff;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 14px;
+  line-height: 22.4px;
+}
+
+.symptomPanel {
+  margin-top: 40px;
+  padding: 36px;
+  border-radius: 36px;
+  background: #f0fbfc;
+  box-shadow: 0 14px 40px rgba(17, 152, 163, 0.08);
+}
+
+.symptomCard {
+  min-height: 612.5px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 28px;
+  background: #ffffff;
+}
+
+.symptomMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(44, 43, 59, 0.45);
+  font-size: 11px;
+  line-height: 16.5px;
+}
+
+.symptomMeta button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #39c3cf;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.symptomProgress {
+  height: 4px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e9f0f2;
+}
+
+.symptomProgress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #39c3cf;
+  transition: width 180ms ease;
+}
+
+.symptomBody {
+  margin-top: 40px;
+}
+
+.symptomBody h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.symptomOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.symptomOptions button {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 18px;
+  border: 1.5px solid #e9f0f2;
+  border-radius: 16px;
+  background: #ffffff;
+  color: rgba(44, 43, 59, 0.72);
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  line-height: 22.5px;
+  text-align: left;
+}
+
+.symptomOptions .selectedSymptomOption,
+.symptomOptions button:hover {
+  border-color: #3dc1be;
+  background: #f0fbfc;
+  color: #178b99;
+}
+
+.continueButton {
+  width: 133px;
+  min-height: 59px;
+  margin: 40px 0 0 auto;
+  padding: 16px 24px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.continueButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.smallNote {
+  margin-top: 16px;
+  color: rgba(44, 43, 59, 0.45);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.experienceCard {
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 24px;
+  background: #f0fbfc;
+}
+
+.experienceImage {
+  position: relative;
+  height: 392px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.experienceCard blockquote {
+  margin: 24px 0 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+}
+
+.experienceCard > p {
+  margin: 8px 0 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.statCard {
+  min-height: 98px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 25px 23px;
+  border: 1px solid #e9f0f2;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(44, 43, 59, 0.05);
+}
+
+.statIcon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #f0fbfc;
+}
+
+.statCard strong {
+  color: #2c2b3b;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.statCard p {
+  margin: 4px 0 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.faqList {
+  width: 100%;
+  margin-top: 36px;
+  overflow: hidden;
+  border: 1px solid #e9f0f2;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.faqItem {
+  border-bottom: 1px solid #e9f0f2;
+}
+
+.faqItem:last-child {
+  border-bottom: 0;
+}
+
+.faqItem button {
+  width: 100%;
+  min-height: 79px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 24px;
+  border: 0;
+  background: #ffffff;
+  color: #2c2b3b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22.5px;
+  text-align: left;
+}
+
+.faqItem p {
+  margin: -8px 0 0;
+  padding: 0 56px 26px 24px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.faqIconOpen {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 1160px) {
+  .bodyShell {
+    gap: 40px;
+  }
+
+  .article {
+    width: calc(100vw - 400px);
+    flex-basis: calc(100vw - 400px);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 42px 20px 0;
+  }
+
+  .readTime {
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .hero h1,
+  .sectionHeading h2 {
+    font-size: clamp(30px, 8vw, 34px);
+    letter-spacing: -0.8px;
+    line-height: 1.22;
+  }
+
+  .heroSummary {
+    font-size: 15px;
+    line-height: 24.5px;
+  }
+
+  .bodyShell {
+    display: block;
+    margin-top: 0;
+    padding: 0 20px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .article {
+    width: 100%;
+    max-width: none;
+    flex-basis: auto;
+  }
+
+  .contentSection,
+  .contentSection:first-of-type,
+  .symptomSection,
+  .faqSection {
+    padding: 56px 0;
+  }
+
+  .richText p,
+  .optionContent p,
+  .smallNote {
+    font-size: 15px;
+    line-height: 24.5px;
+  }
+
+  .articleSubsection {
+    margin-top: 32px;
+  }
+
+  .articleSubsection h3 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+
+  .sizeGrid,
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .optionCard {
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px;
+  }
+
+  .symptomPanel,
+  .experienceCard {
+    margin-top: 32px;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .symptomCard {
+    min-height: auto;
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .symptomBody {
+    margin-top: 28px;
+  }
+
+  .symptomBody h3 {
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .continueButton {
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .experienceImage,
+  .heroImage {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 18px;
+  }
+
+  .heroImage span {
+    left: 14px;
+    bottom: 14px;
+    max-width: calc(100% - 28px);
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .faqItem button {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .faqItem p {
+    padding: 0 20px 20px;
+  }
+}

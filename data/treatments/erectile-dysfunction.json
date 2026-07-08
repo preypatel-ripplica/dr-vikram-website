@@ -1,0 +1,185 @@
+{
+  "slug": "erectile-dysfunction",
+  "metaTitle": "Erectile Dysfunction Treatment | Dr. Vikram",
+  "metaDescription": "Erectile dysfunction evaluation, causes, diagnosis, medicines, lifestyle care, treatment options, and follow-up with Dr. Vikram.",
+  "readTime": "7 min read",
+  "hero": {
+    "title": "Erectile dysfunction",
+    "highlight": "private diagnosis and treatment",
+    "summary": "Get confidential care for difficulty getting or keeping an erection. Understand causes, tests, treatment options, and follow-up.",
+    "image": "/assets/treatments/treatment_6.jpeg",
+    "imageCaption": "Dr. Vikram · Urologist & Robotic Surgeon"
+  },
+  "sidebar": {
+    "items": [
+      { "label": "Overview", "href": "#overview" },
+      { "label": "Symptoms", "href": "#about-cancer" },
+      { "label": "When to consult", "href": "#symptom-check" },
+      { "label": "Diagnosis and tests", "href": "#treatment-journey" },
+      { "label": "Treatment options", "href": "#our-experience" },
+      { "label": "Recovery and follow-up", "href": "#patient-care-guide" },
+      { "label": "FAQs", "href": "#common-questions" }
+    ],
+    "ctaTitle": "Need private help?",
+    "ctaText": "Book a confidential consultation."
+  },
+  "overview": {
+    "eyebrow": "Condition overview",
+    "titlePrefix": "What is",
+    "titleHighlight": "erectile dysfunction?",
+    "body": [
+      "Erectile dysfunction means difficulty getting or keeping an erection firm enough for sex. It is common and treatable.",
+      "ED can be linked to diabetes, blood pressure, heart health, stress, anxiety, low testosterone, medicines, smoking, alcohol, obesity, sleep problems, or nerve and blood flow issues."
+    ],
+    "subsections": [
+      {
+        "title": "Symptoms",
+        "body": [
+          "Symptoms include getting an erection sometimes but not every time, losing erection too early, weak erection, reduced confidence, or no erection.",
+          "ED may also occur with low desire, early ejaculation, urinary symptoms, or fertility concerns."
+        ]
+      },
+      {
+        "title": "When to consult a urologist",
+        "body": [
+          "Consult a urologist if erection difficulty lasts more than a few weeks, affects confidence, affects relationship, or happens with diabetes, blood pressure, or heart risk.",
+          "You should also consult before taking pills on your own, especially if you use heart medicines or nitrates."
+        ]
+      },
+      {
+        "title": "Diagnosis and tests",
+        "body": [
+          "Evaluation may include medical history, sexual history, medicine review, physical examination, blood sugar, lipid profile, testosterone, thyroid tests, and other tests when needed.",
+          "The aim is to treat the cause and improve sexual function safely."
+        ]
+      }
+    ]
+  },
+  "symptomCheck": {
+    "eyebrow": "When to consult",
+    "title": "Which ED concern should be reviewed?",
+    "steps": [
+      {
+        "question": "What is happening?",
+        "options": ["Weak erection", "Erection does not last", "No erection", "Low desire", "Side effect from medicine"]
+      },
+      {
+        "question": "Do you have any health condition?",
+        "options": ["Diabetes", "Blood pressure", "Heart history", "Stress or anxiety", "No major condition"]
+      },
+      {
+        "question": "What would help now?",
+        "options": ["Book appointment", "Understand tests", "Discuss medicines", "Private second opinion"]
+      }
+    ],
+    "note": "This checklist helps organize concerns. It does not replace a urology consultation."
+  },
+  "journey": {
+    "eyebrow": "Diagnosis and tests",
+    "icon": "treatment-journey",
+    "title": "ED care, step by step",
+    "defaultActiveStep": 0,
+    "steps": [
+      {
+        "label": "01",
+        "title": "Consultation",
+        "heading": "Consultation",
+        "subheading": "Private discussion",
+        "description": "Dr. Vikram reviews symptoms, health history, medicines, lifestyle, stress, and relationship concerns with privacy.",
+        "checklist": ["Share diabetes, BP, or heart history", "List current medicines", "Tell the doctor what treatment you tried"]
+      },
+      {
+        "label": "02",
+        "title": "Testing",
+        "heading": "Testing",
+        "subheading": "Find causes",
+        "description": "Tests may check sugar, cholesterol, hormones, thyroid, and other risk factors.",
+        "checklist": ["Review blood sugar", "Check testosterone if needed", "Discuss heart safety before medicines"]
+      },
+      {
+        "label": "03",
+        "title": "Treatment Plan",
+        "heading": "Treatment Plan",
+        "subheading": "Choose safe treatment",
+        "description": "Treatment may include lifestyle changes, counseling support, medicines, hormone correction, devices, injections, or implant discussion in selected cases.",
+        "checklist": ["Understand safe medicine use", "Discuss side effects", "Plan lifestyle changes"]
+      },
+      {
+        "label": "04",
+        "title": "Treatment",
+        "heading": "Treatment",
+        "subheading": "Start carefully",
+        "description": "Treatment is started based on safety, cause, preference, and response.",
+        "checklist": ["Follow dose instructions", "Do not mix unsafe medicines", "Report side effects"]
+      },
+      {
+        "label": "05",
+        "title": "Recovery",
+        "heading": "Recovery",
+        "subheading": "Improve confidence",
+        "description": "Follow-up checks response, side effects, confidence, and any need to change treatment.",
+        "checklist": ["Track response", "Review side effects", "Continue lifestyle changes"]
+      },
+      {
+        "label": "06",
+        "title": "Follow-up",
+        "heading": "Follow-up",
+        "subheading": "Long-term health",
+        "description": "ED can be linked to heart and metabolic health, so follow-up may include risk control.",
+        "checklist": ["Control sugar and BP", "Review medicines", "Return if symptoms change"]
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "Treatment options",
+    "title": "Treatment options for erectile dysfunction",
+    "body": [
+      "ED treatment is personal. It should be safe, private, and matched to the cause.",
+      "Options may include lifestyle changes, medicines, hormone treatment, counseling support, vacuum devices, injections, or penile implant discussion in selected cases."
+    ],
+    "featureTitle": "Private ED care",
+    "featureText": "Care is planned around safety, health conditions, confidence, relationship goals, and treatment response.",
+    "video": {
+      "image": "/assets/treatments/urethral-stricture-content.jpg",
+      "title": "\"ED is common and treatable. The first step is a private and honest discussion.\"",
+      "byline": "Dr. Vikram · Urologist, Robotic Surgeon"
+    },
+    "stats": [
+      { "value": "5K+", "label": "Patients guided", "icon": "stat-cases" },
+      { "value": "20+", "label": "Years of experience", "icon": "stat-experience" },
+      { "value": "5K+", "label": "Private consultations", "icon": "stat-success" }
+    ]
+  },
+  "careGuide": {
+    "eyebrow": "Recovery and follow-up",
+    "icon": "care-check",
+    "title": "Before, during, and after ED care",
+    "intro": "ED care improves when health causes and confidence are addressed together.",
+    "tabs": [
+      {
+        "label": "Before Treatment",
+        "items": ["List current medicines", "Bring diabetes, BP, and heart reports if available", "Share past ED medicines tried", "Avoid self-medicating", "Share stress or sleep concerns", "Ask about safety"]
+      },
+      {
+        "label": "During Treatment",
+        "items": ["Understand the cause", "Discuss medicine safety", "Ask about side effects", "Review lifestyle changes", "Set realistic expectations"]
+      },
+      {
+        "label": "After Treatment",
+        "items": ["Track response", "Report side effects", "Control sugar and blood pressure", "Continue exercise and sleep improvement", "Review treatment if response is poor", "Attend follow-up"]
+      }
+    ],
+    "note": "Your plan will depend on health conditions, medicines, test results, and treatment goals."
+  },
+  "faqs": {
+    "eyebrow": "FAQs",
+    "title": "Frequently asked questions",
+    "items": [
+      { "question": "Is ED a normal part of aging?", "answer": "ED becomes more common with age, but it is not something you have to ignore." },
+      { "question": "Can diabetes cause ED?", "answer": "Yes. Diabetes can affect blood vessels and nerves that help erections." },
+      { "question": "Can I take ED pills without a doctor?", "answer": "It is safer to consult first, especially if you take heart medicines or nitrates." },
+      { "question": "Can stress cause ED?", "answer": "Yes. Stress, anxiety, sleep issues, and relationship concerns can contribute." },
+      { "question": "Is treatment confidential?", "answer": "Yes. ED concerns are handled privately and respectfully." }
+    ]
+  }
+}

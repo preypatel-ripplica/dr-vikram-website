@@ -1,0 +1,185 @@
+{
+  "slug": "urological-cancer",
+  "metaTitle": "Urological Cancer Treatment | Dr. Vikram",
+  "metaDescription": "Urological cancer evaluation, diagnosis, treatment planning, surgery options, and follow-up care with Dr. Vikram.",
+  "readTime": "8 min read",
+  "hero": {
+    "title": "Urological cancer care",
+    "highlight": "clear diagnosis and treatment planning",
+    "summary": "Get clear guidance for prostate, bladder, kidney, testicular, and other urinary cancers. Understand symptoms, tests, treatment options, recovery, and follow-up.",
+    "image": "/assets/treatments/treatment_3.jpeg",
+    "imageCaption": "Dr. Vikram · Urologist & Robotic Surgeon"
+  },
+  "sidebar": {
+    "items": [
+      { "label": "Overview", "href": "#overview" },
+      { "label": "Symptoms", "href": "#about-cancer" },
+      { "label": "When to consult", "href": "#symptom-check" },
+      { "label": "Diagnosis and tests", "href": "#treatment-journey" },
+      { "label": "Treatment options", "href": "#our-experience" },
+      { "label": "Recovery and follow-up", "href": "#patient-care-guide" },
+      { "label": "FAQs", "href": "#common-questions" }
+    ],
+    "ctaTitle": "Need a cancer opinion?",
+    "ctaText": "Share your reports and plan the next step."
+  },
+  "overview": {
+    "eyebrow": "Condition overview",
+    "titlePrefix": "What is",
+    "titleHighlight": "urological cancer?",
+    "body": [
+      "Urological cancer includes cancers of the prostate, bladder, kidney, testicles, penis, ureter, and other parts of the urinary system. These conditions can feel frightening, but a clear plan makes the journey easier to understand.",
+      "The right care depends on the cancer type, stage, grade, scan findings, biopsy report, general health, and personal goals. Dr. Vikram reviews each detail and explains the next step in simple language."
+    ],
+    "subsections": [
+      {
+        "title": "Symptoms",
+        "body": [
+          "Common warning signs include blood in urine, a testicular lump, swelling, side pain, unexplained weight loss, repeated urinary symptoms, weak urine flow, or pain that does not settle.",
+          "Some cancers may not cause symptoms early. A scan, PSA test, cystoscopy, biopsy, or routine check may find a problem before symptoms become obvious."
+        ]
+      },
+      {
+        "title": "When to consult a urologist",
+        "body": [
+          "Consult a urologist if you notice blood in urine, a testicular lump, repeated urinary symptoms, abnormal PSA, a kidney mass on scan, or a biopsy report that needs review.",
+          "You should also seek review if you have been advised surgery, want a second opinion, or need help understanding cancer stage and treatment choices."
+        ]
+      },
+      {
+        "title": "Diagnosis and tests",
+        "body": [
+          "Tests may include urine tests, blood tests, PSA, ultrasound, CT, MRI, PET scan, cystoscopy, biopsy, pathology review, and tumor markers when needed.",
+          "The aim is to confirm the cancer type, stage, grade, spread, and fitness for treatment before making a decision."
+        ]
+      }
+    ]
+  },
+  "symptomCheck": {
+    "eyebrow": "When to consult",
+    "title": "Which cancer concern do you want reviewed?",
+    "steps": [
+      {
+        "question": "What is your main concern?",
+        "options": ["Blood in urine", "Abnormal PSA", "Kidney mass on scan", "Testicular lump or swelling", "I already have biopsy reports"]
+      },
+      {
+        "question": "What do you have with you?",
+        "options": ["Scan reports", "Biopsy or pathology report", "Blood reports", "No reports yet", "Previous treatment summary"]
+      },
+      {
+        "question": "What would help now?",
+        "options": ["Book appointment", "Review my reports", "Understand treatment options", "Ask about surgery"]
+      }
+    ],
+    "note": "This checklist helps organize concerns. It does not diagnose cancer."
+  },
+  "journey": {
+    "eyebrow": "Diagnosis and tests",
+    "icon": "treatment-journey",
+    "title": "Cancer diagnosis and treatment, step by step",
+    "defaultActiveStep": 0,
+    "steps": [
+      {
+        "label": "01",
+        "title": "Consultation",
+        "heading": "Consultation",
+        "subheading": "Review symptoms and reports",
+        "description": "Dr. Vikram reviews symptoms, medical history, scan reports, biopsy reports, medicines, and previous treatment details.",
+        "checklist": ["Bring scans, biopsy reports, blood reports, and discharge papers", "Share current medicines and health conditions", "Write down your main questions"]
+      },
+      {
+        "label": "02",
+        "title": "Diagnosis",
+        "heading": "Diagnosis",
+        "subheading": "Confirm type and stage",
+        "description": "The team reviews tests to understand the cancer type, grade, stage, and whether more tests are needed.",
+        "checklist": ["Review cancer type and grade", "Check if more imaging is needed", "Understand what stage means"]
+      },
+      {
+        "label": "03",
+        "title": "Treatment Options",
+        "heading": "Treatment Options",
+        "subheading": "Compare safe choices",
+        "description": "Options may include active surveillance, surgery, endoscopic treatment, radiation, medicines, chemotherapy, immunotherapy, or referral coordination.",
+        "checklist": ["Compare benefits and risks", "Discuss robotic or minimally invasive options if suitable", "Understand recovery time"]
+      },
+      {
+        "label": "04",
+        "title": "Treatment",
+        "heading": "Treatment",
+        "subheading": "Plan treatment clearly",
+        "description": "If treatment is advised, the team explains preparation, hospital stay, procedure details, and expected recovery.",
+        "checklist": ["Complete pre-treatment tests", "Follow fasting and medicine instructions", "Know what to expect after treatment"]
+      },
+      {
+        "label": "05",
+        "title": "Recovery",
+        "heading": "Recovery",
+        "subheading": "Heal with guidance",
+        "description": "Recovery planning includes pain control, wound care, urine changes, activity, pathology review, and return to routine.",
+        "checklist": ["Attend follow-up visits", "Report fever, bleeding, or worsening pain", "Keep pathology reports safe"]
+      },
+      {
+        "label": "06",
+        "title": "Follow-up",
+        "heading": "Follow-up",
+        "subheading": "Watch for recurrence",
+        "description": "Follow-up may include scans, blood tests, urine tests, cystoscopy, PSA tracking, or long-term review based on cancer type.",
+        "checklist": ["Follow the surveillance schedule", "Keep all reports organized", "Book review if new symptoms appear"]
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "Treatment options",
+    "title": "Treatment options for urological cancer",
+    "body": [
+      "Cancer treatment is not the same for every patient. Some people need close monitoring. Some need surgery. Some need combined care with oncology.",
+      "Dr. Vikram explains what each option means, what recovery may look like, and how follow-up will be planned."
+    ],
+    "featureTitle": "Personalised cancer planning",
+    "featureText": "Care is planned around cancer type, stage, biopsy report, scan findings, overall health, and patient preference.",
+    "video": {
+      "image": "/assets/treatments/urethral-stricture-content.jpg",
+      "title": "\"Every patient should understand the diagnosis, the options, and the reason behind the treatment plan.\"",
+      "byline": "Dr. Vikram · Urologist, Robotic Surgeon"
+    },
+    "stats": [
+      { "value": "500+", "label": "Cancer cases reviewed", "icon": "stat-cases" },
+      { "value": "20+", "label": "Years of experience", "icon": "stat-experience" },
+      { "value": "5K+", "label": "Patients guided", "icon": "stat-success" }
+    ]
+  },
+  "careGuide": {
+    "eyebrow": "Recovery and follow-up",
+    "icon": "care-check",
+    "title": "Before, during, and after cancer care",
+    "intro": "Cancer care works best when reports are complete and follow-up is planned from the start.",
+    "tabs": [
+      {
+        "label": "Before Treatment",
+        "items": ["Bring all scans, biopsy reports, and blood tests", "Ask what stage and grade mean", "Share all medicines and health conditions", "Discuss treatment choices and recovery", "Arrange family support if treatment is planned", "Keep a folder of all reports"]
+      },
+      {
+        "label": "During Treatment",
+        "items": ["Confirm the treatment plan", "Understand hospital stay and anesthesia", "Ask about urine catheter or stent if relevant", "Know warning signs", "Keep one family contact available"]
+      },
+      {
+        "label": "After Treatment",
+        "items": ["Attend all follow-up visits", "Review final pathology if surgery was done", "Follow scan or PSA schedule", "Report blood in urine, fever, pain, or swelling", "Discuss long-term recovery and lifestyle", "Keep all reports for future comparison"]
+      }
+    ],
+    "note": "Your exact instructions will depend on cancer type, stage, treatment plan, and general health."
+  },
+  "faqs": {
+    "eyebrow": "FAQs",
+    "title": "Frequently asked questions",
+    "items": [
+      { "question": "Does blood in urine always mean cancer?", "answer": "No. It can happen due to infection, stones, prostate issues, or other causes. It still needs proper evaluation." },
+      { "question": "Should I get a second opinion?", "answer": "A second opinion can help you understand the diagnosis, stage, and treatment choices before making a decision." },
+      { "question": "Is robotic surgery always needed?", "answer": "No. Robotic surgery is useful for selected cases. The right option depends on cancer type, stage, and patient fitness." },
+      { "question": "How long is recovery after cancer surgery?", "answer": "Recovery depends on the organ, procedure, and overall health. The team will explain hospital stay, catheter care, activity, and follow-up." },
+      { "question": "How often will follow-up be needed?", "answer": "Follow-up depends on cancer type and stage. It may include scans, blood tests, urine tests, cystoscopy, or PSA checks." }
+    ]
+  }
+}

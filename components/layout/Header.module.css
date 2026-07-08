@@ -1,0 +1,482 @@
+.header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+}
+
+.headerFrame {
+  width: 100%;
+  max-width: 1240px;
+  height: 76px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.logo {
+  position: relative;
+  width: 146px;
+  height: 36px;
+  flex: 0 0 146px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.logoMark {
+  position: absolute;
+  left: 0;
+  top: -0.065px;
+  width: 41.86px;
+  height: 36.13px;
+}
+
+.logoMark img {
+  display: block;
+}
+
+.logoText {
+  position: absolute;
+  left: 58px;
+  top: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.logoTitle {
+  color: #2c2b3b;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18.4px;
+  white-space: nowrap;
+}
+
+.logoSubtitle {
+  margin-top: 0;
+  color: #8c8c90;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: -0.11px;
+  line-height: 12.65px;
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navItemWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2c2b3b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.navItem:hover,
+.navItem:focus-visible {
+  color: #178b99;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  color: #2c2b3b;
+  flex: 0 0 16px;
+}
+
+.navItem:hover .chevron,
+.navItem:focus-visible .chevron {
+  color: #178b99;
+}
+
+.dropdown {
+  position: absolute;
+  left: 50%;
+  top: calc(100% - 8px);
+  z-index: 20;
+  width: 260px;
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid rgba(44, 180, 192, 0.12);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(24, 54, 68, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(8px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.dropdownOpen {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdownItem {
+  display: block;
+  padding: 12px;
+  border-radius: 12px;
+  color: #2c2b3b;
+  text-decoration: none;
+}
+
+.dropdownItem:hover,
+.dropdownItem:focus-visible {
+  background: #f0fbfc;
+  outline: none;
+}
+
+.dropdownItem span {
+  color: #2c2b3b;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.languageSwitcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.languageButton {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #2c2b3b;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.languageButton:hover,
+.languageButton:focus-visible,
+.languageButton[aria-expanded="true"] {
+  background: rgba(44, 180, 192, 0.08);
+  color: #178b99;
+  outline: none;
+}
+
+.languageButton::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.languageButton[aria-expanded="true"]::after {
+  transform: translateY(2px) rotate(225deg);
+}
+
+.languageMenu {
+  position: absolute;
+  inset-block-start: calc(100% + 10px);
+  inset-inline-end: 0;
+  z-index: 260;
+  min-width: 164px;
+  display: grid;
+  gap: 2px;
+  padding: 6px;
+  border: 1px solid rgba(3, 33, 38, 0.08);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 18px 44px rgba(8, 39, 58, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.languageMenuOpen {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.languageOption {
+  display: grid;
+  gap: 1px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  color: #2c2b3b;
+  text-decoration: none;
+}
+
+.languageOption:hover,
+.languageOption:focus-visible,
+.languageOption[aria-current="page"] {
+  background: #f0fbfc;
+  outline: none;
+}
+
+.languageOption span {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.languageOption small {
+  color: rgba(44, 43, 59, 0.62);
+  font-size: 11px;
+  line-height: 15px;
+}
+
+.consultButton {
+  width: 146px;
+  height: 44px;
+  flex: 0 0 146px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  padding: 12px 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 62px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #ffffff;
+  font-family: Givonic, Poppins, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  backdrop-filter: blur(29.082px);
+}
+
+.whatsappFrame {
+  position: relative;
+  width: 18px;
+  height: 17.217px;
+  flex: 0 0 18px;
+  overflow: visible;
+}
+
+.whatsappMask {
+  position: absolute;
+  left: -7.41px;
+  top: -8.98px;
+  width: 36.8px;
+  height: 33.244px;
+  display: block;
+  background: #ffffff;
+  mask-image: url("/assets/figma/whatsapp-mask.png");
+  mask-repeat: no-repeat;
+  mask-position: 3.378px 3.733px;
+  mask-size: 26.667px 26.667px;
+  -webkit-mask-image: url("/assets/figma/whatsapp-mask.png");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 3.378px 3.733px;
+  -webkit-mask-size: 26.667px 26.667px;
+}
+
+.mobileMenuButton,
+.mobilePanel {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 3px 4px rgba(171, 171, 171, 0.08);
+  }
+
+  .headerFrame {
+    height: 70px;
+    min-height: 70px;
+    padding: 14px 20px;
+    gap: 12px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .logo {
+    width: 110px;
+    height: 27.123px;
+    flex: 0 0 110px;
+  }
+
+  .logoMark {
+    top: -0.049px;
+    width: 31.54px;
+    height: 27.22px;
+  }
+
+  .logoText {
+    left: 43.7px;
+    top: 0.75px;
+  }
+
+  .logoTitle {
+    font-size: 12.055px;
+    line-height: 13.863px;
+  }
+
+  .logoSubtitle {
+    font-size: 8.288px;
+    letter-spacing: -0.083px;
+    line-height: 9.531px;
+  }
+
+  .headerActions {
+    flex: 0 0 auto;
+    gap: 12px;
+  }
+
+  .headerActions > .languageSwitcher {
+    display: none;
+  }
+
+  .consultButton {
+    width: auto;
+    height: 43px;
+    flex: 0 0 auto;
+    padding: 12px 16px;
+    border-radius: 36px;
+    font-size: 12px;
+    line-height: normal;
+  }
+
+  .whatsappFrame {
+    display: none;
+  }
+
+  .mobileMenuButton {
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .mobileMenuButton img {
+    display: block;
+  }
+
+  .mobilePanel {
+    width: 100%;
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    background: #ffffff;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    transition:
+      max-height 180ms ease,
+      padding 180ms ease;
+  }
+
+  .mobilePanelOpen {
+    max-height: 420px;
+    padding: 8px 20px 20px;
+  }
+
+  .mobileNavGroup {
+    overflow: hidden;
+    border-bottom: 1px solid #e9f0f2;
+  }
+
+  .mobileNavGroup:last-child {
+    border-bottom: 0;
+  }
+
+  .mobileNavItem {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    color: #2c2b3b;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 21px;
+    text-decoration: none;
+  }
+
+  .mobileSubnav {
+    display: grid;
+    gap: 6px;
+    padding: 0 0 14px 14px;
+  }
+
+  .mobileSubnav a {
+    color: rgba(44, 43, 59, 0.62);
+    font-size: 13px;
+    line-height: 19px;
+    text-decoration: none;
+  }
+
+  .mobilePanel .languageSwitcher {
+    width: 100%;
+    display: grid;
+    padding: 12px 0 0;
+  }
+
+  .mobilePanel .languageButton {
+    width: 100%;
+    justify-content: space-between;
+    padding-inline: 0;
+  }
+
+  .mobilePanel .languageMenu {
+    position: static;
+    margin-top: 6px;
+    border-radius: 12px;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .headerFrame {
+    padding-inline: 16px;
+  }
+
+  .consultButton {
+    padding-inline: 12px;
+  }
+}

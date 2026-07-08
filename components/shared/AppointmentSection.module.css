@@ -1,0 +1,450 @@
+.appointmentSection {
+  width: 100%;
+  max-width: 1600px;
+  margin: clamp(104px, 8vw, 140px) auto 0;
+  scroll-margin-top: 104px;
+  padding: 0 clamp(28px, 3.75vw, 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(72px, 8vw, 139px);
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.appointmentInfo {
+  width: 551px;
+  flex: 0 0 551px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(72px, 7vw, 112px);
+  align-items: flex-start;
+}
+
+.appointmentHeading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.sectionLabel svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #6d8389;
+}
+
+.appointmentHeading h2 {
+  width: 100%;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: -1.44px;
+  line-height: 64px;
+}
+
+.contactGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.contactRow {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.contactTile,
+.locationTile {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 24px;
+  background: #f0fbfc;
+  text-decoration: none;
+}
+
+.contactTile {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 72px;
+  color: #032126;
+}
+
+.contactRow .contactTile:first-child {
+  flex: 1.65 1 0;
+}
+
+.contactRow .contactTile:last-child {
+  flex: 1 1 0;
+}
+
+.contactIcon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border: 0.832px solid rgba(61, 193, 190, 0.2);
+  border-radius: 39.086px;
+  background: #ffffff;
+  color: #39c3cf;
+  filter: drop-shadow(0 0.832px 6.722px rgba(17, 152, 163, 0.13));
+}
+
+.contactIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contactText {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.contactText span,
+.locationContent > span {
+  color: rgba(3, 33, 38, 0.5);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.15px;
+  line-height: 1.15;
+}
+
+.contactText strong {
+  overflow: hidden;
+  color: #032126;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.15px;
+  line-height: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contactTile > svg,
+.locationContent a svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #39c3cf;
+}
+
+.locationTile {
+  width: 100%;
+  min-height: 128px;
+  align-items: flex-start;
+}
+
+.locationContent {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.locationContent a {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  color: #39c3cf;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.15px;
+  line-height: normal;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.locationContent a span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.appointmentForm {
+  width: 550px;
+  min-height: 519px;
+  flex: 0 0 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 32px;
+  background: #f0fbfc;
+}
+
+.formRow {
+  width: 100%;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.appointmentForm label {
+  min-width: 0;
+}
+
+.formRow label {
+  flex: 1 1 0;
+}
+
+.fieldLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.appointmentForm input,
+.appointmentForm textarea {
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(3, 33, 38, 0.1);
+  border-radius: 16px;
+  background: #ffffff;
+  color: #032126;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: -0.18px;
+  line-height: 1.15;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.appointmentForm input {
+  height: 53px;
+  padding: 16px 22px;
+}
+
+.appointmentForm textarea {
+  height: 141px;
+  min-height: 141px;
+  resize: vertical;
+  padding: 16px 22px;
+}
+
+.appointmentForm input::placeholder,
+.appointmentForm textarea::placeholder {
+  color: rgba(3, 33, 38, 0.5);
+  opacity: 1;
+}
+
+.appointmentForm input:focus,
+.appointmentForm textarea:focus {
+  border-color: rgba(61, 193, 190, 0.75);
+  box-shadow: 0 0 0 3px rgba(61, 193, 190, 0.12);
+}
+
+.messageField {
+  flex: none;
+  display: block;
+  min-height: 141px;
+}
+
+.uploadField {
+  width: 100%;
+  height: 53px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed #3dc1be;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #3dc1be;
+  cursor: pointer;
+}
+
+.uploadField input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.uploadField span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #3dc1be;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.16px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.uploadField svg {
+  width: 20px;
+  height: 20px;
+}
+
+.appointmentForm button {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 25px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 36px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #eeebff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.appointmentForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(17, 152, 163, 0.18);
+}
+
+@media (max-width: 1100px) {
+  .appointmentSection {
+    max-width: 760px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 56px;
+    padding: 0 20px;
+  }
+
+  .appointmentInfo,
+  .appointmentForm {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .appointmentInfo {
+    gap: 48px;
+  }
+
+  .appointmentForm {
+    height: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .appointmentSection {
+    margin-top: 96px;
+    gap: 40px;
+    padding: 0 12px;
+  }
+
+  .appointmentHeading h2 {
+    font-size: 38px;
+    letter-spacing: -1.14px;
+    line-height: 48px;
+  }
+
+  .contactRow,
+  .formRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contactTile,
+  .formRow label,
+  .messageField,
+  .uploadField {
+    width: 100%;
+  }
+
+  .contactTile {
+    min-height: 74px;
+    padding: 14px 16px;
+  }
+
+  .contactText {
+    gap: 5px;
+  }
+
+  .contactText strong {
+    white-space: normal;
+  }
+
+  .locationTile {
+    align-items: flex-start;
+  }
+
+  .locationContent a {
+    align-items: flex-start;
+  }
+
+  .locationContent a span {
+    white-space: normal;
+  }
+
+  .appointmentForm {
+    width: 100%;
+    min-height: 0;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 28px;
+  }
+
+  .appointmentForm input,
+  .appointmentForm textarea {
+    font-size: 16px;
+  }
+
+  .messageField {
+    min-height: 118px;
+  }
+
+  .appointmentForm textarea {
+    height: 118px;
+    min-height: 118px;
+  }
+
+  .uploadField {
+    height: auto;
+    min-height: 56px;
+    margin-top: 2px;
+  }
+
+  .appointmentForm button {
+    min-height: 60px;
+    margin-top: 4px;
+  }
+}

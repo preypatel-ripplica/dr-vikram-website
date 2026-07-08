@@ -1,0 +1,187 @@
+{
+  "slug": "kidney-stones",
+  "title": "Understanding kidney stones — and getting relief",
+  "readTime": "8 min read",
+  "metaDescription": "A practical guide from Dr. Vikram on kidney stones, symptoms, treatment options, and when to seek urology care.",
+  "hero": {
+    "summary": "Kidney stones are hard mineral and salt deposits that form inside your kidneys. They develop when urine becomes concentrated, allowing minerals to crystallise and stick together. With the right approach, most stones can be managed effectively.",
+    "image": "/assets/figma/blog-detail/hero.jpg",
+    "caption": "Dr. Vikram · Urologist & Robotic Surgeon"
+  },
+  "sidebar": {
+    "items": [
+      { "label": "Overview", "href": "#overview" },
+      { "label": "About kidney stone", "href": "#about" },
+      { "label": "Symptom check", "href": "#symptom-check" },
+      { "label": "Treatment journey", "href": "#treatment-options" },
+      { "label": "Our experience", "href": "#experience" },
+      { "label": "Patient care guide", "href": "#size-guide" },
+      { "label": "Common questions", "href": "#faq" }
+    ]
+  },
+  "overview": {
+    "eyebrow": "About the condition",
+    "titlePrefix": "What is",
+    "highlight": "Kidney stone",
+    "paragraphs": [
+      "Kidney stones are solid crystals that may form anywhere in the urinary tract. Small stones may pass naturally, but larger stones can block urine flow and cause severe pain, infection, or kidney swelling.",
+      "The exact treatment depends on stone size, location, symptoms, kidney function, infection risk, and whether the stone is moving. A urologist can match the safest option to your situation."
+    ],
+    "subheading": "When should you see a urologist?",
+    "subParagraphs": [
+      "Seek medical care if pain is severe, fever is present, urine flow reduces, vomiting prevents hydration, or scans show a stone that is unlikely to pass.",
+      "Early evaluation helps avoid repeated emergency visits and protects kidney function."
+    ]
+  },
+  "sizeGuide": {
+    "eyebrow": "Stone size guide",
+    "title": "What your stone size means for treatment",
+    "items": [
+      {
+        "size": "< 4mm",
+        "icon": "/assets/figma/blog-detail/stone-size-under-4mm.svg",
+        "copy": "Very likely to pass naturally with hydration and pain medicines, if there is no infection or blockage."
+      },
+      {
+        "size": "4–6mm",
+        "icon": "/assets/figma/blog-detail/stone-size-4-6mm.svg",
+        "copy": "May pass but could take time. Pain management and follow-up imaging are often needed."
+      },
+      {
+        "size": "6–10mm",
+        "icon": "/assets/figma/blog-detail/stone-size-6-10mm.svg",
+        "copy": "Unlikely to pass without help. Ureteroscopy or ESWL may be considered depending on location."
+      },
+      {
+        "size": "> 10mm",
+        "icon": "/assets/figma/blog-detail/stone-size-over-10mm.svg",
+        "copy": "Requires intervention. PCNL or ureteroscopy depends on stone burden, anatomy, and kidney health."
+      }
+    ]
+  },
+  "treatmentOptions": {
+    "eyebrow": "Treatment journey",
+    "title": "Treatment options for kidney stones",
+    "note": "Note: Dr. Vikram recommends the least invasive option that can safely clear the stone.",
+    "items": [
+      {
+        "title": "Conservative management",
+        "icon": "/assets/figma/blog-detail/treatment-conservative.svg",
+        "bestFor": "Best for: Stones < 4mm",
+        "duration": "2–4 weeks",
+        "copy": "Increased fluid intake, NSAIDs for pain relief, and medicines to relax the ureter. Follow-up scans confirm whether the stone has passed."
+      },
+      {
+        "title": "Ureteroscopy (URS)",
+        "icon": "/assets/figma/blog-detail/treatment-urs.svg",
+        "bestFor": "Best for: 4–15mm stones",
+        "duration": "30–60 min, day care",
+        "copy": "A thin flexible or rigid scope is passed up the urinary tract to fragment and remove the stone without external cuts."
+      },
+      {
+        "title": "PCNL (Percutaneous)",
+        "icon": "/assets/figma/blog-detail/treatment-pcnl.svg",
+        "bestFor": "Best for: > 15mm or staghorn stones",
+        "duration": "1–2 hr, 2-day stay",
+        "copy": "A small puncture is made in the back to access the kidney directly and clear large or complex stones."
+      }
+    ]
+  },
+  "symptomCheck": {
+    "eyebrow": "Symptom check",
+    "title": "Could your symptoms be stone related?",
+    "steps": [
+      {
+        "question": "What are you mainly concerned about?",
+        "options": [
+          "Pain or burning while urinating",
+          "Kidney stone pain / side pain",
+          "Frequent urination or weak urine flow",
+          "Men's health or fertility concern",
+          "I already have reports and need an opinion"
+        ]
+      },
+      {
+        "question": "How long has this been happening?",
+        "options": [
+          "Started recently",
+          "More than a week",
+          "Keeps coming back",
+          "I need urgent guidance"
+        ]
+      },
+      {
+        "question": "What would help you most right now?",
+        "options": [
+          "Book a clinic consultation",
+          "Review my scans with Dr. Vikram",
+          "Understand the likely procedure",
+          "Speak with the clinic team"
+        ]
+      }
+    ],
+    "note": "This tool is only for guidance and does not replace a doctor's consultation."
+  },
+  "experience": {
+    "eyebrow": "Our experience",
+    "title": "Dr. Vikram's experience in kidney stone",
+    "paragraphs": [
+      "Dr. Vikram treats patients with kidney, ureteric, bladder, and complex recurrent stones using evidence-based and minimally invasive approaches.",
+      "The aim is not only stone clearance, but also reducing recurrence through diagnosis, dietary guidance, and follow-up planning."
+    ],
+    "subheading": "Bloodless stone care",
+    "subParagraphs": [
+      "Modern endoscopic and laser techniques can clear many stones through natural urinary passages, reducing hospital stay and recovery time."
+    ],
+    "image": "/assets/figma/blog-detail/medical-team.jpg",
+    "quote": "\"Every patient deserves to understand their condition and their options clearly.\"",
+    "byline": "Dr. Vikram · Urologist, Robotic Surgeon · 20+ years experience",
+    "stats": [
+      {
+        "value": "500+",
+        "label": "Stone and urology cases",
+        "icon": "/assets/figma/blog-detail/stat-cases.svg"
+      },
+      {
+        "value": "20+",
+        "label": "Years of experience",
+        "icon": "/assets/figma/blog-detail/stat-experience.svg"
+      },
+      {
+        "value": "98%",
+        "label": "Successful outcomes",
+        "icon": "/assets/figma/blog-detail/stat-outcomes.svg"
+      }
+    ]
+  },
+  "faqs": {
+    "eyebrow": "Common questions",
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Do I need surgery for every kidney stone?",
+        "answer": "No. Many small stones pass naturally. Surgery is considered when a stone is large, stuck, painful, infected, or affecting kidney function."
+      },
+      {
+        "question": "Which scan is best for kidney stones?",
+        "answer": "A CT KUB is commonly used for accurate stone size and location. Ultrasound may be used for follow-up or selected patients."
+      },
+      {
+        "question": "How painful is stone treatment?",
+        "answer": "Procedures are performed with anesthesia. Pain after treatment is usually manageable with medicines and improves quickly."
+      },
+      {
+        "question": "Can stones come back?",
+        "answer": "Yes. Hydration, diet changes, metabolic tests, and follow-up plans reduce recurrence risk."
+      },
+      {
+        "question": "When is it an emergency?",
+        "answer": "Fever, chills, uncontrolled pain, vomiting, pregnancy, a single kidney, or reduced urine output need urgent care."
+      },
+      {
+        "question": "How soon can I return to work?",
+        "answer": "It depends on the treatment. Many patients return within a few days after ureteroscopy, while larger procedures may need longer rest."
+      }
+    ]
+  }
+}

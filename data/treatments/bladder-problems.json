@@ -1,0 +1,185 @@
+{
+  "slug": "bladder-problems",
+  "metaTitle": "Bladder Problems Treatment | Dr. Vikram",
+  "metaDescription": "Bladder urgency, leakage, pain, frequent urination, recurrent UTI, and bladder emptying problems evaluated by Dr. Vikram.",
+  "readTime": "7 min read",
+  "hero": {
+    "title": "Bladder problems",
+    "highlight": "clear diagnosis and symptom relief",
+    "summary": "Get help for frequent urination, urgency, leakage, bladder pain, repeated infections, blood in urine, and poor bladder emptying.",
+    "image": "/assets/treatments/treatment_4.jpeg",
+    "imageCaption": "Dr. Vikram · Urologist & Robotic Surgeon"
+  },
+  "sidebar": {
+    "items": [
+      { "label": "Overview", "href": "#overview" },
+      { "label": "Symptoms", "href": "#about-cancer" },
+      { "label": "When to consult", "href": "#symptom-check" },
+      { "label": "Diagnosis and tests", "href": "#treatment-journey" },
+      { "label": "Treatment options", "href": "#our-experience" },
+      { "label": "Recovery and follow-up", "href": "#patient-care-guide" },
+      { "label": "FAQs", "href": "#common-questions" }
+    ],
+    "ctaTitle": "Bladder symptoms?",
+    "ctaText": "Book a consultation and get a clear plan."
+  },
+  "overview": {
+    "eyebrow": "Condition overview",
+    "titlePrefix": "What are",
+    "titleHighlight": "bladder problems?",
+    "body": [
+      "Bladder problems can affect sleep, work, travel, confidence, and daily comfort. They may be caused by infection, bladder overactivity, prostate blockage, stones, stricture, nerve problems, or other urology conditions.",
+      "A clear diagnosis helps avoid repeated guesswork and unnecessary medicines."
+    ],
+    "subsections": [
+      {
+        "title": "Symptoms",
+        "body": [
+          "Common symptoms include frequent urination, sudden urgency, leakage, night urination, burning, bladder pain, weak flow, incomplete emptying, blood in urine, or repeated UTI.",
+          "Some people also feel pressure in the lower abdomen or need to rush to the toilet."
+        ]
+      },
+      {
+        "title": "When to consult a urologist",
+        "body": [
+          "Consult a urologist if symptoms keep coming back, urine leaks often, blood appears in urine, infections repeat, or medicines are not helping.",
+          "You should also seek review if urination is painful, weak, blocked, or linked with fever."
+        ]
+      },
+      {
+        "title": "Diagnosis and tests",
+        "body": [
+          "Tests may include urine routine, urine culture, ultrasound, uroflowmetry, post-void residual urine check, cystoscopy, urodynamic study, or scans when needed.",
+          "The aim is to find the real cause and then plan treatment that fits your symptoms."
+        ]
+      }
+    ]
+  },
+  "symptomCheck": {
+    "eyebrow": "When to consult",
+    "title": "What bladder symptom needs attention?",
+    "steps": [
+      {
+        "question": "What is your main symptom?",
+        "options": ["Frequent urination", "Urgency or leakage", "Burning or pain", "Blood in urine", "Incomplete emptying"]
+      },
+      {
+        "question": "How often does it happen?",
+        "options": ["Started recently", "More than one week", "Keeps returning", "Affects sleep", "I have reports"]
+      },
+      {
+        "question": "What would help now?",
+        "options": ["Book appointment", "Review urine reports", "Understand tests", "Discuss treatment"]
+      }
+    ],
+    "note": "This checklist helps organize symptoms. It does not replace a urology consultation."
+  },
+  "journey": {
+    "eyebrow": "Diagnosis and tests",
+    "icon": "treatment-journey",
+    "title": "Bladder care, step by step",
+    "defaultActiveStep": 0,
+    "steps": [
+      {
+        "label": "01",
+        "title": "Consultation",
+        "heading": "Consultation",
+        "subheading": "Map the symptom pattern",
+        "description": "Dr. Vikram reviews urine symptoms, medical history, medicines, and previous reports.",
+        "checklist": ["Note frequency, urgency, leakage, pain, or blood", "Bring urine tests and ultrasound", "Share diabetes, prostate, or nerve history"]
+      },
+      {
+        "label": "02",
+        "title": "Testing",
+        "heading": "Testing",
+        "subheading": "Find the cause",
+        "description": "Testing checks infection, bladder emptying, flow strength, stones, growths, or other causes.",
+        "checklist": ["Review urine reports", "Check bladder emptying", "Discuss cystoscopy if needed"]
+      },
+      {
+        "label": "03",
+        "title": "Treatment Plan",
+        "heading": "Treatment Plan",
+        "subheading": "Treat the cause",
+        "description": "Treatment may include medicines, bladder training, lifestyle changes, infection prevention, endoscopic treatment, or surgery in selected cases.",
+        "checklist": ["Understand diagnosis", "Review medicine duration", "Know warning signs"]
+      },
+      {
+        "label": "04",
+        "title": "Procedure",
+        "heading": "Procedure if needed",
+        "subheading": "Targeted treatment",
+        "description": "Some patients may need cystoscopy, stone treatment, stricture care, prostate treatment, biopsy, or bladder procedure.",
+        "checklist": ["Complete pre-procedure tests", "Understand anesthesia", "Ask about report timing"]
+      },
+      {
+        "label": "05",
+        "title": "Recovery",
+        "heading": "Recovery",
+        "subheading": "Track response",
+        "description": "Follow-up checks symptom improvement, urine reports, bladder emptying, and side effects if medicines are used.",
+        "checklist": ["Track symptom changes", "Complete medicine course", "Report fever, blood, or worse pain"]
+      },
+      {
+        "label": "06",
+        "title": "Follow-up",
+        "heading": "Follow-up",
+        "subheading": "Prevent recurrence",
+        "description": "Long-term care may include hydration advice, timed voiding, infection prevention, and review of related health conditions.",
+        "checklist": ["Follow prevention advice", "Keep reports organized", "Return if symptoms recur"]
+      }
+    ]
+  },
+  "experience": {
+    "eyebrow": "Treatment options",
+    "title": "Treatment options for bladder problems",
+    "body": [
+      "Bladder treatment is chosen after understanding the cause. The same symptom can happen for different reasons.",
+      "Dr. Vikram explains whether medicines, lifestyle changes, tests, a procedure, or follow-up is needed."
+    ],
+    "featureTitle": "Bladder symptom planning",
+    "featureText": "Care is planned around infection risk, urine flow, bladder emptying, scan findings, and daily impact.",
+    "video": {
+      "image": "/assets/treatments/urethral-stricture-content.jpg",
+      "title": "\"Bladder symptoms are common, but they should still be diagnosed properly.\"",
+      "byline": "Dr. Vikram · Urologist, Robotic Surgeon"
+    },
+    "stats": [
+      { "value": "5K+", "label": "Patients guided", "icon": "stat-cases" },
+      { "value": "20+", "label": "Years of experience", "icon": "stat-experience" },
+      { "value": "5K+", "label": "Reports reviewed", "icon": "stat-success" }
+    ]
+  },
+  "careGuide": {
+    "eyebrow": "Recovery and follow-up",
+    "icon": "care-check",
+    "title": "Before, during, and after bladder care",
+    "intro": "Bladder care works best when symptoms are tracked clearly and tests are reviewed properly.",
+    "tabs": [
+      {
+        "label": "Before Treatment",
+        "items": ["Bring urine tests and scans", "Note how often you urinate", "Track leakage or urgency", "List all medicines", "Avoid self-medicating antibiotics", "Write down questions"]
+      },
+      {
+        "label": "During Treatment",
+        "items": ["Understand the likely cause", "Ask which tests are needed", "Confirm medicine duration", "Discuss side effects", "Know urgent warning signs"]
+      },
+      {
+        "label": "After Treatment",
+        "items": ["Track symptom improvement", "Complete the medicine course", "Repeat tests if advised", "Follow hydration and bladder habits", "Return if symptoms recur", "Keep reports organized"]
+      }
+    ],
+    "note": "Your plan will depend on symptoms, reports, examination, and test results."
+  },
+  "faqs": {
+    "eyebrow": "FAQs",
+    "title": "Frequently asked questions",
+    "items": [
+      { "question": "Is frequent urination always due to infection?", "answer": "No. It can happen due to bladder overactivity, diabetes, prostate problems, medicines, fluid intake, or other causes." },
+      { "question": "When should blood in urine be checked?", "answer": "Blood in urine should be checked even if it happens once." },
+      { "question": "What tests are usually needed?", "answer": "Urine tests, ultrasound, uroflowmetry, residual urine check, cystoscopy, or scans may be advised." },
+      { "question": "Can leakage improve?", "answer": "Many types of leakage improve with the right diagnosis, medicines, habits, pelvic guidance, or procedures." },
+      { "question": "Should recurrent UTI be investigated?", "answer": "Yes. Recurrent infection should be reviewed to check triggers, stones, poor emptying, or blockage." }
+    ]
+  }
+}

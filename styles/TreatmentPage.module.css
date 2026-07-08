@@ -1,0 +1,1237 @@
+.treatmentPage {
+  --page-gutter: clamp(20px, 3vw, 40px);
+  --content-max: 1600px;
+  --section-pad: clamp(28px, 3.75vw, 60px);
+  --section-space: clamp(104px, 8vw, 140px);
+  width: 100%;
+  overflow-x: clip;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.revealPending {
+  opacity: 0.001;
+  transform: translateY(48px) scale(0.985);
+  filter: blur(10px);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 820ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChild {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.revealChildVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 680ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 680ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+  padding: 80px var(--section-pad) 0;
+}
+
+.readTime {
+  margin: 0 0 22px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  line-height: 19.2px;
+}
+
+.hero h1 {
+  max-width: 1380px;
+  margin: 0;
+  color: #2c2b3b;
+  font-size: clamp(46px, 3.6vw, 58px);
+  font-weight: 500;
+  letter-spacing: -1.45px;
+  line-height: 1.1;
+}
+
+.heroTitleLine,
+.heroHighlightLine {
+  display: inline;
+}
+
+.heroHighlightLine {
+  margin-left: 0.16em;
+}
+
+.heroHighlightLine,
+.article h2 span {
+  color: #39c3cf;
+}
+
+.heroSummary {
+  max-width: 980px;
+  margin: 16px 0 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 17px;
+  line-height: 28.9px;
+}
+
+.heroImage {
+  position: relative;
+  width: 100%;
+  height: clamp(470px, 34vw, 560px);
+  margin-top: 36px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f0fbfc;
+}
+
+.heroImage img,
+.videoImage img {
+  object-fit: cover;
+}
+
+.heroImage img {
+  object-position: 56% center;
+}
+
+.heroImage::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, rgba(44, 43, 59, 0.35), rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+.heroImage span {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.bodyShell {
+  width: min(100%, var(--content-max));
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  margin: 0 auto;
+  padding: 0 var(--section-pad);
+}
+
+.sidebar {
+  position: sticky;
+  top: 92px;
+  width: 220px;
+  flex: 0 0 220px;
+  padding: 60px 0 40px;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebarNav a {
+  display: flex;
+  align-items: center;
+  min-height: 37px;
+  padding: 9px 12px 9px 14px;
+  border-left: 2px solid transparent;
+  border-radius: 10px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 13px;
+  line-height: 19.5px;
+  text-decoration: none;
+}
+
+.sidebarNav .activeNavItem {
+  border-left-color: transparent;
+  background: #f0fbfc;
+  color: #178b99;
+  font-weight: 600;
+}
+
+.sidebarCta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 32px;
+  padding: 20px 16px;
+  border-radius: 20px;
+  background: #dcf6f7;
+}
+
+.sidebarCta strong {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19.5px;
+}
+
+.sidebarCta p {
+  width: 188px;
+  margin: 8px 0 14px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.sidebarCta a,
+.continueButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 62px;
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sidebarCta a {
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.article {
+  width: min(100%, 980px);
+  max-width: 980px;
+  flex: 1 1 980px;
+  min-width: 0;
+}
+
+.contentSection {
+  padding: 80px 0;
+  border-bottom: 1px solid #e9f0f2;
+  scroll-margin-top: 120px;
+}
+
+.contentSection:first-child {
+  padding-top: 60px;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  line-height: 19.2px;
+}
+
+.eyebrowIcon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex: 0 0 20px;
+}
+
+.eyebrow svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #6d8389;
+}
+
+.article h2 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 64px;
+}
+
+.richText {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.richText p,
+.sectionIntro {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  line-height: 26.4px;
+}
+
+.journeySection {
+  width: 100%;
+  padding: 80px 0 81px;
+}
+
+.careSection {
+  width: 100%;
+  padding: 80px 0 81px;
+}
+
+.careIntro {
+  margin-top: 24px;
+}
+
+.conditionGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.conditionGroup h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40.8px;
+}
+
+.symptomCard {
+  width: 100%;
+  max-width: 980px;
+  margin-top: 40px;
+  padding: 36px;
+  border-radius: 36px;
+  background: #f0fbfc;
+  box-shadow: 0 14px 40px rgba(17, 152, 163, 0.08);
+}
+
+.symptomCardInner {
+  width: 100%;
+  min-height: 613px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 28px;
+  background: #ffffff;
+}
+
+.symptomMeta {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(44, 43, 59, 0.45);
+  font-size: 11px;
+}
+
+.symptomMeta button {
+  border: 0;
+  background: transparent;
+  color: #39c3cf;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0;
+}
+
+.symptomProgress {
+  height: 3px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e9f0f2;
+}
+
+.symptomProgress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #39c3cf;
+  transition: width 180ms ease;
+}
+
+.symptomCard h3 {
+  margin: 40px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.symptomOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.symptomOptions button {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 18px;
+  border: 1.5px solid #e9f0f2;
+  border-radius: 16px;
+  background: #ffffff;
+  color: rgba(44, 43, 59, 0.7);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.symptomOptions button:hover {
+  border-color: #3dc1be;
+  background: #f0fbfc;
+}
+
+.symptomOptions .selectedSymptomOption {
+  border-color: #3dc1be;
+  background: #f0fbfc;
+  color: #178b99;
+  font-weight: 500;
+}
+
+.continueButton {
+  min-width: 133px;
+  min-height: 59px;
+  margin: 40px 0 0 auto;
+  padding: 16px 24px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.continueButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.smallNote {
+  margin: 18px 0 0;
+  color: rgba(44, 43, 59, 0.35);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.journeyTabs {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 2px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.careTabs {
+  display: flex;
+  margin-top: 0;
+  overflow-x: auto;
+}
+
+.journeyTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.journeyTabs button {
+  width: 180px;
+  min-width: 100px;
+  min-height: 68px;
+  display: inline-flex;
+  flex: 0 0 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 14px 18px;
+  border: 2px solid rgba(44, 180, 192, 0.1);
+  border-radius: 14px;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 15.6px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  scroll-snap-align: center;
+}
+
+.journeyTabs span {
+  color: #8c8c90;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16.5px;
+}
+
+.journeyTabs .activeJourneyTab {
+  border-color: #39c3cf;
+  background: #f0fbfc;
+  color: #178b99;
+  font-weight: 600;
+}
+
+.journeyTabs .activeJourneyTab span {
+  color: #39c3cf;
+}
+
+.journeyCard {
+  position: relative;
+  width: 100%;
+  height: 414px;
+  min-height: 414px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 32px;
+  overflow: hidden;
+  border: 1.5px solid #39c3cf;
+  border-radius: 24px;
+  background: #ffffff;
+}
+
+.journeyCardHeader {
+  height: 107px;
+  min-height: 107px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  background: #f0fbfc;
+}
+
+.journeyTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.journeyCardBody {
+  position: relative;
+  display: block;
+  height: 304px;
+  min-height: 304px;
+  padding: 0;
+}
+
+.journeyIcon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #39c3cf;
+  color: #ffffff;
+}
+
+.journeyIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.journeyIcon > span {
+  width: 22px;
+  height: 22px;
+}
+
+.journeyCard h3 {
+  margin: 0 0 8px;
+  color: #2c2b3b;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.journeyTitleGroup p,
+.journeyChecklist li {
+  color: rgba(44, 43, 59, 0.6);
+}
+
+.journeyTitleGroup p,
+.journeyCardBody > p {
+  margin: 0;
+}
+
+.journeyTitleGroup p {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.journeyCardBody > p {
+  position: absolute;
+  left: 27.5px;
+  top: 34.43px;
+  width: 417px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 15px;
+  line-height: 25.5px;
+}
+
+.journeyChecklist {
+  position: absolute;
+  left: 520.5px;
+  top: 34.43px;
+  width: 405px;
+}
+
+.journeyChecklist strong {
+  display: block;
+  margin-bottom: 0;
+  color: #2c2b3b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19.5px;
+}
+
+.journeyChecklist ul,
+.careList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.journeyChecklist ul {
+  width: 374.5px;
+  padding-top: 12px;
+}
+
+.journeyChecklist li,
+.careList li {
+  position: relative;
+}
+
+.journeyChecklist li + li {
+  margin-top: 10px;
+}
+
+.journeyChecklist li::before,
+.careList li::before {
+  content: none;
+}
+
+.journeyChecklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: #6e7480;
+  font-size: 13px;
+  line-height: 20.15px;
+}
+
+.journeyCheckIcon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex: 0 0 16px;
+  margin-top: 4px;
+  line-height: 0;
+}
+
+.journeyCheckCircle {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex: 0 0 16px;
+}
+
+.journeyControls {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+}
+
+.journeyControls span {
+  color: #8c8c90;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.journeyControls button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.8px solid #322d53;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #322d53;
+  cursor: pointer;
+  padding: 9.6px;
+}
+
+.journeyCaret,
+.journeyCaretRight {
+  width: 20.8px;
+  height: 20.8px;
+  display: block;
+  flex: 0 0 20.8px;
+  background-color: #322d53;
+  mask: url("/assets/icons/caret-left.svg") center / 20.8px 20.8px no-repeat;
+  -webkit-mask: url("/assets/icons/caret-left.svg") center / 20.8px 20.8px no-repeat;
+}
+
+.journeyCaretRight {
+  transform: rotate(180deg) scaleY(-1);
+}
+
+.videoFeature {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 40px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f0fbfc;
+  padding: 32px;
+}
+
+.videoImage {
+  position: relative;
+  height: 392px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.videoImage svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 12px 28px rgba(17, 152, 163, 0.2));
+}
+
+.videoFeature p {
+  margin: 24px 0 0;
+  color: #2c2b3b;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.5px;
+}
+
+.videoFeature span {
+  display: block;
+  margin-top: 8px;
+  color: #8c8c90;
+  font-size: 13px;
+  line-height: 19.5px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.statsGrid article {
+  min-height: 98px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 25px 23px;
+  border: 1px solid rgba(44, 180, 192, 0.1);
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(24, 54, 68, 0.04);
+}
+
+.statsGrid strong {
+  display: block;
+  color: #2c2b3b;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.statsGrid em {
+  display: block;
+  margin-top: 5px;
+  color: #8c8c90;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 18.2px;
+}
+
+.statIcon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  border-radius: 999px;
+  background: #f0fbfc;
+  padding: 12px;
+}
+
+.experienceFeatureText {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.experienceFeatureText h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40.8px;
+}
+
+.experienceFeatureText p {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  line-height: 26.4px;
+}
+
+.careTabs {
+  width: min(100%, 517.203px);
+  display: flex;
+  gap: 4px;
+  margin-top: 40px;
+  padding: 4px;
+  border-radius: 999px;
+  background: #f0f4f5;
+  overflow: hidden;
+}
+
+.careTabs button {
+  min-height: auto;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  padding: 10px 24px;
+  color: #8c8c90;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: center;
+  cursor: pointer;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.careTabs .activeCareTab {
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(24, 54, 68, 0.1);
+  color: #2c2b3b;
+  font-weight: 600;
+}
+
+.careList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.careList li {
+  width: 100%;
+  min-height: 59px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 17px 19px;
+  border: 1px solid rgba(44, 180, 192, 0.1);
+  border-radius: 16px;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+.inlineCheckIcon {
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 16px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  --stroke-0: #8c8c90;
+}
+
+.careCheckIcon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  border: 1.5px solid #39c3cf;
+  border-radius: 999px;
+  background: #f0fbfc;
+  padding: 5px;
+}
+
+.careCheckIcon > span {
+  width: 11px;
+  height: 11px;
+}
+
+.careNote {
+  width: 100%;
+  min-height: 70px;
+  margin: 40px 0 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #dcf6f7;
+  color: rgba(44, 43, 59, 0.65);
+  font-size: 13px;
+  line-height: 20.8px;
+}
+
+.careNote {
+  max-width: 100%;
+}
+
+.faqList {
+  margin-top: 32px;
+  overflow: hidden;
+  border: 1px solid #e9f0f2;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.faqItem + .faqItem {
+  border-top: 1px solid #e9f0f2;
+}
+
+.faqQuestion {
+  width: 100%;
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  list-style: none;
+  text-align: left;
+}
+
+.faqQuestion span {
+  color: #2c2b3b;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22.5px;
+}
+
+.faqQuestion svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: rgba(44, 43, 59, 0.55);
+  transform: rotate(90deg);
+  transition: transform 220ms ease;
+}
+
+.faqItem[data-open="true"] .faqQuestion svg {
+  transform: rotate(-90deg);
+}
+
+.faqAnswer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 240ms ease,
+    opacity 180ms ease;
+}
+
+.faqItem[data-open="true"] .faqAnswer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faqAnswer p {
+  min-height: 0;
+  overflow: hidden;
+  margin: 0 24px;
+  color: rgba(44, 43, 59, 0.62);
+  font-size: 14px;
+  line-height: 23px;
+  transition: margin 240ms ease;
+}
+
+.faqItem[data-open="true"] .faqAnswer p {
+  margin: -8px 24px 24px;
+}
+
+@media (max-width: 1180px) {
+  .bodyShell {
+    gap: 40px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .article {
+    width: 100%;
+    max-width: 980px;
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .treatmentPage {
+    --page-gutter: 12px;
+    --section-pad: 20px;
+    overflow-x: hidden;
+  }
+
+  .hero,
+  .bodyShell {
+    width: 100%;
+    padding-left: var(--section-pad);
+    padding-right: var(--section-pad);
+  }
+
+  .hero {
+    padding-top: 42px;
+  }
+
+  .readTime {
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(32px, 9vw, 38px);
+    letter-spacing: -0.9px;
+    line-height: 1.12;
+  }
+
+  .heroTitleLine,
+  .heroHighlightLine {
+    display: inline;
+  }
+
+  .heroSummary {
+    max-width: 100%;
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .heroImage {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 18px;
+  }
+
+  .heroImage span {
+    left: 14px;
+    bottom: 14px;
+    max-width: calc(100% - 28px);
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .bodyShell {
+    display: block;
+  }
+
+  .article,
+  .journeySection,
+  .careSection {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contentSection,
+  .contentSection:first-child {
+    padding: 56px 0;
+  }
+
+  .article h2 {
+    font-size: clamp(28px, 8vw, 32px);
+    letter-spacing: -0.72px;
+    line-height: 1.22;
+  }
+
+  .richText p,
+  .sectionIntro {
+    font-size: 15px;
+    line-height: 24.5px;
+  }
+
+  .conditionGroups {
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .conditionGroup h3,
+  .experienceFeatureText h3 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+
+  .symptomCard {
+    margin-top: 32px;
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .symptomCardInner {
+    min-height: 0;
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .symptomCard h3 {
+    margin-top: 28px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .symptomOptions button {
+    min-height: 52px;
+    padding: 13px 15px;
+  }
+
+  .continueButton {
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .journeyTabs,
+  .careTabs {
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+
+  .journeyTabs::-webkit-scrollbar,
+  .careTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .journeyTabs button,
+  .careTabs button {
+    min-width: 150px;
+  }
+
+  .journeyCard {
+    height: auto;
+    min-height: 0;
+    margin-top: 24px;
+    border-radius: 20px;
+  }
+
+  .journeyCardHeader {
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+  }
+
+  .journeyTitleGroup {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .journeyIcon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  .journeyCardBody {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 22px;
+  }
+
+  .journeyCardBody > p,
+  .journeyChecklist {
+    position: static;
+    width: 100%;
+  }
+
+  .journeyChecklist ul {
+    width: 100%;
+  }
+
+  .journeyControls {
+    gap: 10px;
+  }
+
+  .videoFeature {
+    margin-top: 32px;
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .videoImage {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    margin-top: 32px;
+  }
+
+  .statsGrid article {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .careTabs {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .careList,
+  .careNote {
+    margin-top: 28px;
+  }
+
+  .careList li {
+    padding: 15px 16px;
+  }
+
+  .faqList {
+    margin-top: 28px;
+  }
+
+  .faqQuestion {
+    padding: 20px;
+  }
+
+  .faqItem[data-open="true"] .faqAnswer p {
+    margin: -6px 20px 20px;
+  }
+}

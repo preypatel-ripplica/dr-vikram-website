@@ -1,0 +1,24 @@
+<svg width="232" height="205" viewBox="0 0 232 205" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g filter="url(#shadow)">
+    <rect x="28" y="20" width="176" height="149" rx="28" fill="white"/>
+    <image href="/images/patient-avatar-1.jpg" x="47" y="39" width="46" height="46" clip-path="url(#avatar1)"/>
+    <image href="/images/patient-avatar-2.jpg" x="78" y="39" width="46" height="46" clip-path="url(#avatar2)"/>
+    <image href="/images/patient-avatar-3.jpg" x="109" y="39" width="46" height="46" clip-path="url(#avatar3)"/>
+    <image href="/images/patient-avatar-4.jpg" x="140" y="39" width="46" height="46" clip-path="url(#avatar4)"/>
+    <circle cx="70" cy="62" r="23" stroke="white" stroke-width="2"/>
+    <circle cx="101" cy="62" r="23" stroke="white" stroke-width="2"/>
+    <circle cx="132" cy="62" r="23" stroke="white" stroke-width="2"/>
+    <circle cx="163" cy="62" r="23" stroke="white" stroke-width="2"/>
+    <text x="116" y="124" text-anchor="middle" fill="#2C2B3B" font-family="Poppins, Arial, sans-serif" font-size="30" font-weight="600" letter-spacing="-0.6">5000+</text>
+    <text x="116" y="147" text-anchor="middle" fill="#8C8C90" font-family="Poppins, Arial, sans-serif" font-size="15" font-weight="400">Happy patients</text>
+  </g>
+  <defs>
+    <clipPath id="avatar1"><circle cx="70" cy="62" r="23"/></clipPath>
+    <clipPath id="avatar2"><circle cx="101" cy="62" r="23"/></clipPath>
+    <clipPath id="avatar3"><circle cx="132" cy="62" r="23"/></clipPath>
+    <clipPath id="avatar4"><circle cx="163" cy="62" r="23"/></clipPath>
+    <filter id="shadow" x="0" y="0" width="232" height="205" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="7" stdDeviation="13.8" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+</svg>
