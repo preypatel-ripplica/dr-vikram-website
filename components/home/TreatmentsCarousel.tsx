@@ -24,7 +24,7 @@ const treatments = [
     image: "/assets/figma/treatments/prostate-urinary-care.png",
     bullets: [
       "Weak flow, night urination, and PSA review",
-      "Medicine, endoscopic, and surgery planning",
+      "Minimally invasive treatment and endoscopic surgery",
     ],
   },
   {
@@ -32,8 +32,8 @@ const treatments = [
     href: "/treatments/kidney-stones",
     image: "/assets/figma/treatments/urological-cancer-card.png",
     bullets: [
-      "CT review for stone size and location",
-      "URS, RIRS, PCNL, ECNL, and prevention care",
+      "Stone size, degree of hardness, and any hydronephrosis",
+      "URS, RIRS, PCNL, ESWL, and prevention care",
     ],
   },
   {

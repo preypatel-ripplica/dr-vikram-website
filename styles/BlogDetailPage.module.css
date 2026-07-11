@@ -1,5 +1,6 @@
 .blogDetailPage {
   width: 100%;
+  overflow-x: clip;
   background: #ffffff;
   color: #2c2b3b;
   font-family: Poppins, Arial, Helvetica, sans-serif;
@@ -165,9 +166,10 @@
 }
 
 .article {
-  width: 980px;
+  min-width: 0;
+  width: 100%;
   max-width: 980px;
-  flex: 0 0 980px;
+  flex: 1 1 0;
 }
 
 .overviewAnchor {
@@ -639,8 +641,7 @@
   }
 
   .article {
-    width: calc(100vw - 400px);
-    flex-basis: calc(100vw - 400px);
+    max-width: none;
   }
 }
 

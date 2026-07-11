@@ -57,6 +57,7 @@ function translateElementAttributes(element: Element, locale: Locale) {
 
 function translateDocument(locale: Locale) {
   if (locale === DEFAULT_LOCALE) return;
+  if (!document.body) return;
 
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   const textNodes: Text[] = [];
@@ -75,8 +76,54 @@ export function ClientDomTranslator({ locale }: { locale: Locale }) {
   const router = useRouter();
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => translateDocument(locale));
-    return () => window.cancelAnimationFrame(frame);
+    if (locale === DEFAULT_LOCALE) return;
+
+    let scheduled = false;
+    let frame = 0;
+
+    const scheduleTranslation = () => {
+      if (scheduled) return;
+
+      scheduled = true;
+      frame = window.requestAnimationFrame(() => {
+        scheduled = false;
+        translateDocument(locale);
+      });
+    };
+
+    scheduleTranslation();
+
+    const observer = new MutationObserver((mutations) => {
+      const hasRelevantChange = mutations.some((mutation) => {
+        if (mutation.type === "characterData") return true;
+        if (mutation.type === "attributes") return true;
+
+        return Array.from(mutation.addedNodes).some((node) => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            return Boolean(normalizeTranslationText(node.textContent));
+          }
+
+          return node.nodeType === Node.ELEMENT_NODE;
+        });
+      });
+
+      if (hasRelevantChange) {
+        scheduleTranslation();
+      }
+    });
+
+    observer.observe(document.body, {
+      attributeFilter: SAFE_ATTRIBUTES,
+      attributes: true,
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+    };
   }, [locale, router.asPath]);
 
   return null;

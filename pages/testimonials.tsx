@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { useI18n } from "@/lib/i18n-context";
 import styles from "@/styles/TestimonialsPage.module.css";
 
 const stats = [
@@ -203,6 +204,8 @@ function FeaturedStorySection({
   onNext: () => void;
   onPrevious: () => void;
 }) {
+  const { t } = useI18n();
+
   return (
     <section className={styles.featuredSection} data-node-id="148:24781" id="featured-story">
       <article className={styles.featuredCard} key={activeStory.id}>
@@ -215,7 +218,7 @@ function FeaturedStorySection({
           />
           <div className={styles.featuredPatient}>
             <strong>{activeStory.name}</strong>
-            <span>{activeStory.meta}</span>
+            <span>{t(activeStory.meta)}</span>
           </div>
         </div>
 
@@ -224,15 +227,15 @@ function FeaturedStorySection({
             <div className={styles.featuredMeta}>
               <span className={styles.featuredMetaLeft}>
                 <StarRow />
-                <span className={styles.featuredPill}>{activeStory.badge}</span>
+                <span className={styles.featuredPill}>{t(activeStory.badge)}</span>
               </span>
               <time>{activeStory.date}</time>
             </div>
-            <blockquote>&quot;{activeStory.quote}&quot;</blockquote>
+            <blockquote>&quot;{t(activeStory.quote)}&quot;</blockquote>
           </div>
 
           <div className={styles.featuredControls}>
-            <button aria-label="Previous testimonial" onClick={onPrevious} type="button">
+            <button aria-label={t("Previous testimonial")} onClick={onPrevious} type="button">
               ‹
             </button>
             <span className={styles.progressPill} aria-hidden="true">
@@ -246,7 +249,7 @@ function FeaturedStorySection({
                 <span className={styles.progressDot} key={index} />
               ))}
             </span>
-            <button aria-label="Next testimonial" onClick={onNext} type="button">
+            <button aria-label={t("Next testimonial")} onClick={onNext} type="button">
               ›
             </button>
           </div>
@@ -265,6 +268,7 @@ function AllTestimonialsSection({
   onFilterChange: (filter: string) => void;
   onStorySelect: (story: Story) => void;
 }) {
+  const { t } = useI18n();
   const filteredStories = useMemo(
     () =>
       activeFilter === "All"
@@ -279,12 +283,12 @@ function AllTestimonialsSection({
         <div>
           <p className={styles.label}>
             <ShieldPlusIcon />
-            <span>Stories by condition</span>
+            <span>{t("Stories by condition")}</span>
           </p>
-          <h2>All testimonials</h2>
+          <h2>{t("All testimonials")}</h2>
         </div>
 
-        <div className={styles.filterRow} aria-label="Testimonial filters">
+        <div className={styles.filterRow} aria-label={t("Testimonial filters")}>
           {filters.map((filter) => (
             <button
               aria-pressed={activeFilter === filter}
@@ -293,7 +297,7 @@ function AllTestimonialsSection({
               onClick={() => onFilterChange(filter)}
               type="button"
             >
-              {filter}
+              {t(filter)}
             </button>
           ))}
         </div>
@@ -306,17 +310,17 @@ function AllTestimonialsSection({
               <Image alt="" fill sizes="(max-width: 900px) 100vw, 410px" src={story.image} />
               <div className={styles.storyImageText}>
                 <strong>{story.name}</strong>
-                <span>{story.meta}</span>
+                <span>{t(story.meta)}</span>
               </div>
             </div>
             <div className={styles.storyBody}>
               <div className={styles.storyTop}>
                 <StarRow small />
-                <span className={styles.storyBadge}>{story.badge}</span>
+                <span className={styles.storyBadge}>{t(story.badge)}</span>
               </div>
-              <p>&quot;{story.quote}&quot;</p>
+              <p>&quot;{t(story.quote)}&quot;</p>
               <button onClick={() => onStorySelect(story)} type="button">
-                Read full story →
+                {t("Read full story")} →
               </button>
             </div>
           </article>
@@ -327,6 +331,7 @@ function AllTestimonialsSection({
 }
 
 export default function TestimonialsPage() {
+  const { t } = useI18n();
   const [activeStoryId, setActiveStoryId] = useState(featuredStories[0]?.id ?? stories[0].id);
   const [activeFilter, setActiveFilter] = useState("All");
   const activeStory = stories.find((story) => story.id === activeStoryId) ?? stories[0];
@@ -395,18 +400,17 @@ export default function TestimonialsPage() {
           <div className={styles.heroContent} data-node-id="148:24780">
             <p className={styles.label}>
               <ShieldPlusIcon />
-              <span>Patient Support · Testimonials</span>
+              <span>{t("Patient Support · Testimonials")}</span>
             </p>
 
             <div className={styles.heroText}>
               <h1>
-                Real patients,
+                {t("Real patients,")}
                 <br />
-                real recoveries
+                {t("real recoveries")}
               </h1>
               <p>
-                Every story is from a patient who chose to share so others could
-                decide with confidence.
+                {t("Every story is from a patient who chose to share so others could decide with confidence.")}
               </p>
             </div>
 
@@ -418,7 +422,7 @@ export default function TestimonialsPage() {
                   </span>
                   <span>
                     <strong>{stat.value}</strong>
-                    <small>{stat.label}</small>
+                    <small>{t(stat.label)}</small>
                   </span>
                 </article>
               ))}
@@ -427,7 +431,7 @@ export default function TestimonialsPage() {
 
           <div className={styles.heroImage} data-node-id="203:17078">
             <Image
-              alt="Patient consultation support"
+              alt={t("Patient consultation support")}
               fill
               priority
               sizes="(max-width: 900px) 100vw, 620px"

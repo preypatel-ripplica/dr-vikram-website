@@ -310,7 +310,9 @@
 .videoThumb {
   position: relative;
   overflow: hidden;
+  display: block;
   background: linear-gradient(144.45deg, #2c2b3b 0%, rgba(57, 195, 207, 0.2) 100%);
+  cursor: pointer;
 }
 
 .featuredMedia {

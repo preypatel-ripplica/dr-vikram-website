@@ -19,6 +19,8 @@ type VideoItem = {
   views: string;
   duration: string;
   tone: VideoTone;
+  url: string;
+  thumbnail: string;
 };
 
 const categoryTabs: { key: CategoryKey; label: string }[] = [
@@ -123,18 +125,24 @@ function FeaturedVideo() {
   return (
     <section className={styles.featuredWrap} data-node-id="149:29173">
       <article className={styles.featuredCard}>
-        <div className={styles.featuredMedia}>
+        <a
+          aria-label={`Watch ${featuredVideo.title} on YouTube`}
+          className={styles.featuredMedia}
+          href={featuredVideo.url}
+          rel="noreferrer"
+          target="_blank"
+        >
           <Image
-            alt=""
+            alt={featuredVideo.title}
             className={styles.thumbTexture}
             fill
             priority
             sizes="427px"
-            src="/assets/figma/video-gallery/featured-thumb.svg"
+            src={featuredVideo.thumbnail}
           />
           <span className={styles.thumbShade} />
           <PlayButton large />
-        </div>
+        </a>
 
         <div className={styles.featuredBody}>
           <span className={`${styles.videoBadge} ${styles.teal}`}>
@@ -150,7 +158,12 @@ function FeaturedVideo() {
               {featuredVideo.duration}
             </MetaItem>
           </div>
-          <a className={styles.watchButton} href="#">
+          <a
+            className={styles.watchButton}
+            href={featuredVideo.url}
+            rel="noreferrer"
+            target="_blank"
+          >
             <Image
               alt=""
               height={16}
@@ -168,17 +181,23 @@ function FeaturedVideo() {
 function VideoCard({ video }: { video: VideoItem }) {
   return (
     <article className={styles.videoCard}>
-      <div className={`${styles.videoThumb} ${styles[`${video.tone}Thumb`]}`}>
+      <a
+        aria-label={`Watch ${video.title} on YouTube`}
+        className={`${styles.videoThumb} ${styles[`${video.tone}Thumb`]}`}
+        href={video.url}
+        rel="noreferrer"
+        target="_blank"
+      >
         <Image
           alt=""
           className={styles.cardThumbTexture}
           fill
           sizes="(max-width: 900px) 100vw, 411px"
-          src="/assets/figma/video-gallery/card-thumb.svg"
+          src={video.thumbnail}
         />
         <span className={styles.thumbShadeSmall} />
         <PlayButton />
-      </div>
+      </a>
 
       <div className={styles.videoCardBody}>
         <span className={`${styles.videoBadge} ${styles[video.tone]}`}>

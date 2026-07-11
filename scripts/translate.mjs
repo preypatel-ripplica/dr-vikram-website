@@ -69,7 +69,10 @@ const SKIPPED_KEYS = new Set([
 const SAFE_JSX_TRANSLATION_ATTRIBUTES = new Set([
   "alt",
   "aria-label",
+  "copy",
+  "eyebrow",
   "highlight",
+  "label",
   "placeholder",
   "source",
   "title",
@@ -77,6 +80,9 @@ const SAFE_JSX_TRANSLATION_ATTRIBUTES = new Set([
 
 const CODE_CONTENT_KEYS = new Set([
   "answer",
+  "action",
+  "appointmentLabel",
+  "badge",
   "byline",
   "caption",
   "categoryLabel",
@@ -88,9 +94,13 @@ const CODE_CONTENT_KEYS = new Set([
   "label",
   "meta",
   "note",
+  "phase",
   "question",
   "quote",
   "range",
+  "right",
+  "left",
+  "step",
   "subheading",
   "summary",
   "title",
@@ -102,6 +112,7 @@ const CODE_CONTENT_ARRAY_KEYS = new Set([
   "faqs",
   "features",
   "links",
+  "notes",
   "options",
   "paragraphs",
   "questions",
@@ -111,13 +122,26 @@ const CODE_CONTENT_ARRAY_KEYS = new Set([
 
 const CODE_CONTENT_ARRAY_NAMES = new Set([
   "categoryTabs",
+  "checklistItems",
+  "consultationSteps",
+  "concerns",
   "faqs",
+  "filters",
+  "journeySteps",
+  "prepSteps",
   "posts",
+  "reportItems",
+  "roboticSlides",
+  "stats",
   "stories",
   "steps",
   "testimonials",
   "timelineSteps",
   "videos",
+]);
+
+const CODE_CONTENT_OBJECT_NAMES = new Set([
+  "stepMessages",
 ]);
 
 const SKIPPED_EXACT_VALUES = new Set([
@@ -249,7 +273,13 @@ const geminiModel =
   process.env.GEMINI_TRANSLATION_MODEL || process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
 function normalizeTranslationText(value) {
-  return String(value).replace(/\s+/g, " ").trim();
+  return String(value)
+    .replace(/&apos;|&#x27;|&#39;/g, "'")
+    .replace(/&quot;|&#x22;|&#34;/g, '"')
+    .replace(/&amp;|&#x26;|&#38;/g, "&")
+    .replace(/&nbsp;|&#xA0;|&#160;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function getTranslationKey(value) {
@@ -353,6 +383,7 @@ function collectFromCode(source, strings) {
 
     if (ts.isPropertyAssignment(parent) && parent.initializer === node) {
       const key = getPropertyName(parent.name);
+      if (isInsideNamedContentObject(node)) return false;
       return shouldSkipKey(key) || !CODE_CONTENT_KEYS.has(key);
     }
 
@@ -387,6 +418,33 @@ function collectFromCode(source, strings) {
 
       if (ts.isVariableDeclaration(current) && ts.isIdentifier(current.name)) {
         return CODE_CONTENT_ARRAY_NAMES.has(current.name.text);
+      }
+
+      if (
+        ts.isCallExpression(current) ||
+        ts.isJsxAttribute(current) ||
+        ts.isImportDeclaration(current) ||
+        ts.isExportDeclaration(current)
+      ) {
+        return false;
+      }
+
+      current = current.parent;
+    }
+
+    return false;
+  }
+
+  function isInsideNamedContentObject(node) {
+    let current = node.parent;
+
+    while (current) {
+      if (
+        ts.isVariableDeclaration(current) &&
+        ts.isIdentifier(current.name) &&
+        CODE_CONTENT_OBJECT_NAMES.has(current.name.text)
+      ) {
+        return true;
       }
 
       if (

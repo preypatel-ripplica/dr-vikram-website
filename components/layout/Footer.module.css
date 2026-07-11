@@ -148,6 +148,11 @@
   white-space: normal;
 }
 
+.locationLink span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .externalIcon {
   margin-top: 1px;
   width: 20px;
@@ -160,6 +165,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 18px;
+  align-items: center;
 }
 
 .footerContactLinks a {
@@ -168,6 +174,7 @@
   font-weight: 500;
   line-height: 18px;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .footerContactLinks a:hover {

@@ -1,3 +1,5 @@
+import { FormEvent, useEffect, useState } from "react";
+import { submitWeb3Form } from "@/lib/web3forms";
 import styles from "./AppointmentSection.module.css";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -8,7 +10,9 @@ type ContactCard = {
 };
 
 type LocationLink = {
+  name: string;
   label: string;
+  shortLabel: string;
   href: string;
 };
 
@@ -18,6 +22,11 @@ type AppointmentSectionProps = {
   email?: ContactCard;
   phone?: ContactCard;
   locations?: LocationLink[];
+};
+
+type FormStatus = {
+  message: string;
+  type: "error" | "success";
 };
 
 const defaultEmail = {
@@ -39,11 +48,15 @@ const urowellnessMapsUrl =
 
 const defaultLocations = [
   {
+    name: "Shalby International Hospitals",
+    shortLabel: "Golf Course Road, Sector 53, Gurugram",
     label:
       "Shalby International Hospitals, Golf Course Rd, Parsvnath Exotica, DLF Phase 5, Sector 53, Gurugram, Haryana 122011",
     href: shalbyMapsUrl,
   },
   {
+    name: "Urowellness Clinic",
+    shortLabel: "Eros City Square Mall, Sector 49, Gurugram",
     label:
       "Urowellness Clinic, 1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49, Gurugram, Haryana 122018",
     href: urowellnessMapsUrl,
@@ -154,9 +167,45 @@ export function AppointmentSection({
   locations = defaultLocations,
 }: AppointmentSectionProps) {
   const { t } = useI18n();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatus | null>(null);
+
+  useEffect(() => {
+    if (!status) return;
+
+    const timer = window.setTimeout(() => {
+      setStatus(null);
+    }, 10000);
+
+    return () => window.clearTimeout(timer);
+  }, [status]);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      await submitWeb3Form(form);
+      form.reset();
+      setStatus({
+        message: t("Sent! We will contact you soon."),
+        type: "success",
+      });
+    } catch (error) {
+      setStatus({
+        message: error instanceof Error ? error.message : t("Something went wrong. Please try again."),
+        type: "error",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
-    <section className={styles.appointmentSection} data-node-id="64:25713" id="contact">
+    <section className={styles.appointmentSection} data-node-id="64:25713">
       <div className={styles.appointmentInfo}>
         <div className={styles.appointmentHeading}>
           <p className={styles.sectionLabel}>
@@ -181,11 +230,14 @@ export function AppointmentSection({
               {locations.map((location) => (
                 <a
                   href={location.href}
-                  key={location.label}
+                  key={location.name}
                   rel={location.href.startsWith("http") ? "noreferrer" : undefined}
                   target={location.href.startsWith("http") ? "_blank" : undefined}
+                  title={location.label}
                 >
-                  <span>{t(location.label)}</span>
+                  <span>
+                    {t(location.name)}, {t(location.shortLabel)}
+                  </span>
                   <ExternalLinkIcon />
                 </a>
               ))}
@@ -194,7 +246,7 @@ export function AppointmentSection({
         </div>
       </div>
 
-      <form className={styles.appointmentForm}>
+      <form className={styles.appointmentForm} id="contact" onSubmit={handleSubmit}>
         <div className={styles.formRow}>
           <label>
             <span className={styles.fieldLabel}>{t("Your name")}</span>
@@ -240,7 +292,23 @@ export function AppointmentSection({
           </span>
         </label>
 
-        <button type="submit">{t("Submit")}</button>
+        {status?.type === "success" ? (
+          <p
+            className={`${styles.formStatus} ${styles.formStatusSuccess}`}
+            role="status"
+          >
+            {status.message}
+          </p>
+        ) : (
+          <button disabled={isSubmitting} type="submit">
+            {isSubmitting ? t("Sending...") : t("Submit")}
+          </button>
+        )}
+        {status?.type === "error" ? (
+          <p className={`${styles.formStatus} ${styles.formStatusError}`} role="status">
+            {status.message}
+          </p>
+        ) : null}
       </form>
     </section>
   );

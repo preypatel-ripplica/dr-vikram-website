@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { TestimonialsSection as HomeTestimonialsSection } from "@/components/home/TestimonialsSection";
+import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import styles from "@/styles/ContactPage.module.css";
 
@@ -19,7 +20,7 @@ const contactCards = [
   {
     label: "Timings",
     value: "All Day: 11.00 AM - 04.00 PM",
-    href: "#appointment",
+    href: "#contact",
   },
 ];
 
@@ -30,12 +31,16 @@ const urowellnessMapsUrl =
 
 const visitLocations = [
   {
+    name: "Shalby International Hospitals",
+    shortLabel: "Golf Course Road, Sector 53, Gurugram",
     label:
       "Shalby International Hospitals, Golf Course Rd, Parsvnath Exotica, DLF Phase 5, Sector 53, Gurugram, Haryana 122011",
     href: shalbyMapsUrl,
     image: "/images/Shalby_Hospital.png",
   },
   {
+    name: "Urowellness Clinic",
+    shortLabel: "Eros City Square Mall, Sector 49, Gurugram",
     label:
       "Urowellness Clinic, 1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49, Gurugram, Haryana 122018",
     href: urowellnessMapsUrl,
@@ -77,19 +82,6 @@ function ExternalLinkIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"
-      />
-    </svg>
-  );
-}
-
-function PlusIcon() {
-  return (
-    <svg aria-hidden="true" fill="none" viewBox="0 0 20 20">
-      <path
-        d="M10 4.75V15.25M4.75 10H15.25"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.6"
       />
     </svg>
   );
@@ -236,65 +228,6 @@ function VisitSection() {
   );
 }
 
-function AppointmentFormSection() {
-  return (
-    <section className={styles.appointment} data-node-id="103:39314" id="appointment">
-      <div className={styles.appointmentInfo}>
-        <div className={styles.appointmentHeading}>
-          <ShieldLabel>Treatments</ShieldLabel>
-          <h2>Any concern? Make an appointment</h2>
-        </div>
-
-        <div className={styles.appointmentContactGroup}>
-          <div className={styles.appointmentContactRow}>
-            {contactCards.slice(0, 2).map((card) => (
-              <ContactCard card={card} key={`appointment-${card.label}`} />
-            ))}
-          </div>
-          <div className={styles.locationTile}>
-            <span className={styles.smallContactIcon}>
-              <Image alt="" fill sizes="23px" src="/assets/figma/contact-page/mail.svg" />
-            </span>
-            <div>
-              <span>Address</span>
-              <a href={shalbyMapsUrl} rel="noreferrer" target="_blank">
-                Shalby International Hospitals, Golf Course Rd, Parsvnath
-                Exotica, DLF Phase 5, Sector 53, Gurugram, Haryana 122011{" "}
-                <ExternalLinkIcon />
-              </a>
-              <a href={urowellnessMapsUrl} rel="noreferrer" target="_blank">
-                Urowellness Clinic, 1st floor, Eros City Square Mall, 117,
-                Rosewood City, Sector 49, Gurugram, Haryana 122018{" "}
-                <ExternalLinkIcon />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <form className={styles.form}>
-        <div className={styles.formRow}>
-          <input aria-label="Your name" placeholder="Your name" type="text" />
-          <input aria-label="Email" placeholder="Email" type="email" />
-        </div>
-        <div className={styles.formRow}>
-          <input aria-label="Whatsapp no." placeholder="Whatsapp no." type="tel" />
-          <input aria-label="Location" placeholder="Location" type="text" />
-        </div>
-        <textarea aria-label="Describe your problem" placeholder="Describe your problem..." />
-        <label className={styles.upload}>
-          <input type="file" />
-          <span>
-            <PlusIcon />
-            Upload any relevant photo or doc
-          </span>
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-  );
-}
-
 export default function ContactUsPage() {
   return (
     <>
@@ -314,7 +247,7 @@ export default function ContactUsPage() {
             styles.contactCards,
             styles.visitSection,
             styles.homeTestimonialsWrap,
-            styles.appointment,
+            styles.sharedAppointment,
           ]}
           visibleChildClassName={styles.revealChildVisible}
           visibleClassName={styles.revealVisible}
@@ -325,7 +258,9 @@ export default function ContactUsPage() {
         <div className={styles.homeTestimonialsWrap}>
           <HomeTestimonialsSection />
         </div>
-        <AppointmentFormSection />
+        <div className={styles.sharedAppointment}>
+          <AppointmentSection />
+        </div>
       </main>
     </>
   );

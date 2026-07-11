@@ -1,112 +1,26 @@
 {
   "featured": {
-    "category": "Featured · Robotic",
-    "categoryKey": "robotic",
-    "title": "What is Robotic Surgery? A Patient's Guide",
-    "excerpt": "Dr. Vikram explains what robotic-assisted surgery means, why it is safer, and which urological procedures benefit most.",
-    "views": "18.4K views",
-    "duration": "6:42",
-    "tone": "teal"
+    "category": "Featured · Prostate Health",
+    "categoryKey": "education",
+    "title": "BPH Aur Cancer Same Hain?",
+    "excerpt": "Dr. Vikram explains the difference between benign prostate enlargement and prostate cancer, and when symptoms need medical evaluation.",
+    "views": "12.8K views",
+    "duration": "1:15",
+    "tone": "teal",
+    "url": "https://youtu.be/GI3w1Da8LBU",
+    "thumbnail": "https://i.ytimg.com/vi/GI3w1Da8LBU/hqdefault.jpg"
   },
   "videos": [
     {
-      "category": "Education",
+      "category": "Kidney Stone Care",
       "categoryKey": "education",
-      "title": "Understanding Kidney Stones — Causes & Prevention",
-      "excerpt": "A comprehensive look at why kidney stones form, dietary triggers, hydration tips, and prevention habits.",
-      "views": "31.2K",
-      "duration": "8:15",
-      "tone": "blue"
-    },
-    {
-      "category": "Testimonials",
-      "categoryKey": "testimonials",
-      "title": "Patient Story — Robotic Prostatectomy Recovery",
-      "excerpt": "Ravi shares his 90-day recovery journey after robotic prostatectomy, including milestones and return to routine.",
-      "views": "9.8K",
-      "duration": "4:30",
-      "tone": "orange"
-    },
-    {
-      "category": "Education",
-      "categoryKey": "education",
-      "title": "Prostate Health After 40 — What You Need to Know",
-      "excerpt": "When to start PSA screening, what PSA scores mean, and how Dr. Vikram approaches early diagnosis.",
-      "views": "24.7K",
-      "duration": "10:05",
-      "tone": "blue"
-    },
-    {
-      "category": "Robotic",
-      "categoryKey": "robotic",
-      "title": "Robotic vs Laparoscopic Surgery — Key Differences",
-      "excerpt": "Side-by-side comparison of robotic and laparoscopic approaches — precision, recovery, and suitability.",
-      "views": "14.1K",
-      "duration": "7:22",
-      "tone": "teal"
-    },
-    {
-      "category": "Testimonials",
-      "categoryKey": "testimonials",
-      "title": "From Nigeria to India — My Treatment Journey",
-      "excerpt": "George flew from Lagos for robotic prostatectomy and shares the international patient support experience.",
-      "views": "6.3K",
-      "duration": "5:10",
-      "tone": "orange"
-    },
-    {
-      "category": "Education",
-      "categoryKey": "education",
-      "title": "PCNL Explained — Removing Large Kidney Stones",
-      "excerpt": "Percutaneous nephrolithotomy demystified — indications, procedure walkthrough, and recovery timeline.",
-      "views": "19.5K",
-      "duration": "9:48",
-      "tone": "blue"
-    },
-    {
-      "category": "Education",
-      "categoryKey": "education",
-      "title": "Urological Cancer — Early Warning Signs",
-      "excerpt": "Key symptoms of bladder, kidney, and prostate cancer that every person should know, and when to consult.",
-      "views": "28.9K",
-      "duration": "11:20",
-      "tone": "blue"
-    },
-    {
-      "category": "Q&A",
-      "categoryKey": "qa",
-      "title": "Men's Health Q&A — Erectile Dysfunction, Testosterone, Fertility",
-      "excerpt": "Dr. Vikram answers the most searched men's health questions — honestly and without jargon.",
-      "views": "22.1K",
-      "duration": "15:00",
-      "tone": "pink"
-    },
-    {
-      "category": "Testimonials",
-      "categoryKey": "testimonials",
-      "title": "Bladder Cancer Survivor — 2-Year Update",
-      "excerpt": "Meera shares her two-year post-TURBT journey, the emotional side of diagnosis, and follow-up lessons.",
-      "views": "8.2K",
-      "duration": "6:05",
-      "tone": "orange"
-    },
-    {
-      "category": "Robotic",
-      "categoryKey": "robotic",
-      "title": "Robotic Pyeloplasty for UPJ Obstruction",
-      "excerpt": "An educational walkthrough of robotic pyeloplasty from diagnosis through recovery milestones.",
-      "views": "11.6K",
-      "duration": "13:40",
-      "tone": "teal"
-    },
-    {
-      "category": "Q&A",
-      "categoryKey": "qa",
-      "title": "Ask the Doctor — Kidney Stone Q&A",
-      "excerpt": "Live Q&A session — patients ask, Dr. Vikram answers every kidney stone question directly.",
-      "views": "15.4K",
-      "duration": "18:20",
-      "tone": "pink"
+      "title": "Kidney Stone: Paani Se Niklega Ya Surgery Chahiye? | Symptoms & Treatment",
+      "excerpt": "A practical guide to kidney stone symptoms, when water and medicines may help, and when surgery becomes the safer option.",
+      "views": "27.4K",
+      "duration": "3:20",
+      "tone": "blue",
+      "url": "https://youtu.be/A8mLX4qr__Q",
+      "thumbnail": "https://i.ytimg.com/vi/A8mLX4qr__Q/hqdefault.jpg"
     }
   ]
 }

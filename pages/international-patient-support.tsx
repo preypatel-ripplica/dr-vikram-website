@@ -5,6 +5,7 @@ import { useState } from "react";
 import { TestimonialsSection as HomeTestimonialsSection } from "@/components/home/TestimonialsSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
+import { useI18n } from "@/lib/i18n-context";
 import styles from "@/styles/PatientSupportPage.module.css";
 
 const countries = [
@@ -122,18 +123,22 @@ function CenteredHeading({
   eyebrow: string;
   title: string;
 }) {
+  const { t } = useI18n();
+
   return (
     <div className={styles.centeredHeading}>
-      <SectionLabel>{eyebrow}</SectionLabel>
-      <h2>{title}</h2>
+      <SectionLabel>{t(eyebrow)}</SectionLabel>
+      <h2>{t(title)}</h2>
     </div>
   );
 }
 
 function ConsultationCard() {
+  const { t } = useI18n();
+
   return (
     <aside className={styles.consultCard}>
-      <h2>Start your international consultation</h2>
+      <h2>{t("Start your international consultation")}</h2>
 
       <div className={styles.stepList}>
         {consultationSteps.map((step) => (
@@ -141,21 +146,23 @@ function ConsultationCard() {
             <span className={styles.stepIcon}>
               <Image alt="" height={14} src={step.icon} width={14} />
             </span>
-            <span>{step.label}</span>
+            <span>{t(step.label)}</span>
           </div>
         ))}
       </div>
 
       <a className={styles.videoButton} href="#contact">
-        Book video consultation
+        {t("Book video consultation")}
       </a>
 
-      <p className={styles.availability}>Available Mon-Sat · 8 am-8 pm IST</p>
+      <p className={styles.availability}>{t("Available Mon-Sat · 8 am-8 pm IST")}</p>
     </aside>
   );
 }
 
 function InternationalSupportHero() {
+  const { t } = useI18n();
+
   return (
     <section
       className={styles.heroSection}
@@ -165,13 +172,11 @@ function InternationalSupportHero() {
       <div className={styles.heroInner} data-node-id="146:16219">
         <div className={styles.heroCopy}>
           <div className={styles.headingGroup}>
-            <SectionLabel>International Patient Support</SectionLabel>
+            <SectionLabel>{t("International Patient Support")}</SectionLabel>
             <div className={styles.heroText}>
-              <h1>Expert urological care, wherever you are</h1>
+              <h1>{t("Expert urological care, wherever you are")}</h1>
               <p>
-                We have supported patients from 35+ countries. Your journey to
-                Dr. Vikram&apos;s care starts with a video call — no flight
-                required to get a clear diagnosis and treatment plan.
+                {t("We have supported patients from 35+ countries. Your journey to Dr. Vikram's care starts with a video call — no flight required to get a clear diagnosis and treatment plan.")}
               </p>
             </div>
           </div>
@@ -192,6 +197,8 @@ function InternationalSupportHero() {
 }
 
 function HowItWorksSection() {
+  const { t } = useI18n();
+
   return (
     <section className={styles.howSection} data-node-id="146:15595">
       <div className={styles.sectionStack}>
@@ -211,12 +218,12 @@ function HowItWorksSection() {
                 <div className={styles.timelineCard}>
                   <div className={styles.timelineCopy}>
                     <div className={styles.stepMeta}>
-                      <span className={styles[item.tone]}>{item.step}</span>
+                      <span className={styles[item.tone]}>{t(item.step)}</span>
                       <i />
-                      <small>{item.phase}</small>
+                      <small>{t(item.phase)}</small>
                     </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.copy}</p>
+                    <h3>{t(item.title)}</h3>
+                    <p>{t(item.copy)}</p>
                   </div>
                 </div>
               </article>
@@ -229,6 +236,7 @@ function HowItWorksSection() {
 }
 
 function TravelChecklistSection() {
+  const { t } = useI18n();
   const [checkedItems, setCheckedItems] = useState<Set<number>>(() => new Set());
   const completed = checkedItems.size;
   const progress = `${(completed / checklistItems.length) * 100}%`;
@@ -262,7 +270,7 @@ function TravelChecklistSection() {
                   }`}
                   key={item}
                 >
-                  <span>{item}</span>
+                  <span>{t(item)}</span>
                   <input
                     checked={isChecked}
                     onChange={() => toggleItem(index)}
@@ -286,11 +294,11 @@ function TravelChecklistSection() {
           <aside className={styles.checklistAside}>
             <div className={styles.progressCard}>
               <strong>{completed}</strong>
-              <span>of {checklistItems.length} items done</span>
+              <span>{t("of")} {checklistItems.length} {t("items done")}</span>
               <div className={styles.progressTrack}>
                 <span style={{ width: progress }} />
               </div>
-              <p>Start checking off items as you prepare for your visit.</p>
+              <p>{t("Start checking off items as you prepare for your visit.")}</p>
             </div>
 
             <a className={styles.helpCard} href="tel:+919871008256">
@@ -303,8 +311,8 @@ function TravelChecklistSection() {
                 />
               </span>
               <span>
-                <strong>Need help right now?</strong>
-                <small>Helpline available 24/7</small>
+                <strong>{t("Need help right now?")}</strong>
+                <small>{t("Helpline available 24/7")}</small>
               </span>
               <Image
                 alt=""
@@ -321,13 +329,14 @@ function TravelChecklistSection() {
 }
 
 function InternationalFaqSection() {
+  const { t } = useI18n();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className={styles.faqSection} data-node-id="146:18606">
       <div className={styles.faqHeading}>
-        <SectionLabel>Common questions</SectionLabel>
-        <h2>International patient FAQs</h2>
+        <SectionLabel>{t("Common questions")}</SectionLabel>
+        <h2>{t("International patient FAQs")}</h2>
       </div>
 
       <div className={styles.faqList}>
@@ -342,7 +351,7 @@ function InternationalFaqSection() {
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 type="button"
               >
-                <span>{question}</span>
+                <span>{t(question)}</span>
                 <Image
                   alt=""
                   className={isOpen ? styles.chevronOpen : undefined}
@@ -353,8 +362,7 @@ function InternationalFaqSection() {
               </button>
               {isOpen ? (
                 <p className={styles.faqAnswer}>
-                  Dr. Vikram&apos;s team will guide you with the next practical
-                  step based on your reports and travel plan.
+                  {t("Dr. Vikram's team will guide you with the next practical step based on your reports and travel plan.")}
                 </p>
               ) : null}
             </div>
@@ -366,26 +374,27 @@ function InternationalFaqSection() {
 }
 
 function FinalCtaSection() {
+  const { t, localizeHref } = useI18n();
+
   return (
     <section className={styles.finalCta} data-node-id="146:16031">
       <div className={styles.finalCtaHeading}>
-        <SectionLabel>Advanced urology clinic</SectionLabel>
+        <SectionLabel>{t("Advanced urology clinic")}</SectionLabel>
         <div>
           <h2>
-            Ready to <span>take control</span> of your health?
+            {t("Ready to")} <span>{t("take control")}</span> {t("of your health?")}
           </h2>
           <p>
-            Share your reports, plan your visit, and get practical support
-            before and after your consultation.
+            {t("Share your reports, plan your visit, and get practical support before and after your consultation.")}
           </p>
         </div>
       </div>
       <div className={styles.finalCtaActions}>
         <a className={styles.primaryCta} href="#contact">
-          Book appointment
+          {t("Book appointment")}
         </a>
-        <Link className={styles.secondaryCta} href="/contact-us">
-          Contact us
+        <Link className={styles.secondaryCta} href={localizeHref("/contact-us")}>
+          {t("Contact us")}
         </Link>
       </div>
     </section>

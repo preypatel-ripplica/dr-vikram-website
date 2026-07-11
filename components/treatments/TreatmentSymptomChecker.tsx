@@ -7,6 +7,23 @@ type TreatmentSymptomCheckerProps = {
   symptomCheck: TreatmentData["symptomCheck"];
 };
 
+function scrollToAppointmentForm() {
+  const contactForm = document.getElementById("contact");
+  const fallbackTarget = document.querySelector("footer");
+  const target = contactForm ?? fallbackTarget;
+
+  if (!target) return;
+
+  const headerOffset = window.matchMedia("(max-width: 900px)").matches ? 84 : 96;
+  const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+  window.history.replaceState(null, "", "#contact");
+  window.scrollTo({
+    top: Math.max(top, 0),
+    behavior: "smooth",
+  });
+}
+
 export function TreatmentSymptomChecker({
   symptomCheck,
 }: TreatmentSymptomCheckerProps) {
@@ -29,7 +46,7 @@ export function TreatmentSymptomChecker({
       return;
     }
 
-    window.location.hash = "contact";
+    scrollToAppointmentForm();
   }
 
   return (

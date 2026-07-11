@@ -4,6 +4,7 @@ import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { useI18n } from "@/lib/i18n-context";
 import styles from "@/styles/TreatmentJourneyPage.module.css";
 
 const icons = {
@@ -112,32 +113,32 @@ const reportItems = [
 ];
 const kitData = {
   "Kidney Stone": {
-    type: "Stone appointment",
+    appointmentLabel: "Stone appointment",
     bring: ["CT scan or X-ray", "Ultrasound report", "Urine test results", "Current prescriptions"],
     questions: ["What is the stone size and location?", "Do I need URS, RIRS, PCNL, or ECNL?", "Will I need a stent?", "How can I prevent stones again?"],
   },
   "Prostate / BPH": {
-    type: "Routine appointment",
+    appointmentLabel: "Routine appointment",
     bring: ["PSA blood test result", "Urine flow test if done", "Prescription list", "Any prior prostate biopsy report"],
     questions: ["Is my PSA level a concern?", "Do I need a biopsy?", "What is causing my urinary symptoms?", "What are my treatment options?"],
   },
   "Bladder Issue": {
-    type: "Bladder appointment",
+    appointmentLabel: "Bladder appointment",
     bring: ["Urine routine report", "Urine culture report", "Ultrasound report", "Current prescriptions"],
     questions: ["What is causing urgency or leakage?", "Do I need cystoscopy?", "Is infection or blockage possible?", "What are my treatment options?"],
   },
   "Men's Health": {
-    type: "Men's health appointment",
+    appointmentLabel: "Men's health appointment",
     bring: ["Semen analysis if done", "Hormone reports", "Prescription list", "Previous fertility reports"],
     questions: ["What could be causing this?", "Do I need hormone testing?", "What treatment is suitable?", "How long can recovery take?"],
   },
   "Urological Cancer": {
-    type: "Cancer opinion appointment",
+    appointmentLabel: "Cancer opinion appointment",
     bring: ["Biopsy report", "CT, MRI, or PET report", "Blood and urine results", "Previous treatment notes"],
     questions: ["What stage is this?", "Is surgery suitable?", "Can robotic surgery help?", "What follow-up will I need?"],
   },
   "Not sure yet": {
-    type: "First consultation",
+    appointmentLabel: "First consultation",
     bring: ["Symptom timeline", "Any report you have", "Prescription list", "Your main questions"],
     questions: ["What could be causing this?", "Which tests are needed?", "Is this urgent?", "What should I do next?"],
   },
@@ -148,6 +149,7 @@ function SvgIcon({ svg }: { svg: string }) {
 }
 
 function JourneyStepsSection() {
+  const { t } = useI18n();
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
@@ -177,7 +179,7 @@ function JourneyStepsSection() {
                 <span className={`${styles.phaseIcon} ${styles[step.tone]}`}>
                   <SvgIcon svg={step.icon} />
                 </span>
-                <strong>{step.title}</strong>
+                <strong>{t(step.title)}</strong>
                 <span className={styles.timeLabel}>
                   <SvgIcon svg={clockIcon} />
                   {step.time}
@@ -189,21 +191,21 @@ function JourneyStepsSection() {
 
               <div className={styles.journeyBody}>
                 <div className={styles.journeyBodyInner}>
-                  <p>{step.description}</p>
+                  <p>{t(step.description)}</p>
                   <div className={styles.pillRow}>
                     {step.points.map((point) => (
                       <span key={point}>
                         <SvgIcon svg={checkIcon} />
-                        {point}
+                        {t(point)}
                       </span>
                     ))}
                   </div>
                   <div className={styles.prepare}>
                     <SvgIcon svg={prepareIcon} />
-                    <span>{step.prepare}</span>
+                    <span>{t(step.prepare)}</span>
                   </div>
                   <a className={styles.stepCta} href="#contact">
-                    {step.cta}
+                    {t(step.cta)}
                   </a>
                 </div>
               </div>
@@ -216,13 +218,15 @@ function JourneyStepsSection() {
 }
 
 function Stepper({ activeStep }: { activeStep: number }) {
+  const { t } = useI18n();
+
   return (
     <div className={styles.prepStepper}>
       {prepSteps.map((step, index) => (
         <span className={styles.prepStepWrap} key={step}>
           <span className={index === activeStep ? styles.prepStepActive : ""}>
             <b>{index + 1}</b>
-            {step}
+            {t(step)}
           </span>
           {index < prepSteps.length - 1 ? (
             <img alt="" className={styles.prepStepArrow} src="/images/treatment-journey/stepper-arrow.svg" />
@@ -234,6 +238,7 @@ function Stepper({ activeStep }: { activeStep: number }) {
 }
 
 function PrepBuilderSection() {
+  const { t } = useI18n();
   const [activeStep, setActiveStep] = useState(0);
   const [selectedConcern, setSelectedConcern] = useState("Prostate / BPH");
   const [selectedReports, setSelectedReports] = useState<string[]>([]);
@@ -253,14 +258,14 @@ function PrepBuilderSection() {
       <div className={styles.prepHeading}>
         <p className={styles.prepLabel}>
           <span className={styles.labelIcon} aria-hidden="true" />
-          Treatment journey
+          {t("Treatment journey")}
         </p>
-        <h2>From diagnosis to recovery, step by step</h2>
+        <h2>{t("From diagnosis to recovery, step by step")}</h2>
       </div>
 
       <div className={styles.prepCard}>
         <header className={styles.prepHeader}>
-          <h3>Build your consultation prep kit</h3>
+          <h3>{t("Build your consultation prep kit")}</h3>
           <Stepper activeStep={activeStep} />
         </header>
 
@@ -270,7 +275,7 @@ function PrepBuilderSection() {
         >
           {activeStep === 0 ? (
             <>
-              <h4>What is your main concern?</h4>
+              <h4>{t("What is your main concern?")}</h4>
               <div className={styles.concernGrid}>
                 {concerns.map((concern) => (
                   <button
@@ -285,7 +290,7 @@ function PrepBuilderSection() {
                     <span className={`${styles.concernIcon} ${styles[concern.tone]}`}>
                       <img alt="" src={concern.icon} />
                     </span>
-                    {concern.label}
+                    {t(concern.label)}
                   </button>
                 ))}
               </div>
@@ -295,11 +300,11 @@ function PrepBuilderSection() {
           {activeStep === 1 ? (
             <>
               <button className={styles.changeButton} onClick={() => setActiveStep(0)} type="button">
-                ‹ Change concern
+                {t("Change concern")}
               </button>
-              <h4>What do you already have?</h4>
+              <h4>{t("What do you already have?")}</h4>
               <p className={styles.helpText}>
-                Select everything that applies, or pick &quot;I have nothing yet&quot;.
+                {t("Select everything that applies, or pick \"I have nothing yet\".")}
               </p>
               <div className={styles.reportGrid}>
                 {reportItems.map((report) => (
@@ -310,12 +315,12 @@ function PrepBuilderSection() {
                     type="button"
                   >
                     <span className={styles.radioDot} />
-                    {report}
+                    {t(report)}
                   </button>
                 ))}
               </div>
               <button className={styles.buildButton} onClick={() => setActiveStep(2)} type="button">
-                Build my kit →
+                {t("Build my kit")} →
               </button>
             </>
           ) : null}
@@ -323,7 +328,7 @@ function PrepBuilderSection() {
           {activeStep === 2 ? (
             <>
               <button className={styles.changeButton} onClick={() => setActiveStep(0)} type="button">
-                ‹ Change concern
+                {t("Change concern")}
               </button>
               <div className={styles.kitTop}>
                 <div className={styles.kitFor}>
@@ -331,39 +336,38 @@ function PrepBuilderSection() {
                     <img alt="" src={selectedConcernMeta.icon} />
                   </span>
                   <div>
-                    <span>Kit for</span>
-                    <strong>{selectedConcern}</strong>
+                    <span>{t("Kit for")}</span>
+                    <strong>{t(selectedConcern)}</strong>
                   </div>
                 </div>
                 <div className={styles.kitActions}>
-                  <span>{kit.type}</span>
-                  <button type="button">Copy kit</button>
+                  <span>{t(kit.appointmentLabel)}</span>
+                  <button type="button">{t("Copy kit")}</button>
                 </div>
               </div>
               <div className={styles.kitGrid}>
                 <article>
-                  <h4>What to bring</h4>
+                  <h4>{t("What to bring")}</h4>
                   {kit.bring.map((item) => (
-                    <p key={item}>{item}</p>
+                    <p key={item}>{t(item)}</p>
                   ))}
                 </article>
                 <article>
-                  <h4>Questions to ask</h4>
+                  <h4>{t("Questions to ask")}</h4>
                   {kit.questions.map((item, index) => (
                     <p key={item}>
                       <b>{index + 1}</b>
-                      {item}
+                      {t(item)}
                     </p>
                   ))}
                 </article>
               </div>
               <p className={styles.expectText}>
-                What to expect: Expect a clear report review, simple explanation,
-                and next-step treatment discussion.
+                {t("What to expect: Expect a clear report review, simple explanation, and next-step treatment discussion.")}
               </p>
               <div className={styles.kitFooter}>
-                <a href="#contact">Book Consultation</a>
-                <button onClick={() => setActiveStep(0)} type="button">Start over</button>
+                <a href="#contact">{t("Book Consultation")}</a>
+                <button onClick={() => setActiveStep(0)} type="button">{t("Start over")}</button>
               </div>
             </>
           ) : null}
@@ -374,6 +378,8 @@ function PrepBuilderSection() {
 }
 
 export default function TreatmentJourneyPage() {
+  const { t } = useI18n();
+
   return (
     <>
       <Head>
@@ -402,17 +408,16 @@ export default function TreatmentJourneyPage() {
         <section className={styles.hero} data-node-id="146:7460">
           <p className={styles.label}>
             <span className={styles.labelIcon} aria-hidden="true" />
-            Patient Support
+            {t("Patient Support")}
           </p>
 
-          <h1>Your treatment journey, step by step</h1>
+          <h1>{t("Your treatment journey, step by step")}</h1>
 
           <p className={styles.subtitle}>
-            From first consultation to full recovery - clear, honest, no
-            surprises.
+            {t("From first consultation to full recovery - clear, honest, no surprises.")}
           </p>
 
-          <a className={styles.scrollButton} href="#journey" aria-label="Go to journey steps">
+          <a className={styles.scrollButton} href="#journey" aria-label={t("Go to journey steps")}>
             <span aria-hidden="true">↓</span>
           </a>
         </section>

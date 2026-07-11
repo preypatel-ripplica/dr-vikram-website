@@ -197,10 +197,12 @@ export default function Header() {
         </nav>
 
         <div className={styles.headerActions}>
+          <LanguageSwitcher />
+
           <Link
             className={styles.consultButton}
             data-node-id="64:20354"
-            href="https://wa.me/"
+            href="https://wa.me/919871008256"
             rel="noreferrer"
             target="_blank"
           >
@@ -209,8 +211,6 @@ export default function Header() {
             </span>
             <span>{t("Consult now")}</span>
           </Link>
-
-          <LanguageSwitcher />
 
           <button
             aria-controls="mobile-navigation"
@@ -261,9 +261,6 @@ export default function Header() {
             ) : null}
           </div>
         ))}
-        <div className={styles.mobileNavGroup}>
-          <LanguageSwitcher onNavigate={() => setIsMobileMenuOpen(false)} />
-        </div>
       </nav>
     </header>
   );

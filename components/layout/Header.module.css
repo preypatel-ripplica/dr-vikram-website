@@ -362,11 +362,7 @@
 
   .headerActions {
     flex: 0 0 auto;
-    gap: 12px;
-  }
-
-  .headerActions > .languageSwitcher {
-    display: none;
+    gap: 10px;
   }
 
   .consultButton {
@@ -377,6 +373,22 @@
     border-radius: 36px;
     font-size: 12px;
     line-height: normal;
+  }
+
+  .headerActions > .languageSwitcher {
+    display: inline-flex;
+  }
+
+  .headerActions > .languageSwitcher .languageButton {
+    min-height: 38px;
+    padding: 0 4px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .headerActions > .languageSwitcher .languageMenu {
+    inset-inline-end: -8px;
   }
 
   .whatsappFrame {
@@ -413,7 +425,9 @@
   }
 
   .mobilePanelOpen {
-    max-height: 420px;
+    max-height: calc(100dvh - 70px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 8px 20px 20px;
   }
 
@@ -450,25 +464,6 @@
     text-decoration: none;
   }
 
-  .mobilePanel .languageSwitcher {
-    width: 100%;
-    display: grid;
-    padding: 12px 0 0;
-  }
-
-  .mobilePanel .languageButton {
-    width: 100%;
-    justify-content: space-between;
-    padding-inline: 0;
-  }
-
-  .mobilePanel .languageMenu {
-    position: static;
-    margin-top: 6px;
-    border-radius: 12px;
-    box-shadow: none;
-    transform: none;
-  }
 }
 
 @media (max-width: 370px) {
@@ -478,5 +473,14 @@
 
   .consultButton {
     padding-inline: 12px;
+  }
+
+  .headerActions {
+    gap: 8px;
+  }
+
+  .headerActions > .languageSwitcher .languageButton {
+    max-width: 58px;
+    overflow: hidden;
   }
 }

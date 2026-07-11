@@ -1,6 +1,6 @@
 import type { Locale } from "@/lib/i18n-config";
 import { DEFAULT_LOCALE } from "@/lib/i18n-config";
-import { normalizeTranslationText } from "@/lib/i18n";
+import { decodeTranslationEntities, normalizeTranslationText } from "@/lib/i18n";
 import memory from "@/.cache/translation-memory.json";
 
 type JsonValue =
@@ -76,7 +76,9 @@ function translateString(value: string, locale: Locale) {
     return value;
   }
 
-  return translationsByEnglish.get(normalized)?.[locale] || value;
+  const translated = translationsByEnglish.get(normalized)?.[locale];
+
+  return translated ? decodeTranslationEntities(translated) : value;
 }
 
 export function translateObjectForLocale<T extends JsonValue>(value: T, locale: Locale): T {

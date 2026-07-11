@@ -1,82 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import Link from "next/link";
+import { useState } from "react";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { useI18n } from "@/lib/i18n-context";
+import { getAllBlogs, type BlogData } from "@/lib/blogs";
 import styles from "@/styles/BlogsPage.module.css";
 
-type BlogCategory = "before" | "during" | "after";
-
-type BlogPost = {
-  category: BlogCategory;
-  categoryLabel: string;
-  badgeTone: "blue" | "orange" | "pink";
-  readTime: string;
-  title: string;
-  excerpt: string;
-};
-
-const categoryTabs: { key: BlogCategory; label: string }[] = [
-  { key: "before", label: "Before Treatment" },
-  { key: "during", label: "During Treatment" },
-  { key: "after", label: "After Treatment" },
-];
-
-const blogPosts: BlogPost[] = [
-  {
-    category: "before",
-    categoryLabel: "Treatment",
-    badgeTone: "blue",
-    readTime: "12 min read",
-    title: "The Link Between Chronic Pain, Nausea and Vomiting",
-    excerpt:
-      "Chronic pain is more than just a persistent ache it's a complex condition that affects over 24% of adults.",
-  },
-  {
-    category: "during",
-    categoryLabel: "Treatment",
-    badgeTone: "orange",
-    readTime: "12 min read",
-    title: "The Link Between Chronic Pain, Nausea and Vomiting",
-    excerpt:
-      "Chronic pain is more than just a persistent ache it's a complex condition that affects over 24% of adults.",
-  },
-  {
-    category: "after",
-    categoryLabel: "Treatments",
-    badgeTone: "pink",
-    readTime: "12 min read",
-    title: "The Link Between Chronic Pain, Nausea and Vomiting",
-    excerpt:
-      "Chronic pain is more than just a persistent ache it's a complex condition that affects over 24% of adults.",
-  },
-  {
-    category: "before",
-    categoryLabel: "Treatment",
-    badgeTone: "blue",
-    readTime: "12 min read",
-    title: "The Link Between Chronic Pain, Nausea and Vomiting",
-    excerpt:
-      "Chronic pain is more than just a persistent ache it's a complex condition that affects over 24% of adults.",
-  },
-  {
-    category: "during",
-    categoryLabel: "Treatment",
-    badgeTone: "orange",
-    readTime: "12 min read",
-    title: "The Link Between Chronic Pain, Nausea and Vomiting",
-    excerpt:
-      "Chronic pain is more than just a persistent ache it's a complex condition that affects over 24% of adults.",
-  },
-  {
-    category: "after",
-    categoryLabel: "Treatments",
-    badgeTone: "pink",
-    readTime: "12 min read",
-    title: "The Link Between Chronic Pain, Nausea and Vomiting",
-    excerpt:
-      "Chronic pain is more than just a persistent ache it's a complex condition that affects over 24% of adults.",
-  },
-];
+const blogPosts = getAllBlogs();
 
 const faqs = [
   "Do I need to travel before deciding on treatment?",
@@ -101,15 +32,17 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 function BlogHero() {
+  const { t } = useI18n();
+
   return (
     <section className={styles.hero} data-node-id="103:37117">
       <div className={styles.heroHeading}>
-        <SectionLabel>Blogs</SectionLabel>
+        <SectionLabel>{t("Blogs")}</SectionLabel>
         <div className={styles.heroText}>
           <h1>
-            Ready to <span>take control</span> of your health?
+            {t("Ready to")} <span>{t("take control")}</span> {t("of your health?")}
           </h1>
-          <p>Keep yourself updated regarding best practices and exercises to reduce your pain</p>
+          <p>{t("Keep yourself updated regarding best practices and exercises to reduce your pain")}</p>
         </div>
       </div>
       <span className={styles.heroArrow}>
@@ -119,71 +52,46 @@ function BlogHero() {
   );
 }
 
-function BlogCard({ post }: { post: BlogPost }) {
+function BlogCard({ post }: { post: BlogData }) {
+  const { localizeHref, t } = useI18n();
+
   return (
     <article className={styles.blogCard}>
       <div className={styles.blogImage}>
         <Image
-          alt=""
+          alt={post.title}
           className={styles.blogImageAsset}
           fill
           sizes="(max-width: 900px) 100vw, 347px"
-          src="/assets/figma/blogs/blog-doctor.png"
+          src={post.hero.image}
         />
       </div>
 
       <div className={styles.cardBody}>
         <div className={styles.metaRow}>
-          <span className={`${styles.badge} ${styles[post.badgeTone]}`}>
-            {post.categoryLabel}
-          </span>
+          <span className={`${styles.badge} ${styles.blue}`}>{t("Kidney Stones")}</span>
           <span className={styles.dot}>·</span>
-          <span className={styles.readTime}>{post.readTime}</span>
+          <span className={styles.readTime}>{t(post.readTime)}</span>
         </div>
 
-        <h2>{post.title}</h2>
-        <p>{post.excerpt}</p>
+        <h2>{t(post.title)}</h2>
+        <p>{t(post.metaDescription)}</p>
       </div>
 
-      <a className={styles.readMore} href="#">
-        <span>Read more</span>
+      <Link className={styles.readMore} href={localizeHref(`/blogs/${post.slug}/`)}>
+        <span>{t("Read more")}</span>
         <Image alt="" height={20} src="/assets/figma/blogs/arrow-outward.svg" width={20} />
-      </a>
+      </Link>
     </article>
   );
 }
 
 function BlogGrid() {
-  const [activeCategory, setActiveCategory] = useState<BlogCategory>("before");
-
-  const sortedPosts = useMemo(() => {
-    const active = blogPosts.filter((post) => post.category === activeCategory);
-    const rest = blogPosts.filter((post) => post.category !== activeCategory);
-    return [...active, ...rest];
-  }, [activeCategory]);
-
   return (
     <section className={styles.blogGridSection} data-node-id="103:37294">
-      <div className={styles.tabsWrap}>
-        <div className={styles.tabs} role="tablist" aria-label="Blog categories">
-          {categoryTabs.map((tab) => (
-            <button
-              aria-selected={activeCategory === tab.key}
-              className={activeCategory === tab.key ? styles.activeTab : undefined}
-              key={tab.key}
-              onClick={() => setActiveCategory(tab.key)}
-              role="tab"
-              type="button"
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
       <div className={styles.blogGrid}>
-        {sortedPosts.map((post, index) => (
-          <BlogCard key={`${post.category}-${index}`} post={post} />
+        {blogPosts.map((post) => (
+          <BlogCard key={post.slug} post={post} />
         ))}
       </div>
     </section>
@@ -191,13 +99,14 @@ function BlogGrid() {
 }
 
 function FaqSection() {
+  const { t } = useI18n();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className={styles.faqSection} data-node-id="103:37322">
       <div className={styles.faqHeading}>
-        <SectionLabel>Common questions</SectionLabel>
-        <h2>Frequently asked questions</h2>
+        <SectionLabel>{t("Common questions")}</SectionLabel>
+        <h2>{t("Frequently asked questions")}</h2>
       </div>
 
       <div className={styles.faqList}>
@@ -212,7 +121,7 @@ function FaqSection() {
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 type="button"
               >
-                <span>{question}</span>
+                <span>{t(question)}</span>
                 <Image
                   alt=""
                   className={isOpen ? styles.chevronOpen : undefined}
@@ -223,7 +132,7 @@ function FaqSection() {
               </button>
               {isOpen ? (
                 <p className={styles.faqAnswer}>
-                  Our team will guide you with the next practical step during consultation.
+                  {t("Our team will guide you with the next practical step during consultation.")}
                 </p>
               ) : null}
             </div>
@@ -235,12 +144,14 @@ function FaqSection() {
 }
 
 export default function BlogsPage() {
+  const { t } = useI18n();
+
   return (
     <>
       <Head>
-        <title>Blogs | Dr. Vikram</title>
+        <title>{t("Blogs | Dr. Vikram")}</title>
         <meta
-          content="Read Dr. Vikram's latest guidance on treatment, recovery, and patient care."
+          content={t("Read Dr. Vikram's latest guidance on treatment, recovery, and patient care.")}
           name="description"
         />
       </Head>

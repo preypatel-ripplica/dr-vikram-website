@@ -47,9 +47,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Dr. Vikram | Urology &amp; Robotic Surgery</title>
+        <title>{t("Dr. Vikram | Urology & Robotic Surgery")}</title>
         <meta
-          content="Specialist urology consultation for kidney stones, prostate care, urinary health, and robotic surgery."
+          content={t("Specialist urology consultation for kidney stones, prostate care, urinary health, and robotic surgery.")}
           name="description"
         />
       </Head>
@@ -144,7 +144,7 @@ export default function Home() {
                   alt="Dr. Vikram"
                   fill
                   sizes="625px"
-                  src="/images/dr-vikram.png"
+                  src="/images/DSC_0138.JPG"
                 />
               </div>
 

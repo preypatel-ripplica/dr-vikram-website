@@ -499,259 +499,23 @@
   letter-spacing: -0.32px;
 }
 
-.appointment {
-  width: min(100%, 1400px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 139px;
-  margin: 160px auto 0;
-  padding: 0 60px 160px;
-}
-
-.appointmentInfo {
-  width: 551px;
-  flex: 0 0 551px;
-  display: flex;
-  flex-direction: column;
-  gap: 160px;
-}
-
-.appointmentHeading {
+.sharedAppointment {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+  margin-top: 160px;
+  padding-bottom: 160px;
 }
 
-.appointmentHeading h2 {
-  margin: 0;
-  color: #2c2b3b;
-  font-size: 48px;
-  font-weight: 500;
-  letter-spacing: -1.44px;
-  line-height: 64px;
-}
-
-.appointmentContactGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
-}
-
-.appointmentContactRow {
-  display: flex;
-  gap: 16px;
-}
-
-.appointment .contactCard {
-  gap: 8px;
-  padding: 16px;
-}
-
-.appointmentContactRow .contactCard:first-child {
-  flex: 1.65 1 0;
-}
-
-.appointmentContactRow .contactCard:last-child {
-  flex: 1 1 0;
-}
-
-.appointment .contactIcon,
-.smallContactIcon {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-  border: 0.832px solid rgba(61, 193, 190, 0.2);
-  border-radius: 39.086px;
-  background: #ffffff;
-  filter: drop-shadow(0 0.832px 6.722px rgba(17, 152, 163, 0.13));
-}
-
-.appointment .contactIcon img,
-.smallContactIcon img {
-  padding: 8px;
-}
-
-.appointment .contactCopy {
-  gap: 8px;
-  padding: 0 8px;
-}
-
-.appointment .contactCopy span,
-.locationTile > div > span {
-  color: rgba(44, 43, 59, 0.6);
-  font-size: 15px;
-  letter-spacing: -0.15px;
-}
-
-.appointment .contactCopy strong {
-  overflow: hidden;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.15px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.locationTile {
-  width: 100%;
-  min-height: 128px;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  overflow: hidden;
-  padding: 16px;
-  border-radius: 24px;
-  background: #f0fbfc;
-}
-
-.locationTile > div {
-  min-width: 0;
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: center;
-  padding: 0 8px;
-}
-
-.locationTile a {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
-  color: #39c3cf;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.15px;
-  line-height: normal;
-  text-decoration: underline;
-  text-underline-position: from-font;
-  overflow-wrap: anywhere;
-  white-space: normal;
-}
-
-.locationTile svg {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-}
-
-.form {
-  width: 550px;
-  height: 519px;
-  flex: 0 0 550px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  overflow: hidden;
-  padding: 20px;
-  border-radius: 32px;
-  background: #f0fbfc;
-}
-
-.formRow {
-  display: flex;
-  gap: 14px;
-}
-
-.form input,
-.form textarea {
-  min-width: 0;
-  width: 100%;
-  border: 1px solid rgba(3, 33, 38, 0.1);
-  border-radius: 16px;
-  background: #ffffff;
-  color: #032126;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: 300;
-  letter-spacing: -0.18px;
-  line-height: 1.15;
-  outline: none;
-}
-
-.form input {
-  height: 53px;
-  padding: 16px 22px;
-}
-
-.form textarea {
-  height: 141px;
-  resize: none;
-  padding: 16px 22px;
-}
-
-.form input::placeholder,
-.form textarea::placeholder {
-  color: rgba(44, 43, 59, 0.6);
-  opacity: 1;
-}
-
-.upload {
-  width: 100%;
-  height: 53px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px dashed #3dc1be;
-  border-radius: 16px;
-  background: #ffffff;
-  color: #3dc1be;
-}
-
-.upload input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
-
-.upload span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: #3dc1be;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: -0.16px;
-  line-height: 1.15;
-}
-
-.upload svg {
-  width: 20px;
-  height: 20px;
-}
-
-.form button {
-  width: 100%;
-  min-height: 59px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 36px;
-  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
-  color: #eeebff;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: 600;
+.sharedAppointment > section {
+  margin-top: 0;
 }
 
 @media (max-width: 1180px) {
   .contactCards,
-  .visitInner,
-  .appointment {
+  .visitInner {
     flex-direction: column;
   }
 
-  .visitCard,
-  .appointmentInfo,
-  .form {
+  .visitCard {
     width: 100%;
     flex-basis: auto;
   }
@@ -771,7 +535,7 @@
   .contactCards,
   .visitSection,
   .testimonials,
-  .appointment {
+  .sharedAppointment {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -817,9 +581,7 @@
     margin-top: 32px;
   }
 
-  .contactCards,
-  .appointmentContactRow,
-  .formRow {
+  .contactCards {
     flex-direction: column;
   }
 
@@ -985,72 +747,9 @@
     line-height: 1.28;
   }
 
-  .appointment {
-    gap: 40px;
+  .sharedAppointment {
     margin-top: 96px;
     padding-bottom: 96px;
-  }
-
-  .appointmentInfo {
-    width: 100%;
-    flex-basis: auto;
-    gap: 40px;
-  }
-
-  .appointmentHeading h2 {
-    font-size: 36px;
-    letter-spacing: -1.08px;
-    line-height: 44px;
-  }
-
-  .appointmentContactGroup {
-    gap: 14px;
-  }
-
-  .appointment .contactCard {
-    min-height: 76px;
-  }
-
-  .locationTile {
-    height: auto;
-    align-items: flex-start;
-    padding: 16px;
-    border-radius: 20px;
-  }
-
-  .locationTile a {
-    align-items: flex-start;
-    white-space: normal;
-    line-height: 21px;
-  }
-
-  .form {
-    width: 100%;
-    height: auto;
-    flex-basis: auto;
-    gap: 14px;
-    padding: 16px;
-    border-radius: 24px;
-  }
-
-  .form input,
-  .form textarea {
-    font-size: 16px;
-  }
-
-  .form textarea {
-    height: 118px;
-  }
-
-  .upload {
-    height: auto;
-    min-height: 56px;
-    padding: 12px;
-  }
-
-  .upload span {
-    font-size: 14px;
-    text-align: center;
   }
 }
 
@@ -1059,7 +758,7 @@
   .contactCards,
   .visitSection,
   .testimonials,
-  .appointment {
+  .sharedAppointment {
     padding-left: 16px;
     padding-right: 16px;
   }
