@@ -1,10 +1,11 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { SeoHead } from "@/components/shared/SeoHead";
 import videoGallery from "@/data/video-gallery.json";
+import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/VideoGalleryPage.module.css";
 
 type CategoryKey = "all" | "education" | "robotic" | "testimonials" | "qa";
@@ -360,15 +361,27 @@ function ClosingCta() {
 }
 
 export default function VideoGalleryPage() {
+  const title = "Video Gallery | Dr. Vikram";
+  const description = "Watch educational urology videos, robotic surgery explainers, patient stories, and Q&A sessions from Dr. Vikram's team.";
+
   return (
     <>
-      <Head>
-        <title>Video Gallery | Dr. Vikram</title>
-        <meta
-          name="description"
-          content="Watch educational urology videos, robotic surgery explainers, patient stories, and Q&A sessions from Dr. Vikram's team."
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/video-gallery", title, description, type: "CollectionPage" }),
+          itemListGraph({
+            path: "/video-gallery",
+            name: "Urology videos",
+            items: videos.map((video) => video.title),
+          }),
+          breadcrumbGraph([
+            { name: "Home", path: "/" },
+            { name: "Video Gallery", path: "/video-gallery" },
+          ]),
+        ]}
+      />
 
       <main className={styles.videoGalleryPage}>
         <PageSectionReveal

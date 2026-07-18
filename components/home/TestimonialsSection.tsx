@@ -8,28 +8,28 @@ import styles from "@/styles/Home.module.css";
 
 const testimonials = [
   {
-    name: "Rahul gupta",
-    meta: "24, Male",
+    name: "Arpana Mehalawat",
+    meta: "Google review · 26 Nov 2022",
     rating: "5",
     avatar: "/assets/figma/testimonials/rahul-gupta-figma.png",
     quote:
-      "Dr. Vikram explained my scan clearly and helped me understand the safest treatment for my stone.",
+      "Since 10 years, I have been following up with Dr. Vikram Barua. He explained my health issues so well and suggested the best decision every time I met him. Thank you for everything.",
   },
   {
-    name: "Raghav Chaddha",
-    meta: "24, Male",
+    name: "CA. Akshay Agarwal",
+    meta: "Google review · 9 Dec 2022",
     rating: "5",
     avatar: "/assets/figma/testimonials/raghav-chaddha.png",
     quote:
-      "The consultation was calm and practical. We knew what tests were needed and what each result meant.",
+      "Thanks Dr. Vikram for operating on my father. He and his urologist team are very supportive and very careful. The whole team explained the procedure and treatment to us in a very calm way.",
   },
   {
-    name: "Ayush Pareekh",
-    meta: "24, Male",
+    name: "Jasveer Sheoran",
+    meta: "Google review · 18 Mar 2023",
     rating: "5",
     avatar: "/assets/figma/testimonials/ayush-pareekh.png",
     quote:
-      "The team discussed the procedure, hospital stay, and recovery in simple language before we decided.",
+      "Dr. Vikram Barua did surgery for me. I am totally fine and getting discharged today. I am so comfortable here with Dr. Vikram and the whole urology team.",
   },
 ];
 

@@ -1,12 +1,13 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
-import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
+import { SeoHead } from "@/components/shared/SeoHead";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n-config";
 import { withLocaleProps } from "@/lib/page-i18n.server";
 import { getAllBlogs, getBlogBySlug, type BlogData } from "@/lib/blogs";
+import { blogGraphs } from "@/lib/seo";
 import styles from "@/styles/BlogDetailPage.module.css";
 
 type BlogPageProps = {
@@ -399,10 +400,13 @@ export default function BlogDetailPage({ blog }: BlogPageProps) {
 
   return (
     <>
-      <Head>
-        <title>{blog.title} | Dr. Vikram</title>
-        <meta content={blog.metaDescription} name="description" />
-      </Head>
+      <SeoHead
+        title={`${blog.title} | Dr. Vikram`}
+        description={blog.metaDescription}
+        image={blog.hero.image}
+        ogType="article"
+        jsonLd={blogGraphs(blog)}
+      />
 
       <main className={styles.blogDetailPage}>
         <BlogHero blog={blog} />

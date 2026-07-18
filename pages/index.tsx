@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
 import { Bot, ClipboardCheck, MessagesSquare } from "lucide-react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { RoboticMovementToggle } from "@/components/home/RoboticMovementToggle";
@@ -9,8 +8,10 @@ import { SymptomGuide } from "@/components/home/SymptomGuide";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { TreatmentsCarousel } from "@/components/home/TreatmentsCarousel";
 import { ScrollReveal } from "@/components/home/ScrollReveal";
+import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
 import { LocalizedHighlight } from "@/components/shared/LocalizedHighlight";
+import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/Home.module.css";
 
 function ShieldPlusIcon() {
@@ -43,16 +44,30 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   const { t, localizeHref } = useI18n();
+  const title = t("Dr. Vikram | Urology & Robotic Surgery");
+  const description = t("Specialist urology consultation for kidney stones, prostate care, urinary health, and robotic surgery.");
 
   return (
     <>
-      <Head>
-        <title>{t("Dr. Vikram | Urology & Robotic Surgery")}</title>
-        <meta
-          content={t("Specialist urology consultation for kidney stones, prostate care, urinary health, and robotic surgery.")}
-          name="description"
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/", title, description }),
+          itemListGraph({
+            path: "/",
+            name: "Urology services",
+            items: [
+              "Kidney stones",
+              "Prostate problems",
+              "Urinary symptoms",
+              "Urological cancer",
+              "Robotic surgery planning",
+            ],
+          }),
+          breadcrumbGraph([{ name: "Home", path: "/" }]),
+        ]}
+      />
 
       <main className={styles.homePage}>
         <ScrollReveal />

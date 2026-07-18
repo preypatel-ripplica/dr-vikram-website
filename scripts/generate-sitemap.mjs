@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const ROOT = process.cwd();
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.drvikramurology.com").replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://drvikrambaruakaushik.com").replace(/\/$/, "");
 const locales = ["en", "hi", "ar", "ru"];
 
 function readJson(file) {

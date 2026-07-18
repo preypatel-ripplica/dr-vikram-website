@@ -292,6 +292,7 @@
 }
 
 .uploadField span {
+  max-width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -302,6 +303,9 @@
   letter-spacing: -0.16px;
   line-height: 1.15;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .uploadField svg {

@@ -1,11 +1,12 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { TestimonialsSection as HomeTestimonialsSection } from "@/components/home/TestimonialsSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
+import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
+import { breadcrumbGraph, faqGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/PatientSupportPage.module.css";
 
 const countries = [
@@ -90,14 +91,46 @@ const checklistItems = [
 ];
 
 const faqs = [
-  "Do I need to travel before deciding on treatment?",
-  "What language support is available?",
-  "How long should I plan to stay?",
-  "What language support is available?",
-  "How long should I plan to stay?",
-  "How are follow-ups managed after I return home?",
-  "How long should I plan to stay?",
-  "How are follow-ups managed after I return home?",
+  {
+    question: "Do I need to travel before deciding on treatment?",
+    answer:
+      "No. You can share reports first and schedule a video consultation. Dr. Vikram's team can explain the likely diagnosis, treatment options, estimated stay, and whether travel is needed before you book flights.",
+  },
+  {
+    question: "What reports should I share before the video consultation?",
+    answer:
+      "Share recent scans, blood and urine tests, biopsy or PSA reports if relevant, discharge summaries, current prescriptions, and a short symptom timeline. Clear photos or PDFs are usually enough for the first review.",
+  },
+  {
+    question: "What language support is available?",
+    answer:
+      "English and Hindi support is available directly. For other languages, the team can help plan interpreter support when required, especially for hospital admission, consent, and discharge instructions.",
+  },
+  {
+    question: "How long should I plan to stay?",
+    answer:
+      "The stay depends on diagnosis and procedure. Many evaluation visits are short, while surgery may require extra days for admission, recovery, and fit-to-fly review. The team will suggest a practical travel window after reviewing reports.",
+  },
+  {
+    question: "Can my family travel with me?",
+    answer:
+      "Yes. A family member or attendant can usually travel with the patient. The coordinator can guide you on hospital stay, nearby accommodation, and planning around the patient's admission and follow-up.",
+  },
+  {
+    question: "Will I receive a cost estimate before travel?",
+    answer:
+      "After report review, the team can share an estimated treatment plan and cost range where possible. Final cost may change if tests, diagnosis, procedure, or hospital-stay needs change after examination.",
+  },
+  {
+    question: "How are follow-ups managed after I return home?",
+    answer:
+      "Follow-ups can be managed through video consultation, phone, WhatsApp, and shared reports. Dr. Vikram's team will explain medicines, warning signs, stent removal if relevant, and timing for repeat tests or scans.",
+  },
+  {
+    question: "What happens if my condition changes before I travel?",
+    answer:
+      "Contact the clinic team immediately and share updated symptoms or reports. If there are warning signs such as fever, severe pain, or inability to pass urine, seek urgent care locally first.",
+  },
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -340,18 +373,18 @@ function InternationalFaqSection() {
       </div>
 
       <div className={styles.faqList}>
-        {faqs.map((question, index) => {
+        {faqs.map((faq, index) => {
           const isOpen = openIndex === index;
 
           return (
-            <div className={styles.faqItem} key={`${question}-${index}`}>
+            <div className={styles.faqItem} key={faq.question}>
               <button
                 aria-expanded={isOpen}
                 className={styles.faqButton}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 type="button"
               >
-                <span>{t(question)}</span>
+                <span>{t(faq.question)}</span>
                 <Image
                   alt=""
                   className={isOpen ? styles.chevronOpen : undefined}
@@ -362,7 +395,7 @@ function InternationalFaqSection() {
               </button>
               {isOpen ? (
                 <p className={styles.faqAnswer}>
-                  {t("Dr. Vikram's team will guide you with the next practical step based on your reports and travel plan.")}
+                  {t(faq.answer)}
                 </p>
               ) : null}
             </div>
@@ -402,15 +435,33 @@ function FinalCtaSection() {
 }
 
 export default function PatientSupportPage() {
+  const title = "International Patient Support | Dr. Vikram";
+  const description = "International patient support for Dr. Vikram's urology and robotic surgery care, including report review, video consultation, travel planning, and follow-up.";
+
   return (
     <>
-      <Head>
-        <title>International Patient Support | Dr. Vikram</title>
-        <meta
-          content="International patient support for Dr. Vikram's urology and robotic surgery care."
-          name="description"
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/international-patient-support", title, description }),
+          itemListGraph({
+            path: "/international-patient-support",
+            name: "International patient journey",
+            items: timelineSteps.map((step) => step.title),
+          }),
+          itemListGraph({
+            path: "/international-patient-support#countries",
+            name: "International patient countries",
+            items: countries,
+          }),
+          faqGraph(faqs),
+          breadcrumbGraph([
+            { name: "Home", path: "/" },
+            { name: "International Patient Support", path: "/international-patient-support" },
+          ]),
+        ]}
+      />
 
       <main className={styles.patientSupportPage}>
         <PageSectionReveal

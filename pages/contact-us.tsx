@@ -1,9 +1,10 @@
-import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { TestimonialsSection as HomeTestimonialsSection } from "@/components/home/TestimonialsSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { SeoHead } from "@/components/shared/SeoHead";
+import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/ContactPage.module.css";
 
 const contactCards = [
@@ -37,6 +38,7 @@ const visitLocations = [
       "Shalby International Hospitals, Golf Course Rd, Parsvnath Exotica, DLF Phase 5, Sector 53, Gurugram, Haryana 122011",
     href: shalbyMapsUrl,
     image: "/images/Shalby_Hospital.png",
+    timing: "Every Day 11:00AM - 04:00PM",
   },
   {
     name: "Urowellness Clinic",
@@ -45,6 +47,7 @@ const visitLocations = [
       "Urowellness Clinic, 1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49, Gurugram, Haryana 122018",
     href: urowellnessMapsUrl,
     image: "/images/Clinic.png",
+    timing: "Monday to Saturday 5:00PM - 8:00PM",
   },
 ];
 
@@ -199,7 +202,7 @@ function VisitSection() {
 
             <div className={styles.visitMeta}>
               <ClockIcon />
-              <span>Every Day 11:00AM - 04:00PM</span>
+              <span>{location.timing}</span>
             </div>
 
             <a
@@ -229,15 +232,27 @@ function VisitSection() {
 }
 
 export default function ContactUsPage() {
+  const title = "Contact Us | Dr. Vikram";
+  const description = "Contact Dr. Vikram's team for appointments, consultation details, locations, and patient support.";
+
   return (
     <>
-      <Head>
-        <title>Contact Us | Dr. Vikram</title>
-        <meta
-          name="description"
-          content="Contact Dr. Vikram's team for appointments, consultation details, locations, and patient support."
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/contact-us", title, description, type: "ContactPage" }),
+          itemListGraph({
+            path: "/contact-us",
+            name: "Clinic locations",
+            items: visitLocations.map((location) => location.name),
+          }),
+          breadcrumbGraph([
+            { name: "Home", path: "/" },
+            { name: "Contact Us", path: "/contact-us" },
+          ]),
+        ]}
+      />
       <main className={styles.contactPage}>
         <PageSectionReveal
           childClassName={styles.revealChild}

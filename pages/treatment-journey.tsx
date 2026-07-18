@@ -1,10 +1,11 @@
-import Head from "next/head";
 import { useState } from "react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
+import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/TreatmentJourneyPage.module.css";
 
 const icons = {
@@ -379,16 +380,27 @@ function PrepBuilderSection() {
 
 export default function TreatmentJourneyPage() {
   const { t } = useI18n();
+  const title = "Treatment Journey | Dr. Vikram";
+  const description = "Your treatment journey with Dr. Vikram, from first consultation and report review to treatment planning, procedure guidance, recovery, and follow-up.";
 
   return (
     <>
-      <Head>
-        <title>Treatment Journey | Dr. Vikram</title>
-        <meta
-          content="Your treatment journey with Dr. Vikram, from first consultation to recovery."
-          name="description"
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/treatment-journey", title, description }),
+          itemListGraph({
+            path: "/treatment-journey",
+            name: "Treatment journey steps",
+            items: journeySteps.map((step) => step.title),
+          }),
+          breadcrumbGraph([
+            { name: "Home", path: "/" },
+            { name: "Treatment Journey", path: "/treatment-journey" },
+          ]),
+        ]}
+      />
 
       <main className={styles.page}>
         <PageSectionReveal

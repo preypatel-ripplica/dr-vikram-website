@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from "react";
-import { submitWeb3Form } from "@/lib/web3forms";
 import styles from "./AppointmentSection.module.css";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -169,6 +168,7 @@ export function AppointmentSection({
   const { t } = useI18n();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<FormStatus | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState("");
 
   useEffect(() => {
     if (!status) return;
@@ -188,8 +188,21 @@ export function AppointmentSection({
     setStatus(null);
 
     try {
-      await submitWeb3Form(form);
+      const formData = new FormData(form);
+      formData.delete("attachment");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = (await response.json()) as { message?: string; success?: boolean };
+
+      if (!response.ok || data.success === false) {
+        throw new Error(data.message || "Unable to send message.");
+      }
+
       form.reset();
+      setSelectedFileName("");
       setStatus({
         message: t("Sent! We will contact you soon."),
         type: "success",
@@ -247,6 +260,7 @@ export function AppointmentSection({
       </div>
 
       <form className={styles.appointmentForm} id="contact" onSubmit={handleSubmit}>
+        <input name="access_key" type="hidden" value="df479ac0-0425-44f8-bc01-75d99bd99514" />
         <div className={styles.formRow}>
           <label>
             <span className={styles.fieldLabel}>{t("Your name")}</span>
@@ -284,11 +298,14 @@ export function AppointmentSection({
           <input
             accept="image/*,.pdf,.doc,.docx"
             name="attachment"
+            onChange={(event) => {
+              setSelectedFileName(event.currentTarget.files?.[0]?.name || "");
+            }}
             type="file"
           />
           <span>
             <PlusIcon />
-            {t("Upload any relevant photo or doc")}
+            {selectedFileName || t("Upload any relevant photo or doc")}
           </span>
         </label>
 

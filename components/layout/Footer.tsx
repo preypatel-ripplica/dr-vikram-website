@@ -7,34 +7,31 @@ const columns = [
   {
     title: "Treatments",
     links: [
-      "Urological cancer",
-      "Prostate problems",
-      "Kidney stones",
-      "Bladder problems",
-      "Male infertility",
-      "Erectile dysfunction",
-      "Urinary tract infection",
-      "Urethral stricture",
+      { label: "Urological cancer", href: "/treatments/urological-cancer" },
+      { label: "Prostate problems", href: "/treatments/prostate-problems" },
+      { label: "Kidney stones", href: "/treatments/kidney-stones" },
+      { label: "Bladder problems", href: "/treatments/bladder-problems" },
+      { label: "Male infertility", href: "/treatments/male-infertility" },
+      { label: "Erectile dysfunction", href: "/treatments/erectile-dysfunction" },
+      { label: "Urinary tract infection", href: "/treatments/urinary-tract-infection" },
+      { label: "Urethral stricture", href: "/treatments/urethral-stricture" },
     ],
   },
   {
     title: "Patient support",
     links: [
-      "Book appointment",
-      "Report review",
-      "Video consultation",
-      "Surgery planning",
-      "Follow-up care",
+      { label: "Treatment journey", href: "/treatment-journey" },
+      { label: "Testimonials", href: "/testimonials" },
+      { label: "Video gallery", href: "/video-gallery" },
+      { label: "International patients", href: "/international-patient-support" },
+      { label: "Contact us", href: "/contact-us" },
     ],
   },
   {
     title: "Blogs",
     links: [
-      "Kidney stones",
-      "Robotic urology",
-      "Prostate health",
-      "Treatment guides",
-      "Patient stories",
+      { label: "All blogs", href: "/blogs" },
+      { label: "Kidney stones", href: "/blogs/kidney-stones" },
     ],
   },
 ];
@@ -160,9 +157,9 @@ export default function Footer() {
             <section className={styles.column} key={column.title}>
               <h2>{t(column.title)}</h2>
               <ul>
-                {column.links.map((item, index) => (
-                  <li key={`${column.title}-${item}-${index}`}>
-                    <Link href={localizeHref("#")}>{t(item)}</Link>
+                {column.links.map((item) => (
+                  <li key={`${column.title}-${item.href}`}>
+                    <Link href={localizeHref(item.href)}>{t(item.label)}</Link>
                   </li>
                 ))}
               </ul>

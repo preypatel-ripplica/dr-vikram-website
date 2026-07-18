@@ -1,23 +1,46 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
 import { getAllBlogs, type BlogData } from "@/lib/blogs";
+import { breadcrumbGraph, faqGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/BlogsPage.module.css";
 
 const blogPosts = getAllBlogs();
 
 const faqs = [
-  "Do I need to travel before deciding on treatment?",
-  "What language support is available?",
-  "How long should I plan to stay?",
-  "What language support is available?",
-  "How long should I plan to stay?",
-  "How are follow-ups managed after I return home?",
-  "How long should I plan to stay?",
-  "How are follow-ups managed after I return home?",
+  {
+    question: "How do I know if my urinary symptoms need a doctor?",
+    answer:
+      "You should speak to a urologist if symptoms are repeated, painful, worsening, or affecting sleep and daily routine. Burning urination, blood in urine, fever with urinary symptoms, severe flank pain, or inability to pass urine should not be ignored.",
+  },
+  {
+    question: "Is kidney stone pain always severe?",
+    answer:
+      "Not always. Some stones cause sudden severe back or side pain, while smaller or non-blocking stones may cause mild discomfort, burning urination, blood in urine, nausea, or no symptoms at all. A scan helps confirm the size and location.",
+  },
+  {
+    question: "When should prostate symptoms be checked?",
+    answer:
+      "Men should get checked if they have weak urine flow, frequent urination, waking often at night, urgency, incomplete emptying, blood in urine, or pain. Early evaluation helps separate common prostate enlargement from infection or more serious causes.",
+  },
+  {
+    question: "Can urology problems be treated without surgery?",
+    answer:
+      "Many urology problems can be managed with medicines, lifestyle changes, observation, or small endoscopic procedures. Surgery is considered when symptoms, reports, stone size, blockage, cancer risk, or repeated infections make it necessary.",
+  },
+  {
+    question: "What reports should I bring for a urology consultation?",
+    answer:
+      "Bring recent ultrasound, CT, MRI, urine tests, blood tests, PSA reports, biopsy reports, discharge summaries, and current medicines if available. If you do not have reports yet, the doctor can advise which tests are actually needed.",
+  },
+  {
+    question: "How can I reduce the chance of kidney stones coming back?",
+    answer:
+      "Most patients are advised to increase water intake, reduce excess salt, avoid dehydration, and review diet based on stone type. Recurrent stones may need urine and blood evaluation so prevention can be personalized.",
+  },
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -110,18 +133,18 @@ function FaqSection() {
       </div>
 
       <div className={styles.faqList}>
-        {faqs.map((question, index) => {
+        {faqs.map((faq, index) => {
           const isOpen = openIndex === index;
 
           return (
-            <div className={styles.faqItem} key={`${question}-${index}`}>
+            <div className={styles.faqItem} key={faq.question}>
               <button
                 aria-expanded={isOpen}
                 className={styles.faqButton}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 type="button"
               >
-                <span>{t(question)}</span>
+                <span>{t(faq.question)}</span>
                 <Image
                   alt=""
                   className={isOpen ? styles.chevronOpen : undefined}
@@ -132,7 +155,7 @@ function FaqSection() {
               </button>
               {isOpen ? (
                 <p className={styles.faqAnswer}>
-                  {t("Our team will guide you with the next practical step during consultation.")}
+                  {t(faq.answer)}
                 </p>
               ) : null}
             </div>
@@ -145,16 +168,28 @@ function FaqSection() {
 
 export default function BlogsPage() {
   const { t } = useI18n();
+  const title = t("Blogs | Dr. Vikram");
+  const description = t("Read Dr. Vikram's latest guidance on treatment, recovery, and patient care.");
 
   return (
     <>
-      <Head>
-        <title>{t("Blogs | Dr. Vikram")}</title>
-        <meta
-          content={t("Read Dr. Vikram's latest guidance on treatment, recovery, and patient care.")}
-          name="description"
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/blogs", title, description, type: "CollectionPage" }),
+          itemListGraph({
+            path: "/blogs",
+            name: "Urology blog articles",
+            items: blogPosts.map((post) => post.title),
+          }),
+          faqGraph(faqs),
+          breadcrumbGraph([
+            { name: "Home", path: "/" },
+            { name: "Blogs", path: "/blogs" },
+          ]),
+        ]}
+      />
 
       <main className={styles.blogsPage}>
         <PageSectionReveal

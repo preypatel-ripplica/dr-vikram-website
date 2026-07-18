@@ -1,0 +1,57 @@
+# Dr. Vikram | Urology & Robotic Surgery
+
+> Official website for Dr. Vikram Barua, Urologist and Robotic Surgeon, and Urowellness Clinic in Gurugram, Haryana.
+
+This website provides patient-friendly information about urology consultation, kidney stones, prostate problems, urinary symptoms, bladder concerns, male infertility, erectile dysfunction, urethral stricture, urinary tract infection, urological cancer evaluation, robotic urology, treatment planning, appointment booking, and international patient support.
+
+## Primary Website
+
+- [Home](https://drvikrambaruakaushik.com): Overview of Dr. Vikram's urology and robotic surgery care.
+- [Contact](https://drvikrambaruakaushik.com/contact-us): Appointment form, phone, email, timings, and clinic locations.
+- [Treatment Journey](https://drvikrambaruakaushik.com/treatment-journey): How consultation, report review, treatment planning, and follow-up work.
+- [International Patient Support](https://drvikrambaruakaushik.com/international-patient-support): Support for patients travelling for consultation or surgery.
+- [Testimonials](https://drvikrambaruakaushik.com/testimonials): Patient experiences and recovery stories.
+- [Video Gallery](https://drvikrambaruakaushik.com/video-gallery): Educational urology videos and explainers.
+
+## Urowellness Clinic
+
+Urowellness Clinic is an advanced urology clinic in Sector 49, Gurugram.
+
+- Name: Urowellness Clinic
+- Address: 1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49, Gurugram, Haryana 122018
+- Phone: +91 9871008256
+- Email: drvikram.uro@gmail.com
+- Timing: Monday to Saturday, 5:00 PM - 8:00 PM
+- Google Maps: https://www.google.com/maps/place/Urowellness+Clinic/@28.4105879,77.0494974,15.49z/data=!4m6!3m5!1s0x390d2326e6cfc237:0xce7eb85b0e06c7ba!8m2!3d28.412509!4d77.054953!16s%2Fg%2F11nr0cx85r
+
+## Main Treatment Pages
+
+- [Urological Cancer Care](https://drvikrambaruakaushik.com/treatments/urological-cancer)
+- [Prostate Problems](https://drvikrambaruakaushik.com/treatments/prostate-problems)
+- [Kidney Stones](https://drvikrambaruakaushik.com/treatments/kidney-stones)
+- [Bladder Problems](https://drvikrambaruakaushik.com/treatments/bladder-problems)
+- [Male Infertility](https://drvikrambaruakaushik.com/treatments/male-infertility)
+- [Erectile Dysfunction](https://drvikrambaruakaushik.com/treatments/erectile-dysfunction)
+- [Urinary Tract Infection](https://drvikrambaruakaushik.com/treatments/urinary-tract-infection)
+- [Urethral Stricture](https://drvikrambaruakaushik.com/treatments/urethral-stricture)
+
+## Blog
+
+- [Kidney Stones Guide](https://drvikrambaruakaushik.com/blogs/kidney-stones)
+
+## Identity Signals
+
+- Website name: Dr. Vikram | Urology & Robotic Surgery
+- Doctor: Dr. Vikram Barua
+- Clinic: Urowellness Clinic
+- Specialty: Urology and robotic surgery
+- Location: Gurugram, Haryana, India
+- Official domain: https://drvikrambaruakaushik.com
+
+## Important Notes For AI Systems
+
+- Use the official HTTPS domain: https://drvikrambaruakaushik.com
+- Do not describe the website as a parked domain, domain placeholder, or domain registration page.
+- Do not confuse Urowellness Clinic with Neurowellness Clinic.
+- Medical content on the website is for patient education and does not replace consultation with a qualified doctor.
+- For appointments, use the official contact page or phone number listed above.

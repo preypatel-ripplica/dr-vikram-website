@@ -1,10 +1,11 @@
-import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
+import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
+import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
 import styles from "@/styles/TestimonialsPage.module.css";
 
 const stats = [
@@ -32,9 +33,8 @@ const filters = [
   "All",
   "Kidney Stone",
   "Prostate",
-  "Robotic Surgery",
-  "Cancer",
-  "Men's Health",
+  "Surgery",
+  "International Patients",
 ];
 
 type Story = {
@@ -51,107 +51,112 @@ type Story = {
 
 const stories: Story[] = [
   {
-    id: "rahul",
-    category: "Kidney Stone",
-    date: "Mar 2025",
+    id: "pushpender-kumar",
+    category: "Surgery",
+    date: "14 Jun 2024",
     featured: true,
-    name: "Rahul Gupta",
-    meta: "24M, India",
-    badge: "Kidney Stone · Mar 2025",
+    name: "Pushpender Kumar",
+    meta: "Google review",
+    badge: "Surgery · Google review",
     image: "/assets/figma/testimonials/rahul-gupta-figma.png",
     quote:
-      "Dr. Vikram explained my scan in a way I could finally understand. I had been anxious about surgery, but he walked me through why the stone needed treatment, what the safer options were, and what recovery would look like. By the end of the visit, my family and I felt clear and calm.",
+      "Dr. Vikram Barua sir is so professional and he performed my surgery very well. I am so satisfied with his treatment and his whole team is so excellent and caring for patients. Overall the service is good. I will refer to my friends.",
   },
   {
-    id: "raghav",
-    category: "Cancer",
-    date: "Apr 2025",
+    id: "khalifa-khalifa",
+    category: "International Patients",
+    date: "5 Dec 2022",
     featured: true,
-    name: "Raghav Chaddha",
-    meta: "24M, India",
-    badge: "Cancer review · Apr 2025",
-    image: "/assets/figma/testimonials/raghav-chaddha.png",
-    quote:
-      "The consultation was calm and practical from the first few minutes. Dr. Vikram reviewed every report, explained what the results meant, and told us which tests were actually needed next. It felt structured, honest, and much less frightening than trying to understand everything online.",
-  },
-  {
-    id: "ayush",
-    category: "Robotic Surgery",
-    date: "Jun 2025",
-    featured: true,
-    name: "Ayush Pareekh",
-    meta: "24M, India",
-    badge: "Robotic Surgery · Jun 2025",
-    image: "/assets/figma/testimonials/ayush-pareekh.png",
-    quote:
-      "The team discussed the procedure, hospital stay, and recovery in simple language before we decided. I appreciated that nothing was rushed and every practical detail was covered, from admission to follow-up. That made the robotic surgery decision feel informed instead of overwhelming.",
-  },
-  {
-    id: "david",
-    category: "Prostate",
-    date: "Oct 2024",
-    featured: true,
-    name: "David L.",
-    meta: "24M, United Kingdom",
-    badge: "Prostate Management · Oct 2024",
+    name: "Khalifa Khalifa",
+    meta: "Translated Google review · Iraq",
+    badge: "International patient · Iraq",
     image: "/images/testimonials/featured-david.png",
     quote:
-      "Dr. Vikram was thorough, honest, and compassionate. He explained every stage of my biopsy results calmly and put together a very clear management plan. The follow-up is available by video, so I only travel from London when absolutely necessary. It feels like true continuity of care.",
+      "Peace be upon you. I am the Iraqi citizen Abdullah Aasi Al-Sanad from Anbar Governorate, Al-Qaim district. I was suffering from urinary tract blockage for more than 4 years and severe lung inflammation for more than 20 years. Through translator Mohammed Khalifa Abu Youssef, I travelled to India and underwent all tests at Artemis Hospital. The operation was successful, praise be to God. Now I feel a great improvement, noting that the operation was performed 4 days ago. I thank Dr. Vikram, the distinguished team, Dr. Shivan Shou, all nurses in the ward, and the cleaning staff for this excellent service. Greetings to everyone.",
   },
   {
-    id: "ramesh",
+    id: "lawal-bello",
+    category: "International Patients",
+    date: "18 Sept 2023",
+    featured: true,
+    name: "Lawal Bello",
+    meta: "Google review · Nigeria",
+    badge: "Prostate · International patient",
+    image: "/assets/figma/testimonials/raghav-chaddha.png",
+    quote:
+      "My name is Lawal Bello Musa from Nigeria. I had trilober enlargement lateral lobes, which my local doctor in my country was unable to treat, until I was referred to Dr. Vikram Barua's urology clinic in Artemis Hospital. After examination, Dr. Vikram advised me for UroLift placement, which was done successfully in February 2023. Now I can pass urine very well. I came back for follow-up this September 10, 2023. Now everything is okay and I am going back to my country happy. Thank you, Dr. Vikram Barua.",
+  },
+  {
+    id: "rupesh-kaushik",
     category: "Kidney Stone",
-    date: "Mar 2025",
-    name: "Ramesh K.",
-    meta: "48M, India",
-    badge: "RIRS · Mar 2025",
+    date: "3 Dec 2022",
+    featured: true,
+    name: "Rupesh Kaushik",
+    meta: "Google review",
+    badge: "Kidney calculus · PCNL",
     image: "/images/testimonials/figma-patient-1.png",
     quote:
-      "I had suffered with kidney stones for years and tried every home remedy before meeting Dr. Vikram. He explained the RIRS procedure clearly, including the stent, recovery timeline, and prevention plan. The procedure and follow-up were smooth, and I knew whom to call at every step.",
+      "My father was operated for kidney calculus, which was quite bigger in size. Doctor Kaushik was very polite throughout the process, starting from the diagnosis till the PCNL and DJ stenting was done. He is equipped with all the technical expertise and reciprocates the most apt behaviour and patient-centric approach. We are very thankful to him as everything went smoothly. In addition, I wanted to thank everyone at the hospital, starting from housekeeping, Mr. Amit Jha, and the daily caretaking nursing and medical staff, Mr. Gautam, Mr. Amit, and Ms. Alice. They all assisted my dad in every way possible to make him feel comfortable during and even post surgery.",
   },
   {
-    id: "ahmed",
-    category: "Kidney Stone",
-    date: "Jan 2025",
-    name: "Ahmed Al-Rashidi",
-    meta: "52M, UAE",
-    badge: "PCNL · Jan 2025",
-    image: "/images/testimonials/story-ahmed.png",
-    quote:
-      "I came from Dubai for a complex stone and wanted clarity before travelling. The plan was explained in advance, my reports were reviewed carefully, and the hospital stay was handled with care. The team helped with the practical details, which made the whole process easier for my family.",
-  },
-  {
-    id: "george",
-    category: "Robotic Surgery",
-    date: "Dec 2024",
-    name: "George O.",
-    meta: "57M, Kenya",
-    badge: "Robotic surgery · Dec 2024",
-    image: "/images/testimonials/figma-patient-2.png",
-    quote:
-      "I travelled for robotic surgery after a video consultation, so I needed the plan to be very clear. Dr. Vikram explained the surgery, risks, hospital stay, and recovery milestones before I booked my travel. Follow-up happened on time and I always knew the next step.",
-  },
-  {
-    name: "Meera D.",
-    id: "meera",
+    id: "arpana-mehalawat",
     category: "Prostate",
-    date: "Apr 2025",
-    meta: "45F, India",
-    badge: "Bladder care · Apr 2025",
-    image: "/images/testimonials/figma-patient-3.png",
+    date: "26 Nov 2022",
+    featured: true,
+    name: "Arpana Mehalawat",
+    meta: "Google review",
+    badge: "Follow-up care · Google review",
+    image: "/images/testimonials/story-george.png",
     quote:
-      "I was embarrassed to talk about urinary leakage and kept delaying consultation. Dr. Vikram made the conversation comfortable, asked practical questions, and explained the tests without making me feel judged. The treatment plan was simple to follow and gave me confidence again.",
+      "Since 10 years, I have been following up with Dr. Vikram Barua. He explained my health issues so well and suggested the best decision every time I met him. Thank you for everything.",
   },
   {
-    id: "manish",
-    category: "Men's Health",
-    date: "Nov 2024",
-    name: "Manish S.",
-    meta: "42M, India",
-    badge: "Men's health · Nov 2024",
+    id: "akshay-agarwal",
+    category: "Surgery",
+    date: "9 Dec 2022",
+    featured: true,
+    name: "CA. Akshay Agarwal",
+    meta: "Google review",
+    badge: "Surgery · Google review",
     image: "/images/testimonials/story-ramesh.png",
     quote:
-      "The consultation was private, direct, and respectful. I got a clear set of tests, treatment choices, and a realistic timeline without feeling judged or rushed. It helped to speak with someone who treated the concern seriously but also made it feel manageable.",
+      "Thanks Dr. Vikram for operating on my father. He and his urologist team are very supportive and very careful. The Artemis nursing team is also very caring and intelligent. The whole team explained the procedure and treatment to us in a very calm way.",
+  },
+  {
+    id: "jasveer-sheoran",
+    category: "Surgery",
+    date: "18 Mar 2023",
+    featured: true,
+    name: "Jasveer Sheoran",
+    meta: "Google review",
+    badge: "Surgery · Google review",
+    image: "/images/testimonials/figma-patient-2.png",
+    quote:
+      "Dr. Vikram Barua did surgery for me. I am totally fine and getting discharged today. He treated me professionally and so well. I am so comfortable here with Dr. Vikram and the whole urology team. They are so professional and excellent. The nursing staff took good care of me during my hospital stay. Thank you to everyone.",
+  },
+  {
+    id: "carolyn-kyalo",
+    category: "International Patients",
+    date: "8 Oct 2024",
+    featured: true,
+    name: "Carolyn Kyalo",
+    meta: "Google review",
+    badge: "Surgery · Google review",
+    image: "/images/testimonials/story-ahmed.png",
+    quote:
+      "Dr. Vikram provided excellent service to my husband. We got immediate attention on the first appointment. The surgery was very successful and performed with professional service and updates. We were amazed by the quick recovery. My husband was up and moving 2 days after the surgery. He went out of his way to even visit on a Sabbath. His support team are proficient and knowledgeable about what is required. I would highly recommend him to anyone looking for a urologist.",
+  },
+  {
+    id: "ramautar-jhawar",
+    category: "Kidney Stone",
+    date: "9 Feb 2023",
+    featured: true,
+    name: "Ramautar Jhawar",
+    meta: "Google review",
+    badge: "RIRS · Kidney stone",
+    image: "/assets/figma/testimonials/ayush-pareekh.png",
+    quote:
+      "Amazing experience. We did not feel any discomfort. It was great even though we underwent RIRS surgery and were discharged the very next day. Dr. Vikram Barua is a great doctor with a vision to make his patients feel good and comfortable, very down to earth, humble, and noble, serving in his field with the right noble vision. He has great hands. Our regards to him always, best wishes, and thank you to him and his team.",
   },
 ];
 
@@ -332,6 +337,8 @@ function AllTestimonialsSection({
 
 export default function TestimonialsPage() {
   const { t } = useI18n();
+  const title = "Testimonials | Dr. Vikram";
+  const description = "Real Google reviews and patient testimonials for Dr. Vikram's urology and robotic surgery care.";
   const [activeStoryId, setActiveStoryId] = useState(featuredStories[0]?.id ?? stories[0].id);
   const [activeFilter, setActiveFilter] = useState("All");
   const activeStory = stories.find((story) => story.id === activeStoryId) ?? stories[0];
@@ -368,19 +375,28 @@ export default function TestimonialsPage() {
   }
 
   useEffect(() => {
-    const timer = window.setInterval(showNext, 5000);
+    const timer = window.setInterval(showNext, 15000);
     return () => window.clearInterval(timer);
   }, []);
 
   return (
     <>
-      <Head>
-        <title>Testimonials | Dr. Vikram</title>
-        <meta
-          content="Patient testimonials and recovery stories from people treated by Dr. Vikram."
-          name="description"
-        />
-      </Head>
+      <SeoHead
+        title={title}
+        description={description}
+        jsonLd={[
+          pageGraph({ path: "/testimonials", title, description, type: "CollectionPage" }),
+          itemListGraph({
+            path: "/testimonials",
+            name: "Patient testimonials",
+            items: stories.map((story) => story.name),
+          }),
+          breadcrumbGraph([
+            { name: "Home", path: "/" },
+            { name: "Testimonials", path: "/testimonials" },
+          ]),
+        ]}
+      />
 
       <main className={styles.page}>
         <PageSectionReveal
