@@ -1,6 +1,12 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { DEFAULT_LOCALE, type Locale, normalizeTranslationText, translateText } from "@/lib/i18n";
+import {
+  DEFAULT_LOCALE,
+  type ClientTranslations,
+  type Locale,
+  normalizeTranslationText,
+  translateText,
+} from "@/lib/i18n";
 
 const SAFE_ATTRIBUTES = ["alt", "aria-label", "placeholder", "title"];
 const SKIPPED_TAGS = new Set([
@@ -26,20 +32,24 @@ function shouldSkipNode(node: Node) {
   return SKIPPED_TAGS.has(parent.tagName);
 }
 
-function translateTextNode(node: Text, locale: Locale) {
+function translateTextNode(node: Text, locale: Locale, clientTranslations: ClientTranslations) {
   if (shouldSkipNode(node)) return;
 
   const original = node.nodeValue ?? "";
   const normalized = normalizeTranslationText(original);
   if (!normalized) return;
 
-  const translated = translateText(locale, normalized);
+  const translated = translateText(locale, normalized, clientTranslations);
   if (translated !== normalized) {
     node.nodeValue = preserveOuterWhitespace(original, translated);
   }
 }
 
-function translateElementAttributes(element: Element, locale: Locale) {
+function translateElementAttributes(
+  element: Element,
+  locale: Locale,
+  clientTranslations: ClientTranslations,
+) {
   if (element.closest("[data-no-translate]")) return;
 
   for (const attribute of SAFE_ATTRIBUTES) {
@@ -47,7 +57,7 @@ function translateElementAttributes(element: Element, locale: Locale) {
     if (!original) continue;
 
     const normalized = normalizeTranslationText(original);
-    const translated = translateText(locale, normalized);
+    const translated = translateText(locale, normalized, clientTranslations);
 
     if (translated !== normalized) {
       element.setAttribute(attribute, translated);
@@ -55,7 +65,7 @@ function translateElementAttributes(element: Element, locale: Locale) {
   }
 }
 
-function translateDocument(locale: Locale) {
+function translateDocument(locale: Locale, clientTranslations: ClientTranslations) {
   if (locale === DEFAULT_LOCALE) return;
   if (!document.body) return;
 
@@ -66,13 +76,19 @@ function translateDocument(locale: Locale) {
     textNodes.push(walker.currentNode as Text);
   }
 
-  textNodes.forEach((node) => translateTextNode(node, locale));
+  textNodes.forEach((node) => translateTextNode(node, locale, clientTranslations));
   document
     .querySelectorAll(SAFE_ATTRIBUTES.map((attribute) => `[${attribute}]`).join(","))
-    .forEach((element) => translateElementAttributes(element, locale));
+    .forEach((element) => translateElementAttributes(element, locale, clientTranslations));
 }
 
-export function ClientDomTranslator({ locale }: { locale: Locale }) {
+export function ClientDomTranslator({
+  clientTranslations = {},
+  locale,
+}: {
+  clientTranslations?: ClientTranslations;
+  locale: Locale;
+}) {
   const router = useRouter();
 
   useEffect(() => {
@@ -87,7 +103,7 @@ export function ClientDomTranslator({ locale }: { locale: Locale }) {
       scheduled = true;
       frame = window.requestAnimationFrame(() => {
         scheduled = false;
-        translateDocument(locale);
+        translateDocument(locale, clientTranslations);
       });
     };
 
@@ -124,7 +140,7 @@ export function ClientDomTranslator({ locale }: { locale: Locale }) {
       observer.disconnect();
       window.cancelAnimationFrame(frame);
     };
-  }, [locale, router.asPath]);
+  }, [clientTranslations, locale, router.asPath]);
 
   return null;
 }

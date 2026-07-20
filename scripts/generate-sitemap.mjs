@@ -4,6 +4,7 @@ import path from "node:path";
 const ROOT = process.cwd();
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://drvikrambaruakaushik.com").replace(/\/$/, "");
 const locales = ["en", "hi", "ar", "ru"];
+const lastmod = new Date().toISOString().slice(0, 10);
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, file), "utf8"));
@@ -41,6 +42,21 @@ function absolute(route) {
   return `${SITE_URL}${route === "/" ? "" : route}`;
 }
 
+function getPriority(route, locale) {
+  if (route === "/" && locale === "en") return "1.0";
+  if (route === "/") return "0.8";
+  if (route.startsWith("/treatments/")) return locale === "en" ? "0.9" : "0.7";
+  if (route === "/contact-us") return locale === "en" ? "0.9" : "0.7";
+  if (route === "/blogs" || route.startsWith("/blogs/")) return locale === "en" ? "0.8" : "0.6";
+  return locale === "en" ? "0.8" : "0.6";
+}
+
+function getChangefreq(route) {
+  if (route === "/" || route === "/blogs") return "weekly";
+  if (route.startsWith("/blogs/")) return "monthly";
+  return "monthly";
+}
+
 const urls = [];
 
 for (const route of routes) {
@@ -57,6 +73,9 @@ for (const route of routes) {
     urls.push([
       "  <url>",
       `    <loc>${escapeXml(absolute(localizedRoute))}</loc>`,
+      `    <lastmod>${lastmod}</lastmod>`,
+      `    <changefreq>${getChangefreq(route)}</changefreq>`,
+      `    <priority>${getPriority(route, locale)}</priority>`,
       ...alternates.map(
         (alternate) =>
           `    <xhtml:link rel="alternate" hreflang="${alternate.hreflang}" href="${escapeXml(alternate.href)}" />`,

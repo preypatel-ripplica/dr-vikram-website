@@ -115,7 +115,7 @@ function VideoHero() {
           fill
           priority
           sizes="683px"
-          src="/images/hero-combined.png"
+          src="/images/hero-combined-desktop.webp"
         />
       </div>
     </section>
@@ -137,7 +137,6 @@ function FeaturedVideo() {
             alt={featuredVideo.title}
             className={styles.thumbTexture}
             fill
-            priority
             sizes="427px"
             src={featuredVideo.thumbnail}
           />

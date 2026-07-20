@@ -27,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const siteUrl = SITE_URL;
   const localizedShellKey = `${locale}:${canonicalPath}`;
   const canonicalUrl = absoluteUrl(siteUrl, localizePath(canonicalPath, locale));
+  const isNotFoundRoute = canonicalPath === "/404" || router.pathname === "/404";
   const logoUrl = LOGO_IMAGE;
   const siteImageUrl = SITE_IMAGE;
   const structuredData = getStructuredData(siteUrl, logoUrl, siteImageUrl);
@@ -37,18 +38,18 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [localeMeta.code, localeMeta.dir]);
 
   return (
-    <I18nProvider locale={locale}>
+    <I18nProvider clientTranslations={pageProps.clientTranslations} locale={locale}>
       <Head>
-        <link href="/favicon.ico" rel="icon" sizes="any" />
-        <link href="/favicon.png" rel="icon" sizes="720x720" type="image/png" />
-        <link href="/favicon.png" rel="shortcut icon" type="image/png" />
-        <link href="/favicon.ico" rel="shortcut icon" />
-        <link href="/images/logo.png" rel="apple-touch-icon" />
+        <link href="/favicon-v2.ico" rel="icon" sizes="any" />
+        <link href="/favicon-v2.png" rel="icon" sizes="720x720" type="image/png" />
+        <link href="/favicon-v2.png" rel="shortcut icon" type="image/png" />
+        <link href="/favicon-v2.ico" rel="shortcut icon" />
+        <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
         <meta content={SITE_NAME} property="og:site_name" />
         <meta content={canonicalUrl} property="og:url" />
         <meta content="summary_large_image" name="twitter:card" />
         <link href={canonicalUrl} rel="canonical" />
-        {LOCALES.map((item) => (
+        {!isNotFoundRoute && LOCALES.map((item) => (
           <link
             href={absoluteUrl(siteUrl, localizePath(canonicalPath, item.code))}
             hrefLang={item.code}
@@ -56,14 +57,14 @@ export default function App({ Component, pageProps }: AppProps) {
             rel="alternate"
           />
         ))}
-        <link href={absoluteUrl(siteUrl, canonicalPath)} hrefLang="x-default" rel="alternate" />
+        {!isNotFoundRoute && <link href={absoluteUrl(siteUrl, canonicalPath)} hrefLang="x-default" rel="alternate" />}
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
           type="application/ld+json"
         />
       </Head>
       <div key={localizedShellKey}>
-        <ClientDomTranslator locale={locale} />
+        <ClientDomTranslator clientTranslations={pageProps.clientTranslations} locale={locale} />
         <Header />
         <Component {...pageProps} />
         <Footer />
@@ -116,6 +117,7 @@ function getStructuredData(siteUrl: string, logoUrl: string, siteImageUrl: strin
         },
         "image": siteImageUrl,
         "telephone": "+919871008256",
+        "email": "drvikram.uro@gmail.com",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49",
@@ -123,20 +125,17 @@ function getStructuredData(siteUrl: string, logoUrl: string, siteImageUrl: strin
           "addressRegion": "Haryana",
           "postalCode": "122018",
           "addressCountry": "IN"
-        },
-        "medicalSpecialty": [
-          "Urology",
-          "Robotic Surgery"
-        ]
+        }
       },
       {
-        "@type": "Physician",
+        "@type": "Person",
         "@id": `${siteUrl}/#dr-vikram`,
         "name": DOCTOR_NAME,
         "url": siteUrl,
         "image": siteImageUrl,
         "telephone": "+919871008256",
-        "medicalSpecialty": "Urology",
+        "email": "drvikram.uro@gmail.com",
+        "jobTitle": "Urologist and Robotic Surgeon",
         "worksFor": {
           "@id": `${siteUrl}/#organization`
         }

@@ -11,7 +11,7 @@ const testimonials = [
     name: "Arpana Mehalawat",
     meta: "Google review · 26 Nov 2022",
     rating: "5",
-    avatar: "/assets/figma/testimonials/rahul-gupta-figma.png",
+    avatar: "/assets/figma/testimonials/rahul-gupta-figma.webp",
     quote:
       "Since 10 years, I have been following up with Dr. Vikram Barua. He explained my health issues so well and suggested the best decision every time I met him. Thank you for everything.",
   },
@@ -19,7 +19,7 @@ const testimonials = [
     name: "CA. Akshay Agarwal",
     meta: "Google review · 9 Dec 2022",
     rating: "5",
-    avatar: "/assets/figma/testimonials/raghav-chaddha.png",
+    avatar: "/assets/figma/testimonials/raghav-chaddha.webp",
     quote:
       "Thanks Dr. Vikram for operating on my father. He and his urologist team are very supportive and very careful. The whole team explained the procedure and treatment to us in a very calm way.",
   },
@@ -27,7 +27,7 @@ const testimonials = [
     name: "Jasveer Sheoran",
     meta: "Google review · 18 Mar 2023",
     rating: "5",
-    avatar: "/assets/figma/testimonials/ayush-pareekh.png",
+    avatar: "/assets/figma/testimonials/ayush-pareekh.webp",
     quote:
       "Dr. Vikram Barua did surgery for me. I am totally fine and getting discharged today. I am so comfortable here with Dr. Vikram and the whole urology team.",
   },

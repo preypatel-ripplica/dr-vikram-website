@@ -230,6 +230,15 @@
   height: 728px;
 }
 
+.heroVisual picture,
+.heroVisual img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .heroVisual img {
   object-fit: contain;
   object-position: center bottom;
@@ -2366,6 +2375,7 @@
   .hero {
     height: auto;
     padding: 48px 24px 0;
+    background: linear-gradient(180deg, #d6f1f6 0%, #eefbfc 100%);
   }
 
   .heroCopy,
@@ -2617,6 +2627,18 @@
   .testimonialsSection {
     margin-top: var(--section-space);
     gap: 40px;
+  }
+
+  .aboutSection,
+  .expertsSection,
+  .treatmentsSection,
+  .symptomGuideSection,
+  .roboticVisionSection,
+  .roboticMovementSection,
+  .testimonialsSection,
+  .finalCtaSection {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
   }
 
   .finalCtaSection {

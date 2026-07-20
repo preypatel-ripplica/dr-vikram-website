@@ -16,6 +16,7 @@ import { getAllSiteRoutes } from "@/lib/routes";
 import { getTreatmentBySlug, type TreatmentData } from "@/lib/treatments";
 
 type LocalizedPageProps = {
+  clientTranslations?: Record<string, string>;
   locale: Locale;
   canonicalPath: string;
   pageKey: string;
@@ -32,6 +33,89 @@ const staticPageComponents: Record<string, ComponentType<Record<string, unknown>
   "/treatment-journey": TreatmentJourneyPage,
   "/video-gallery": VideoGalleryPage,
 };
+
+const commonRuntimeSources = [
+  "components/layout/Header.tsx",
+  "components/layout/LanguageSwitcher.tsx",
+  "components/layout/Footer.tsx",
+  "components/shared/ClientDomTranslator.tsx",
+];
+
+const appointmentRuntimeSources = [
+  "components/shared/AppointmentSection.tsx",
+];
+
+const finalCtaRuntimeSources = [
+  "components/home/FinalCtaSection.tsx",
+  "components/shared/LocalizedHighlight.tsx",
+];
+
+const testimonialRuntimeSources = [
+  "components/home/TestimonialsSection.tsx",
+  "pages/testimonials.tsx",
+];
+
+const localizedRuntimeSources: Record<string, string[]> = {
+  "/": [
+    "pages/index.tsx",
+    "components/home/TreatmentsCarousel.tsx",
+    "components/home/SymptomGuide.tsx",
+    "components/home/RoboticVisionComparison.tsx",
+    "components/home/RoboticMovementToggle.tsx",
+    "components/home/TestimonialsSection.tsx",
+    ...appointmentRuntimeSources,
+    ...finalCtaRuntimeSources,
+  ],
+  "/blogs": [
+    "pages/blogs/index.tsx",
+    "components/shared/LocalizedHighlight.tsx",
+  ],
+  "/contact-us": [
+    "pages/contact-us.tsx",
+    "components/home/TestimonialsSection.tsx",
+    ...appointmentRuntimeSources,
+  ],
+  "/international-patient-support": [
+    "pages/international-patient-support.tsx",
+    "components/home/TestimonialsSection.tsx",
+    ...appointmentRuntimeSources,
+  ],
+  "/testimonials": [
+    ...testimonialRuntimeSources,
+    ...appointmentRuntimeSources,
+    ...finalCtaRuntimeSources,
+  ],
+  "/treatment-journey": [
+    "pages/treatment-journey.tsx",
+    "components/home/TestimonialsSection.tsx",
+    ...appointmentRuntimeSources,
+    ...finalCtaRuntimeSources,
+  ],
+  "/video-gallery": [
+    "pages/video-gallery.tsx",
+    ...appointmentRuntimeSources,
+  ],
+};
+
+const treatmentRuntimeSources = [
+  "pages/treatments/[slug].tsx",
+  "components/treatments",
+  ...appointmentRuntimeSources,
+  ...finalCtaRuntimeSources,
+];
+
+const blogRuntimeSources = [
+  "pages/blogs/[slug].tsx",
+  ...appointmentRuntimeSources,
+  ...finalCtaRuntimeSources,
+];
+
+function getRuntimeSources(pageKey: string) {
+  return [
+    ...commonRuntimeSources,
+    ...(localizedRuntimeSources[pageKey] ?? []),
+  ];
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = TARGET_LOCALES.flatMap((locale) =>
@@ -76,6 +160,12 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
           treatment,
         },
         locale,
+        {
+          runtimeSources: [
+            ...commonRuntimeSources,
+            ...treatmentRuntimeSources,
+          ],
+        },
       ),
     };
   }
@@ -96,6 +186,12 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
           blog,
         },
         locale,
+        {
+          runtimeSources: [
+            ...commonRuntimeSources,
+            ...blogRuntimeSources,
+          ],
+        },
       ),
     };
   }
@@ -112,6 +208,9 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
         pageKey: canonicalPath,
       },
       locale,
+      {
+        runtimeSources: getRuntimeSources(canonicalPath),
+      },
     ),
   };
 };

@@ -150,7 +150,7 @@ function ContactTile({ item }: { item: ContactCard }) {
         <MailIcon />
       </span>
       <span className={styles.contactText}>
-        <span>{t(item.label)}</span>
+        <span>{t(item.label)}: </span>
         <strong>{item.value}</strong>
       </span>
       <ExternalLinkIcon />

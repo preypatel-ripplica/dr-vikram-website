@@ -7,7 +7,7 @@
     "title": "Kidney stones",
     "highlight": "pain relief, stone removal, and prevention",
     "summary": "Get clear care for kidney stones, ureter stones, pain, infection risk, and recurrent stones. Understand scans, procedures, recovery, and prevention.",
-    "image": "/assets/treatments/treatment_1.jpeg",
+    "image": "/assets/treatments/treatment_1.webp",
     "imageCaption": "Dr. Vikram · Urologist & Robotic Surgeon"
   },
   "sidebar": {
@@ -140,7 +140,7 @@
     "featureTitle": "Common procedures",
     "featureText": "Dr. Vikram explains the difference between URS, RIRS, PCNL, ECNL, stenting, and laparoscopic surgery in simple language.",
     "video": {
-      "image": "/assets/treatments/kidney-stones-scan-content.jpg",
+      "image": "/assets/treatments/kidney-stones-scan-content.webp",
       "title": "\"The goal is stone clearance, pain relief, and prevention of the next stone.\"",
       "byline": "Dr. Vikram · Urologist, Robotic Surgeon"
     },

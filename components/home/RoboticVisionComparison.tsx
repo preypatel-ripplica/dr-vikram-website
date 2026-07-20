@@ -82,7 +82,7 @@ export function RoboticVisionComparison() {
                   alt={t("Robotic-assisted magnified surgical view")}
                   fill
                   sizes="568px"
-                  src="/assets/figma/robotic-vision/robotic-view.png"
+                  src="/assets/figma/robotic-vision/robotic-view.webp"
                 />
               </div>
               <div className={styles.roboticStandardOverlay}>
@@ -90,7 +90,7 @@ export function RoboticVisionComparison() {
                   alt={t("Standard surgical visibility")}
                   fill
                   sizes="568px"
-                  src="/assets/figma/robotic-vision/standard-view.png"
+                  src="/assets/figma/robotic-vision/standard-view.webp"
                 />
               </div>
 

@@ -19,8 +19,8 @@ const contactCards = [
     href: "tel:+919871008256",
   },
   {
-    label: "Timings",
-    value: "All Day: 11.00 AM - 04.00 PM",
+    label: "Urowellness hours",
+    value: "Monday-Saturday: 5:00 PM - 8:00 PM",
     href: "#contact",
   },
 ];
@@ -37,8 +37,8 @@ const visitLocations = [
     label:
       "Shalby International Hospitals, Golf Course Rd, Parsvnath Exotica, DLF Phase 5, Sector 53, Gurugram, Haryana 122011",
     href: shalbyMapsUrl,
-    image: "/images/Shalby_Hospital.png",
-    timing: "Every Day 11:00AM - 04:00PM",
+    image: "/images/Shalby_Hospital.webp",
+    timing: "Appointments by prior confirmation",
   },
   {
     name: "Urowellness Clinic",
@@ -46,7 +46,7 @@ const visitLocations = [
     label:
       "Urowellness Clinic, 1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49, Gurugram, Haryana 122018",
     href: urowellnessMapsUrl,
-    image: "/images/Clinic.png",
+    image: "/images/Clinic.webp",
     timing: "Monday to Saturday 5:00PM - 8:00PM",
   },
 ];
@@ -131,7 +131,7 @@ function ContactCard({ card }: { card: (typeof contactCards)[number] }) {
         <Image alt="" fill sizes="37px" src="/assets/figma/contact-page/mail.svg" />
       </span>
       <span className={styles.contactCopy}>
-        <span>{card.label}</span>
+        <span>{card.label}: </span>
         <strong>{card.value}</strong>
       </span>
       {card.label === "Email us" ? <ExternalLinkIcon /> : null}
@@ -196,8 +196,8 @@ function VisitSection() {
           <div className={styles.visitContent}>
             <div className={styles.visitHeading}>
               <ShieldLabel>Visit for consultation</ShieldLabel>
-              <h2>Dr. Vikram</h2>
-              <p>MBBS, MD, FELLOWSHIP PAIN MEDICINE (FIAPM)</p>
+              <h2>Dr. Vikram Barua</h2>
+              <p>Urologist &amp; Robotic Surgeon</p>
             </div>
 
             <div className={styles.visitMeta}>

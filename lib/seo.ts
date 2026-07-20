@@ -22,7 +22,7 @@ type FaqItem = {
 
 export function absoluteUrl(path = "/") {
   const cleanPath = path.split("#")[0]?.split("?")[0] || "/";
-  return `${SITE_URL}${cleanPath === "/" ? "" : cleanPath}`;
+  return `${SITE_URL}${cleanPath === "/" ? "/" : cleanPath}`;
 }
 
 export function imageUrl(path?: string) {
@@ -35,7 +35,7 @@ export function pageGraph({
   path,
   title,
   description,
-  type = "MedicalWebPage",
+  type = "WebPage",
   image,
 }: {
   path: string;
@@ -111,7 +111,6 @@ export function treatmentGraphs(treatment: TreatmentData): JsonLd[] {
       possibleTreatment: {
         "@id": `${absoluteUrl(path)}#procedure`,
       },
-      relevantSpecialty: "Urology",
     },
     {
       "@context": "https://schema.org",
@@ -119,8 +118,6 @@ export function treatmentGraphs(treatment: TreatmentData): JsonLd[] {
       "@id": `${absoluteUrl(path)}#procedure`,
       name: `${treatment.hero.title} treatment`,
       description: treatment.experience.body.join(" "),
-      procedureType: "Urologic treatment",
-      relevantSpecialty: "Urology",
       provider: { "@id": `${SITE_URL}/#dr-vikram` },
     },
     faqGraph(treatment.faqs.items),
@@ -148,14 +145,12 @@ export function blogGraphs(blog: BlogData): JsonLd[] {
       author: { "@id": `${SITE_URL}/#dr-vikram` },
       publisher: { "@id": `${SITE_URL}/#organization` },
       about: "Kidney stones",
-      medicalSpecialty: "Urology",
       inLanguage: "en",
     },
     pageGraph({
       path,
       title,
       description: blog.metaDescription,
-      type: "MedicalWebPage",
       image: blog.hero.image,
     }),
     faqGraph(blog.faqs.items),

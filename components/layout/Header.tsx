@@ -120,7 +120,6 @@ export default function Header() {
             <Image
               alt=""
               fill
-              priority
               sizes="42px"
               src="/assets/figma/header-logo-mark.svg"
             />

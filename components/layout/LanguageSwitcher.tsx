@@ -11,7 +11,8 @@ export function LanguageSwitcher({ onNavigate }: { onNavigate?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const currentLocale = LOCALES.find((item) => item.code === locale) ?? LOCALES[0];
-  const currentPath = stripLocaleFromPath(router.asPath || "/");
+  const strippedPath = stripLocaleFromPath(router.asPath || "/");
+  const currentPath = strippedPath === "/404" ? "/" : strippedPath;
 
   useEffect(() => {
     function closeOnOutsideClick(event: MouseEvent | TouchEvent) {

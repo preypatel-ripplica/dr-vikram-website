@@ -7,7 +7,7 @@
     "title": "Urological cancer care",
     "highlight": "clear diagnosis and treatment planning",
     "summary": "Get clear guidance for prostate, bladder, kidney, testicular, and other urinary cancers. Understand symptoms, tests, treatment options, recovery, and follow-up.",
-    "image": "/assets/treatments/treatment_3.jpeg",
+    "image": "/assets/treatments/treatment_3.webp",
     "imageCaption": "Dr. Vikram · Urologist & Robotic Surgeon"
   },
   "sidebar": {
@@ -140,7 +140,7 @@
     "featureTitle": "Personalised cancer planning",
     "featureText": "Care is planned around cancer type, stage, biopsy report, scan findings, overall health, and patient preference.",
     "video": {
-      "image": "/assets/treatments/urological-cancer-reports-content.jpg",
+      "image": "/assets/treatments/urological-cancer-reports-content.webp",
       "title": "\"Every patient should understand the diagnosis, the options, and the reason behind the treatment plan.\"",
       "byline": "Dr. Vikram · Urologist, Robotic Surgeon"
     },

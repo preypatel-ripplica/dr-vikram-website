@@ -7,6 +7,7 @@ import {
 } from "react";
 import {
   DEFAULT_LOCALE,
+  type ClientTranslations,
   type Locale,
   getLocaleMeta,
   localizePath,
@@ -29,13 +30,18 @@ const I18nContext = createContext<I18nContextValue>({
 
 export function I18nProvider({
   children,
+  clientTranslations = {},
   locale = DEFAULT_LOCALE,
 }: {
   children: ReactNode;
+  clientTranslations?: ClientTranslations;
   locale?: Locale;
 }) {
   const meta = getLocaleMeta(locale);
-  const t = useCallback((text: string) => translateText(locale, text), [locale]);
+  const t = useCallback(
+    (text: string) => translateText(locale, text, clientTranslations),
+    [clientTranslations, locale],
+  );
   const localizeHref = useCallback((href: string) => localizePath(href, locale), [locale]);
 
   const value = useMemo(

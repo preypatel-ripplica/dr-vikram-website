@@ -18,12 +18,12 @@ const modes: Record<
 > = {
   manual: {
     label: "Manual",
-    image: "/assets/figma/robotic-movement/manual-reference-crop.png",
+    image: "/assets/figma/robotic-movement/manual-reference-crop.webp",
     range: "~180° movement range",
   },
   robotic: {
     label: "Robotic-assisted",
-    image: "/assets/figma/robotic-movement/robotic-reference-crop.png",
+    image: "/assets/figma/robotic-movement/robotic-reference-crop.webp",
     range: "360° movement range",
   },
 };

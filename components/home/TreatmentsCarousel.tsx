@@ -12,7 +12,7 @@ const treatments = [
   {
     title: "Urological Cancer",
     href: "/treatments/urological-cancer",
-    image: "/assets/figma/treatments/urological-cancer-card.png",
+    image: "/assets/figma/treatments/urological-cancer-card.webp",
     bullets: [
       "Bladder, kidney, prostate, and testicular cancer review",
       "Staging, second opinion, and treatment roadmap",
@@ -21,7 +21,7 @@ const treatments = [
   {
     title: "Prostate Problems",
     href: "/treatments/prostate-problems",
-    image: "/assets/figma/treatments/prostate-urinary-care.png",
+    image: "/assets/figma/treatments/prostate-urinary-care.webp",
     bullets: [
       "Weak flow, night urination, and PSA review",
       "Minimally invasive treatment and endoscopic surgery",
@@ -30,7 +30,7 @@ const treatments = [
   {
     title: "Kidney Stones",
     href: "/treatments/kidney-stones",
-    image: "/assets/figma/treatments/urological-cancer-card.png",
+    image: "/assets/figma/treatments/urological-cancer-card.webp",
     bullets: [
       "Stone size, degree of hardness, and any hydronephrosis",
       "URS, RIRS, PCNL, ESWL, and prevention care",
@@ -39,7 +39,7 @@ const treatments = [
   {
     title: "Bladder Problems",
     href: "/treatments/bladder-problems",
-    image: "/assets/figma/treatments/prostate-urinary-care.png",
+    image: "/assets/figma/treatments/prostate-urinary-care.webp",
     bullets: [
       "Urgency, leakage, pain, and frequent urination",
       "Urine tests, cystoscopy, and bladder care planning",
@@ -48,7 +48,7 @@ const treatments = [
   {
     title: "Male Infertility",
     href: "/treatments/male-infertility",
-    image: "/assets/figma/treatments/prostate-urinary-care.png",
+    image: "/assets/figma/treatments/prostate-urinary-care.webp",
     bullets: [
       "Semen analysis, hormones, and varicocele review",
       "Private guidance for fertility treatment options",
@@ -57,7 +57,7 @@ const treatments = [
   {
     title: "Erectile Dysfunction",
     href: "/treatments/erectile-dysfunction",
-    image: "/assets/figma/treatments/robotic-urology.png",
+    image: "/assets/figma/treatments/robotic-urology.webp",
     bullets: [
       "Private evaluation for erection concerns",
       "Safe medicines, tests, and long-term health review",
@@ -66,7 +66,7 @@ const treatments = [
   {
     title: "Urinary Tract Infection",
     href: "/treatments/urinary-tract-infection",
-    image: "/assets/figma/treatments/prostate-urinary-care.png",
+    image: "/assets/figma/treatments/prostate-urinary-care.webp",
     bullets: [
       "Burning urine, fever, and recurrent UTI care",
       "Culture-based treatment and prevention planning",
@@ -75,7 +75,7 @@ const treatments = [
   {
     title: "Urethral Stricture",
     href: "/treatments/urethral-stricture",
-    image: "/assets/figma/treatments/robotic-urology.png",
+    image: "/assets/figma/treatments/robotic-urology.webp",
     bullets: [
       "Weak flow, spraying, and urine blockage review",
       "Uroflow, cystoscopy, and repair planning",

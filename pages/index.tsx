@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Head from "next/head";
 import { Bot, ClipboardCheck, MessagesSquare } from "lucide-react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { RoboticMovementToggle } from "@/components/home/RoboticMovementToggle";
@@ -68,6 +69,24 @@ export default function Home() {
           breadcrumbGraph([{ name: "Home", path: "/" }]),
         ]}
       />
+      <Head>
+        <link
+          as="image"
+          fetchPriority="high"
+          href="/images/hero-combined-mobile.webp"
+          media="(max-width: 700px)"
+          rel="preload"
+          type="image/webp"
+        />
+        <link
+          as="image"
+          fetchPriority="high"
+          href="/images/hero-combined-desktop.webp"
+          media="(min-width: 701px)"
+          rel="preload"
+          type="image/webp"
+        />
+      </Head>
 
       <main className={styles.homePage}>
         <ScrollReveal />
@@ -92,13 +111,17 @@ export default function Home() {
         </div>
 
         <div className={styles.heroVisual}>
-          <Image
-            alt="Dr. Vikram"
-            fill
-            priority
-            sizes="683px"
-            src="/images/hero-combined.png"
-          />
+          <picture>
+            <source media="(min-width: 701px)" srcSet="/images/hero-combined-desktop.webp" type="image/webp" />
+            <img
+              alt="Dr. Vikram"
+              decoding="sync"
+              fetchPriority="high"
+              height={720}
+              src="/images/hero-combined-mobile.webp"
+              width={675}
+            />
+          </picture>
         </div>
       </section>
 
@@ -134,7 +157,7 @@ export default function Home() {
                 alt={t("Medical team consulting with a patient")}
                 fill
                 sizes="281px"
-                src="/assets/figma/about/about-us-consultation.png"
+                src="/assets/figma/about/about-us-consultation.webp"
               />
             </div>
             <article className={`${styles.aboutStatCard} ${styles.aboutExperience}`}>
@@ -159,7 +182,7 @@ export default function Home() {
                   alt="Dr. Vikram"
                   fill
                   sizes="625px"
-                  src="/images/DSC_0138.JPG"
+                  src="/images/DSC_0138.webp"
                 />
               </div>
 
