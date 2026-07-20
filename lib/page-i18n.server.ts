@@ -128,6 +128,25 @@ function collectRuntimeTranslationKeysFromFile(
       keys.add(key);
     }
   }
+
+  collectStaticTranslationKeysFromFile(source, keys);
+}
+
+function collectStaticTranslationKeysFromFile(source: string, keys: Set<string>) {
+  const stringPattern = /(["'`])((?:\\.|(?!\1).)*)\1/g;
+
+  for (const match of source.matchAll(stringPattern)) {
+    if (match[1] === "`" && match[2].includes("${")) {
+      continue;
+    }
+
+    const value = parseStringLiteral(match[1], match[2]);
+    const key = normalizeTranslationText(value);
+
+    if (key && translationsByEnglish.has(key)) {
+      keys.add(key);
+    }
+  }
 }
 
 function parseStringLiteral(quote: string, value: string) {
