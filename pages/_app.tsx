@@ -16,7 +16,7 @@ import {
   localizePath,
   stripLocaleFromPath,
 } from "@/lib/i18n-config";
-import { CLINIC_NAME, DOCTOR_NAME, LOGO_IMAGE, SITE_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { identityGraphItems, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -28,9 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const localizedShellKey = `${locale}:${canonicalPath}`;
   const canonicalUrl = absoluteUrl(siteUrl, localizePath(canonicalPath, locale));
   const isNotFoundRoute = canonicalPath === "/404" || router.pathname === "/404";
-  const logoUrl = LOGO_IMAGE;
-  const siteImageUrl = SITE_IMAGE;
-  const structuredData = getStructuredData(siteUrl, logoUrl, siteImageUrl);
+  const structuredData = { "@context": "https://schema.org", "@graph": identityGraphItems() };
 
   useEffect(() => {
     document.documentElement.lang = localeMeta.code;
@@ -40,10 +38,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <I18nProvider clientTranslations={pageProps.clientTranslations} locale={locale}>
       <Head>
-        <link href="/favicon-v2.ico" rel="icon" sizes="any" />
-        <link href="/favicon-v2.png" rel="icon" sizes="720x720" type="image/png" />
-        <link href="/favicon-v2.png" rel="shortcut icon" type="image/png" />
-        <link href="/favicon-v2.ico" rel="shortcut icon" />
+        <link href="/favicon.ico" rel="icon" sizes="any" />
+        <link href="/favicon.png" rel="icon" type="image/png" />
         <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
         <meta content={SITE_NAME} property="og:site_name" />
         <meta content={canonicalUrl} property="og:url" />
@@ -65,7 +61,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <div key={localizedShellKey}>
         <ClientDomTranslator clientTranslations={pageProps.clientTranslations} locale={locale} />
-        <Header />
+        <Header treatments={pageProps.navTreatments ?? []} />
         <Component {...pageProps} />
         <Footer />
       </div>
@@ -83,63 +79,6 @@ function getPageLocale(pageLocale: unknown, asPath: string): Locale {
 
 function absoluteUrl(siteUrl: string, route: string) {
   const cleanRoute = route.split("#")[0]?.split("?")[0] || "/";
-  return `${siteUrl}${cleanRoute === "/" ? "" : cleanRoute}`;
-}
-
-function getStructuredData(siteUrl: string, logoUrl: string, siteImageUrl: string) {
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        "url": siteUrl,
-        "name": SITE_NAME,
-        "alternateName": [
-          DOCTOR_NAME,
-          CLINIC_NAME
-        ],
-        "publisher": {
-          "@id": `${siteUrl}/#organization`
-        },
-        "inLanguage": "en"
-      },
-      {
-        "@type": "MedicalOrganization",
-        "@id": `${siteUrl}/#organization`,
-        "name": CLINIC_NAME,
-        "url": siteUrl,
-        "logo": {
-          "@type": "ImageObject",
-          "url": logoUrl,
-          "width": 720,
-          "height": 720
-        },
-        "image": siteImageUrl,
-        "telephone": "+919871008256",
-        "email": "drvikram.uro@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49",
-          "addressLocality": "Gurugram",
-          "addressRegion": "Haryana",
-          "postalCode": "122018",
-          "addressCountry": "IN"
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": `${siteUrl}/#dr-vikram`,
-        "name": DOCTOR_NAME,
-        "url": siteUrl,
-        "image": siteImageUrl,
-        "telephone": "+919871008256",
-        "email": "drvikram.uro@gmail.com",
-        "jobTitle": "Urologist and Robotic Surgeon",
-        "worksFor": {
-          "@id": `${siteUrl}/#organization`
-        }
-      }
-    ]
-  };
+  if (cleanRoute === "/") return `${siteUrl}/`;
+  return `${siteUrl}${cleanRoute.endsWith("/") ? cleanRoute : `${cleanRoute}/`}`;
 }

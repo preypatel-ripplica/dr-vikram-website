@@ -1,3 +1,4 @@
+import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Head from "next/head";
 import { Bot, ClipboardCheck, MessagesSquare } from "lucide-react";
@@ -13,7 +14,12 @@ import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
 import { LocalizedHighlight } from "@/components/shared/LocalizedHighlight";
 import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
+import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/Home.module.css";
+
+export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentData[] }> = async () => {
+  return { props: { navTreatments: await getAllTreatments() } };
+};
 
 function ShieldPlusIcon() {
   return (

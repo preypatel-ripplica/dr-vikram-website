@@ -1,0 +1,545 @@
+.aboutPage {
+  overflow: hidden;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.revealPending {
+  opacity: 0.001;
+  transform: translateY(56px) scale(0.97);
+  filter: blur(12px);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChild {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealChildVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChildVisible:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+.revealChildVisible:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.shieldIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+/* Hero */
+
+.hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 52px;
+  padding: 100px 60px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.hero::before {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(1800px, 112vw);
+  height: 476px;
+  content: "";
+  pointer-events: none;
+  background: url("/images/bg_2.svg") center top / 100% auto no-repeat;
+  transform: translateX(-50%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+.heroHeading {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.heroText {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.heroText h1 {
+  width: min(100%, 900px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 52px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  line-height: 62px;
+}
+
+.heroText p {
+  width: min(100%, 680px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+  line-height: 26px;
+}
+
+/* Bio section */
+
+.bioSection {
+  width: min(100%, 1400px);
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin: 40px auto 0;
+  padding: 0 60px;
+}
+
+.bioImage {
+  position: relative;
+  height: 560px;
+  min-width: 0;
+  flex: 1 1 0;
+  overflow: hidden;
+  border-radius: 44px;
+  background: #f0fbfc;
+}
+
+.bioImage img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.bioContent {
+  min-width: 0;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.bioContent h2 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.bioContent p {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.8);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 1.6;
+}
+
+.statsRow {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.statCard {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #f0fbfc;
+}
+
+.statCard strong {
+  color: #032126;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.56px;
+}
+
+.statCard span {
+  color: rgba(3, 33, 38, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.bioButton {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+  padding: 16px 28px;
+  border-radius: 100px;
+  background: #39c3cf;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Why choose us */
+
+.whyChooseSection {
+  width: min(100%, 1400px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  margin: 160px auto 0;
+  padding: 0 60px;
+}
+
+.whyChooseHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.whyChooseHeader h2 {
+  margin: 0;
+  width: min(100%, 700px);
+  color: #032126;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.whyChooseGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.whyChooseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 24px;
+  border-radius: 24px;
+  background: #f8f9f9;
+}
+
+.whyChooseIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #39c3cf;
+}
+
+.whyChooseIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.whyChooseCard h3 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.whyChooseCard p {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.65);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* Expertise */
+
+.expertiseSection {
+  width: min(100%, 1400px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  margin: 160px auto 0;
+  padding: 0 60px;
+}
+
+.expertiseHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.expertiseHeader h2 {
+  margin: 0;
+  width: min(100%, 760px);
+  color: #032126;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.expertiseGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.expertiseCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #f0fbfc;
+  color: #032126;
+  text-decoration: none;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.expertiseCard:hover,
+.expertiseCard:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(17, 152, 163, 0.16);
+}
+
+.expertiseCard h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.expertiseCard p {
+  margin: 0;
+  color: rgba(3, 33, 38, 0.65);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* FAQ */
+
+.faqSection {
+  width: min(100%, 1000px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  margin: 160px auto 0;
+  padding: 0 60px;
+}
+
+.faqHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.faqHeader h2 {
+  margin: 0;
+  color: #032126;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.faqList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faqItem {
+  width: 100%;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: #f8f9f9;
+}
+
+.faqItem summary {
+  cursor: pointer;
+  color: #2c2b3b;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  list-style: none;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem p {
+  margin: 12px 0 0;
+  color: rgba(44, 43, 59, 0.7);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Shared sections reused from contact page pattern */
+
+.homeTestimonialsWrap {
+  width: 100%;
+  margin-top: 160px;
+}
+
+.homeTestimonialsWrap > section {
+  margin-top: 0;
+}
+
+.sharedAppointment {
+  width: 100%;
+  margin-top: 160px;
+  padding-bottom: 160px;
+}
+
+.sharedAppointment > section {
+  margin-top: 0;
+}
+
+@media (max-width: 1180px) {
+  .bioSection {
+    flex-direction: column;
+  }
+
+  .bioImage {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .whyChooseGrid,
+  .expertiseGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .aboutPage {
+    overflow-x: hidden;
+  }
+
+  .hero,
+  .bioSection,
+  .whyChooseSection,
+  .expertiseSection,
+  .faqSection,
+  .sharedAppointment {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero {
+    gap: 36px;
+    padding-top: 72px;
+    padding-bottom: 56px;
+  }
+
+  .hero::before {
+    top: 0;
+    width: min(1500px, 170vw);
+    height: 430px;
+  }
+
+  .heroText h1 {
+    width: 100%;
+    font-size: clamp(32px, 9vw, 40px);
+    letter-spacing: -1px;
+    line-height: 1.2;
+  }
+
+  .heroText p {
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -0.24px;
+    line-height: 1.5;
+  }
+
+  .statsRow {
+    flex-direction: column;
+  }
+
+  .whyChooseGrid,
+  .expertiseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .whyChooseHeader h2,
+  .expertiseHeader h2,
+  .faqHeader h2 {
+    font-size: 30px;
+    letter-spacing: -0.6px;
+  }
+
+  .whyChooseSection,
+  .expertiseSection,
+  .faqSection {
+    margin-top: 100px;
+  }
+
+  .homeTestimonialsWrap,
+  .sharedAppointment {
+    margin-top: 100px;
+  }
+}

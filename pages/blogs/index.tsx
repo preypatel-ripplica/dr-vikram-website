@@ -1,3 +1,4 @@
+import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -6,9 +7,8 @@ import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
 import { getAllBlogs, type BlogData } from "@/lib/blogs";
 import { breadcrumbGraph, faqGraph, itemListGraph, pageGraph } from "@/lib/seo";
+import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/BlogsPage.module.css";
-
-const blogPosts = getAllBlogs();
 
 const faqs = [
   {
@@ -109,7 +109,7 @@ function BlogCard({ post }: { post: BlogData }) {
   );
 }
 
-function BlogGrid() {
+function BlogGrid({ blogPosts }: { blogPosts: BlogData[] }) {
   return (
     <section className={styles.blogGridSection} data-node-id="103:37294">
       <div className={styles.blogGrid}>
@@ -166,7 +166,15 @@ function FaqSection() {
   );
 }
 
-export default function BlogsPage() {
+export const getStaticProps: GetStaticProps<{
+  blogPosts: BlogData[];
+  navTreatments: TreatmentData[];
+}> = async () => {
+  const [blogPosts, navTreatments] = await Promise.all([getAllBlogs(), getAllTreatments()]);
+  return { props: { blogPosts, navTreatments } };
+};
+
+export default function BlogsPage({ blogPosts }: { blogPosts: BlogData[] }) {
   const { t } = useI18n();
   const title = t("Blogs | Dr. Vikram");
   const description = t("Read Dr. Vikram's latest guidance on treatment, recovery, and patient care.");
@@ -200,7 +208,7 @@ export default function BlogsPage() {
           visibleClassName={styles.revealVisible}
         />
         <BlogHero />
-        <BlogGrid />
+        <BlogGrid blogPosts={blogPosts} />
         <FaqSection />
       </main>
     </>

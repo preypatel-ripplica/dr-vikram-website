@@ -8,13 +8,38 @@ import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n-config";
 import { withLocaleProps } from "@/lib/page-i18n.server";
 import { getAllBlogs, getBlogBySlug, type BlogData } from "@/lib/blogs";
 import { blogGraphs } from "@/lib/seo";
+import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/BlogDetailPage.module.css";
 
 type BlogPageProps = {
   blog: BlogData;
   canonicalPath: string;
   locale: Locale;
+  navTreatments: TreatmentData[];
 };
+
+// Sections always render in this fixed order in this template — the CMS's
+// `sidebar.items` only supplies label text overrides, never order, so a
+// misordered CMS entry can no longer put the sidebar out of sync with the
+// actual section order on the page.
+const BLOG_SECTION_ORDER: { href: string; defaultLabel: string }[] = [
+  { href: "#overview", defaultLabel: "Overview" },
+  { href: "#about", defaultLabel: "About the condition" },
+  { href: "#size-guide", defaultLabel: "Size guide" },
+  { href: "#treatment-options", defaultLabel: "Treatment options" },
+  { href: "#symptom-check", defaultLabel: "Symptom check" },
+  { href: "#experience", defaultLabel: "Our experience" },
+  { href: "#faq", defaultLabel: "Common questions" },
+];
+
+function buildSidebarItems(blog: BlogData): BlogData["sidebar"]["items"] {
+  const labelByHref = new Map(blog.sidebar.items.map((item) => [item.href, item.label]));
+
+  return BLOG_SECTION_ORDER.map(({ href, defaultLabel }) => ({
+    href,
+    label: labelByHref.get(href) || defaultLabel,
+  }));
+}
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -361,13 +386,15 @@ function FaqSection({ blog }: { blog: BlogData }) {
 }
 
 export default function BlogDetailPage({ blog }: BlogPageProps) {
+  const sidebarItems = useMemo(() => buildSidebarItems(blog), [blog]);
+
   const [activeSection, setActiveSection] = useState(
-    blog.sidebar.items[0]?.href.replace("#", "") ?? "overview",
+    sidebarItems[0]?.href.replace("#", "") ?? "overview",
   );
 
   const sectionIds = useMemo(
-    () => blog.sidebar.items.map((item) => item.href.replace("#", "")),
-    [blog.sidebar.items],
+    () => sidebarItems.map((item) => item.href.replace("#", "")),
+    [sidebarItems],
   );
 
   useEffect(() => {
@@ -412,7 +439,7 @@ export default function BlogDetailPage({ blog }: BlogPageProps) {
         <BlogHero blog={blog} />
 
         <div className={styles.bodyShell} data-node-id="135:10311">
-          <Sidebar activeSection={activeSection} items={blog.sidebar.items} />
+          <Sidebar activeSection={activeSection} items={sidebarItems} />
 
           <article className={styles.article}>
             <section className={styles.overviewAnchor} id="overview" />
@@ -433,9 +460,11 @@ export default function BlogDetailPage({ blog }: BlogPageProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const blogs = await getAllBlogs();
+
   return {
     fallback: false,
-    paths: getAllBlogs().map((blog) => ({
+    paths: blogs.map((blog) => ({
       params: { slug: blog.slug },
     })),
   };
@@ -443,7 +472,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<BlogPageProps> = async ({ params }) => {
   const slug = typeof params?.slug === "string" ? params.slug : "";
-  const blog = getBlogBySlug(slug);
+  const [blog, navTreatments] = await Promise.all([getBlogBySlug(slug), getAllTreatments()]);
 
   if (!blog) {
     return { notFound: true };
@@ -454,6 +483,7 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async ({ params }) 
       {
         blog,
         canonicalPath: `/blogs/${blog.slug}`,
+        navTreatments,
       },
       DEFAULT_LOCALE,
     ),

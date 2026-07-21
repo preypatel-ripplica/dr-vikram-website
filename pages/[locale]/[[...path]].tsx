@@ -1,6 +1,7 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
 import type { ComponentType } from "react";
 import HomePage from "@/pages/index";
+import AboutUsPage from "@/pages/about-us";
 import BlogsPage from "@/pages/blogs/index";
 import BlogDetailPage from "@/pages/blogs/[slug]";
 import ContactUsPage from "@/pages/contact-us";
@@ -9,11 +10,11 @@ import TestimonialsPage from "@/pages/testimonials";
 import TreatmentJourneyPage from "@/pages/treatment-journey";
 import TreatmentPage from "@/pages/treatments/[slug]";
 import VideoGalleryPage from "@/pages/video-gallery";
-import { getBlogBySlug, type BlogData } from "@/lib/blogs";
+import { getAllBlogs, getBlogBySlug, type BlogData } from "@/lib/blogs";
 import { isLocale, TARGET_LOCALES, type Locale } from "@/lib/i18n-config";
 import { withLocaleProps } from "@/lib/page-i18n.server";
 import { getAllSiteRoutes } from "@/lib/routes";
-import { getTreatmentBySlug, type TreatmentData } from "@/lib/treatments";
+import { getAllTreatments, getTreatmentBySlug, type TreatmentData } from "@/lib/treatments";
 
 type LocalizedPageProps = {
   clientTranslations?: Record<string, string>;
@@ -22,11 +23,15 @@ type LocalizedPageProps = {
   pageKey: string;
   treatment?: TreatmentData;
   blog?: BlogData;
+  treatments?: TreatmentData[];
+  blogPosts?: BlogData[];
+  navTreatments?: TreatmentData[];
 };
 
 const staticPageComponents: Record<string, ComponentType<Record<string, unknown>>> = {
   "/": HomePage,
-  "/blogs": BlogsPage,
+  "/about-us": AboutUsPage as ComponentType<Record<string, unknown>>,
+  "/blogs": BlogsPage as ComponentType<Record<string, unknown>>,
   "/contact-us": ContactUsPage,
   "/international-patient-support": PatientSupportPage,
   "/testimonials": TestimonialsPage,
@@ -56,6 +61,11 @@ const testimonialRuntimeSources = [
 ];
 
 const localizedRuntimeSources: Record<string, string[]> = {
+  "/about-us": [
+    "pages/about-us.tsx",
+    "components/home/TestimonialsSection.tsx",
+    ...appointmentRuntimeSources,
+  ],
   "/": [
     "pages/index.tsx",
     "components/home/TreatmentsCarousel.tsx",
@@ -118,8 +128,9 @@ function getRuntimeSources(pageKey: string) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const routes = await getAllSiteRoutes();
   const paths = TARGET_LOCALES.flatMap((locale) =>
-    getAllSiteRoutes().map((route) => ({
+    routes.map((route) => ({
       params: {
         locale: locale.code,
         path: route === "/" ? [] : route.split("/").filter(Boolean),
@@ -142,10 +153,11 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
     return { notFound: true };
   }
 
+  const navTreatments = await getAllTreatments();
   const [section, slug] = pathSegments;
 
   if (section === "treatments" && slug) {
-    const treatment = getTreatmentBySlug(slug);
+    const treatment = await getTreatmentBySlug(slug);
 
     if (!treatment) {
       return { notFound: true };
@@ -158,6 +170,7 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
           canonicalPath,
           pageKey: "treatment",
           treatment,
+          navTreatments,
         },
         locale,
         {
@@ -171,7 +184,7 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
   }
 
   if (section === "blogs" && slug) {
-    const blog = getBlogBySlug(slug);
+    const blog = await getBlogBySlug(slug);
 
     if (!blog) {
       return { notFound: true };
@@ -184,6 +197,7 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
           canonicalPath,
           pageKey: "blog",
           blog,
+          navTreatments,
         },
         locale,
         {
@@ -200,12 +214,51 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
     return { notFound: true };
   }
 
+  if (canonicalPath === "/blogs") {
+    const blogPosts = await getAllBlogs();
+
+    return {
+      props: withLocaleProps(
+        {
+          locale,
+          canonicalPath,
+          pageKey: canonicalPath,
+          blogPosts,
+          navTreatments,
+        },
+        locale,
+        {
+          runtimeSources: getRuntimeSources(canonicalPath),
+        },
+      ),
+    };
+  }
+
+  if (canonicalPath === "/about-us") {
+    return {
+      props: withLocaleProps(
+        {
+          locale,
+          canonicalPath,
+          pageKey: canonicalPath,
+          treatments: navTreatments,
+          navTreatments,
+        },
+        locale,
+        {
+          runtimeSources: getRuntimeSources(canonicalPath),
+        },
+      ),
+    };
+  }
+
   return {
     props: withLocaleProps(
       {
         locale,
         canonicalPath,
         pageKey: canonicalPath,
+        navTreatments,
       },
       locale,
       {
@@ -221,6 +274,7 @@ export default function LocalizedPage({ pageKey, ...props }: LocalizedPageProps)
       <TreatmentPage
         canonicalPath={props.canonicalPath}
         locale={props.locale}
+        navTreatments={props.navTreatments ?? []}
         treatment={props.treatment as TreatmentData}
       />
     );
@@ -232,6 +286,7 @@ export default function LocalizedPage({ pageKey, ...props }: LocalizedPageProps)
         blog={props.blog as BlogData}
         canonicalPath={props.canonicalPath}
         locale={props.locale}
+        navTreatments={props.navTreatments ?? []}
       />
     );
   }
