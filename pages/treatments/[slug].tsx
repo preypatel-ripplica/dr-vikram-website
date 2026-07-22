@@ -11,11 +11,14 @@ type TreatmentPageProps = {
   treatment: TreatmentData;
   canonicalPath: string;
   locale: Locale;
+  navTreatments: TreatmentData[];
 };
 
 export const getStaticPaths = (async () => {
+  const treatments = await getAllTreatments();
+
   return {
-    paths: getAllTreatments().map((treatment) => ({
+    paths: treatments.map((treatment) => ({
       params: { slug: treatment.slug },
     })),
     fallback: false,
@@ -24,7 +27,7 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async ({ params }) => {
   const slug = String(params?.slug ?? "");
-  const treatment = getTreatmentBySlug(slug);
+  const [treatment, navTreatments] = await Promise.all([getTreatmentBySlug(slug), getAllTreatments()]);
 
   if (!treatment) {
     return { notFound: true };
@@ -35,6 +38,7 @@ export const getStaticProps = (async ({ params }) => {
       {
         treatment,
         canonicalPath: `/treatments/${treatment.slug}`,
+        navTreatments,
       },
       DEFAULT_LOCALE,
     ),

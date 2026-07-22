@@ -1,3 +1,4 @@
+import type { GetStaticProps } from "next";
 import Image from "next/image";
 import { useState } from "react";
 import { TestimonialsSection as HomeTestimonialsSection } from "@/components/home/TestimonialsSection";
@@ -5,7 +6,12 @@ import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { SeoHead } from "@/components/shared/SeoHead";
 import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
+import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/ContactPage.module.css";
+
+export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentData[] }> = async () => {
+  return { props: { navTreatments: await getAllTreatments() } };
+};
 
 const contactCards = [
   {

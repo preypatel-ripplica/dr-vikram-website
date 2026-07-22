@@ -4,6 +4,8 @@ import { imageUrl, SITE_IMAGE } from "@/lib/seo";
 type SeoHeadProps = {
   title: string;
   description: string;
+  /** Overrides the og:description/twitter:description text when it should read differently from the meta description. */
+  socialDescription?: string;
   image?: string;
   ogType?: "website" | "article";
   jsonLd?: Array<Record<string, unknown> | null> | Record<string, unknown> | null;
@@ -12,11 +14,13 @@ type SeoHeadProps = {
 export function SeoHead({
   title,
   description,
+  socialDescription,
   image = SITE_IMAGE,
   ogType = "website",
   jsonLd,
 }: SeoHeadProps) {
   const resolvedImage = imageUrl(image);
+  const resolvedSocialDescription = socialDescription ?? description;
   const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 
   return (
@@ -24,11 +28,11 @@ export function SeoHead({
       <title key="title">{title}</title>
       <meta content={description} key="description" name="description" />
       <meta content={title} key="og:title" property="og:title" />
-      <meta content={description} key="og:description" property="og:description" />
+      <meta content={resolvedSocialDescription} key="og:description" property="og:description" />
       <meta content={ogType} key="og:type" property="og:type" />
       <meta content={resolvedImage} key="og:image" property="og:image" />
       <meta content={title} key="twitter:title" name="twitter:title" />
-      <meta content={description} key="twitter:description" name="twitter:description" />
+      <meta content={resolvedSocialDescription} key="twitter:description" name="twitter:description" />
       <meta content={resolvedImage} key="twitter:image" name="twitter:image" />
       {jsonLdItems.map((item, index) => (
         <script

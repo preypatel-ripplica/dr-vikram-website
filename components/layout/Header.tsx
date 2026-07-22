@@ -2,14 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
-import { getAllTreatments } from "@/lib/treatments";
+import type { TreatmentData } from "@/lib/treatments";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import styles from "./Header.module.css";
-
-const treatments = getAllTreatments().map((treatment) => ({
-  label: treatment.hero.title.replace(/^Understanding\s+/i, ""),
-  href: `/treatments/${treatment.slug}`,
-}));
 
 const patientSupportItems = [
   {
@@ -27,39 +22,6 @@ const patientSupportItems = [
   {
     label: "International patients",
     href: "/international-patient-support",
-  },
-];
-
-const navItems = [
-  {
-    label: "Home",
-    href: "/",
-    hasDropdown: false,
-    dropdownItems: [],
-  },
-  {
-    label: "Treatments",
-    href: treatments[0]?.href ?? "/treatments",
-    hasDropdown: true,
-    dropdownItems: treatments,
-  },
-  {
-    label: "Blogs",
-    href: "/blogs",
-    hasDropdown: false,
-    dropdownItems: [],
-  },
-  {
-    label: "Patient support",
-    href: "/treatment-journey",
-    hasDropdown: true,
-    dropdownItems: patientSupportItems,
-  },
-  {
-    label: "Contact us",
-    href: "/contact-us",
-    hasDropdown: false,
-    dropdownItems: [],
   },
 ];
 
@@ -82,11 +44,59 @@ function ChevronDown() {
   );
 }
 
-export default function Header() {
+type HeaderProps = {
+  treatments: TreatmentData[];
+};
+
+export default function Header({ treatments }: HeaderProps) {
   const { t, localizeHref } = useI18n();
   const headerRef = useRef<HTMLElement | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const treatmentNavItems = treatments.map((treatment) => ({
+    label: treatment.hero.title.replace(/^Understanding\s+/i, ""),
+    href: `/treatments/${treatment.slug}`,
+  }));
+
+  const navItems = [
+    {
+      label: "Home",
+      href: "/",
+      hasDropdown: false,
+      dropdownItems: [],
+    },
+    {
+      label: "About us",
+      href: "/about-us",
+      hasDropdown: false,
+      dropdownItems: [],
+    },
+    {
+      label: "Treatments",
+      href: treatmentNavItems[0]?.href ?? "/treatments",
+      hasDropdown: true,
+      dropdownItems: treatmentNavItems,
+    },
+    {
+      label: "Blogs",
+      href: "/blogs",
+      hasDropdown: false,
+      dropdownItems: [],
+    },
+    {
+      label: "Patient support",
+      href: "/treatment-journey",
+      hasDropdown: true,
+      dropdownItems: patientSupportItems,
+    },
+    {
+      label: "Contact us",
+      href: "/contact-us",
+      hasDropdown: false,
+      dropdownItems: [],
+    },
+  ];
 
   useEffect(() => {
     function closeOnOutsideClick(event: MouseEvent | TouchEvent) {

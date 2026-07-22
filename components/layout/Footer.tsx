@@ -20,6 +20,7 @@ const columns = [
   {
     title: "Patient support",
     links: [
+      { label: "About us", href: "/about-us" },
       { label: "Treatment journey", href: "/treatment-journey" },
       { label: "Testimonials", href: "/testimonials" },
       { label: "Video gallery", href: "/video-gallery" },

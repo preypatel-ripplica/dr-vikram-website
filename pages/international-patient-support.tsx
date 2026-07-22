@@ -1,3 +1,4 @@
+import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,7 +8,12 @@ import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
 import { breadcrumbGraph, faqGraph, itemListGraph, pageGraph } from "@/lib/seo";
+import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/PatientSupportPage.module.css";
+
+export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentData[] }> = async () => {
+  return { props: { navTreatments: await getAllTreatments() } };
+};
 
 const countries = [
   "UAE",
