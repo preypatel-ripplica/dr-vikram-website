@@ -65,7 +65,10 @@ export function LanguageSwitcher({ onNavigate }: { onNavigate?: () => void }) {
             href={localizePath(currentPath, item.code)}
             key={item.code}
             locale={false}
-            onClick={() => {
+            onClick={(event) => {
+              if (item.code === locale) {
+                event.preventDefault();
+              }
               setIsOpen(false);
               onNavigate?.();
             }}

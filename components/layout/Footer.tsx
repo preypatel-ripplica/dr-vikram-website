@@ -22,6 +22,7 @@ const columns = [
     links: [
       { label: "About us", href: "/about-us" },
       { label: "Treatment journey", href: "/treatment-journey" },
+      { label: "Urowellness Clinic Gurugram", href: "/urowellness-clinic-gurugram" },
       { label: "Testimonials", href: "/testimonials" },
       { label: "Video gallery", href: "/video-gallery" },
       { label: "International patients", href: "/international-patient-support" },

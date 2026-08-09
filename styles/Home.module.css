@@ -12,6 +12,7 @@
 
 .hero,
 .aboutSection,
+.clinicSection,
 .expertsSection,
 .treatmentsSection,
 .symptomGuideSection,
@@ -27,6 +28,7 @@
 }
 
 .aboutSection,
+.clinicSection,
 .expertsSection,
 .treatmentsSection,
 .symptomGuideSection,
@@ -82,6 +84,7 @@
 
 .hero,
 .aboutSection,
+.clinicSection,
 .expertsSection,
 .treatmentsSection,
 .symptomGuideSection,
@@ -89,6 +92,13 @@
 .roboticMovementSection,
 .testimonialsSection {
   max-width: var(--content-max);
+}
+
+.deferredSection {
+  min-height: 420px;
+  margin-top: var(--section-space);
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
 }
 
 .hero {
@@ -467,6 +477,86 @@
   object-position: center bottom;
 }
 
+.clinicSection {
+  max-width: var(--content-max);
+  margin-top: 72px;
+  padding: 0 var(--section-pad);
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 64px);
+  align-items: center;
+}
+
+.clinicImage {
+  position: relative;
+  min-height: 430px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #f0fbfc;
+  box-shadow: 0 20px 54px rgba(24, 54, 68, 0.1);
+}
+
+.clinicImage img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.clinicContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.clinicContent h2 {
+  margin: 0;
+  color: #032126;
+  font-size: 42px;
+  font-weight: 500;
+  letter-spacing: -1.1px;
+  line-height: 1.18;
+}
+
+.clinicContent > p {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.76);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.clinicMeta {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.clinicMeta p {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: rgba(3, 33, 38, 0.72);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.clinicMeta svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  color: #39c3cf;
+}
+
+.clinicActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
 .expertsSection {
   max-width: 1280px;
   margin-top: var(--section-space);
@@ -746,9 +836,12 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 32px 28px;
+  border: 0;
   border-radius: 24px;
   background: #f1f0fe;
   color: #2c2b3b;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
   opacity: 0.58;
   transform: scale(0.94);
@@ -2023,6 +2116,7 @@
 }
 
 .testimonialReviewCard {
+  position: relative;
   width: 360px;
   height: 340px;
   flex: 0 0 360px;
@@ -2042,6 +2136,15 @@
     opacity 260ms ease,
     box-shadow 260ms ease,
     transform 260ms ease;
+}
+
+.testimonialCardButton {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
 .testimonialReviewCard:hover {
@@ -2085,20 +2188,17 @@
   height: 60px;
   flex: 0 0 60px;
   overflow: hidden;
+  display: grid;
+  place-items: center;
   border-radius: 35px;
-  background: #dce9eb;
-}
-
-.testimonialAvatar img {
-  object-fit: cover;
-}
-
-.testimonialReviewCard:nth-child(2) .testimonialAvatar img {
-  object-position: 50% 50%;
-}
-
-.testimonialReviewCard:nth-child(3) .testimonialAvatar img {
-  object-position: 48% 20%;
+  border: 1px solid rgba(57, 195, 207, 0.34);
+  background:
+    radial-gradient(circle at 30% 24%, rgba(57, 195, 207, 0.22), transparent 48%),
+    #eefcfc;
+  color: #209fa4;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .testimonialPerson h3,
@@ -2354,7 +2454,8 @@
 }
 
 @media (max-width: 1280px) {
-  .aboutSection {
+  .aboutSection,
+  .clinicSection {
     gap: 64px;
   }
 
@@ -2375,7 +2476,7 @@
   .hero {
     height: auto;
     padding: 48px 24px 0;
-    background: linear-gradient(180deg, #d6f1f6 0%, #eefbfc 100%);
+    background: #d6f1f6;
   }
 
   .heroCopy,
@@ -2406,17 +2507,28 @@
     display: none;
   }
 
-  .aboutSection {
+  .aboutSection,
+  .clinicSection {
     max-width: 760px;
     flex-direction: column;
     align-items: flex-start;
     padding-inline: 0;
   }
 
+  .clinicSection {
+    display: flex;
+  }
+
   .aboutCopy,
-  .aboutStats {
+  .aboutStats,
+  .clinicImage,
+  .clinicContent {
     width: 100%;
     flex-basis: auto;
+  }
+
+  .clinicImage {
+    min-height: 360px;
   }
 
   .aboutCopy {
@@ -2562,7 +2674,8 @@
     flex-direction: column;
   }
 
-  .aboutSection {
+  .aboutSection,
+  .clinicSection {
     margin-top: var(--section-space);
     gap: 40px;
   }
@@ -2602,6 +2715,28 @@
     height: auto;
   }
 
+  .clinicImage {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
+  }
+
+  .clinicContent h2 {
+    font-size: 32px;
+    letter-spacing: -0.6px;
+    line-height: 1.25;
+  }
+
+  .clinicContent > p {
+    font-size: 16px;
+  }
+
+  .clinicActions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .expertsSection {
     margin-top: var(--section-space);
   }
@@ -2630,6 +2765,7 @@
   }
 
   .aboutSection,
+  .clinicSection,
   .expertsSection,
   .treatmentsSection,
   .symptomGuideSection,

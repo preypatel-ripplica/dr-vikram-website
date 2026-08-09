@@ -9,6 +9,7 @@ export const STATIC_ROUTES = [
   "/international-patient-support",
   "/testimonials",
   "/treatment-journey",
+  "/urowellness-clinic-gurugram",
   "/video-gallery",
 ] as const;
 

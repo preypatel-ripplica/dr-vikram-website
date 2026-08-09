@@ -1,6 +1,7 @@
 import type { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Bot, Building2, HeartHandshake, Stethoscope } from "lucide-react";
 import { TestimonialsSection as HomeTestimonialsSection } from "@/components/home/TestimonialsSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
@@ -93,7 +94,7 @@ function AboutHero() {
         <SectionLabel>{t("About us")}</SectionLabel>
         <div className={styles.heroText}>
           <h1>
-            {t("Dr. Vikram Barua Kaushik")} — {t("Urologist & Robotic Surgeon, Urowellness Clinic")}
+            {t("Dr. Vikram Barua Kaushik")}: {t("Urologist & Robotic Surgeon, Urowellness Clinic")}
           </h1>
           <p>
             {t(
@@ -204,6 +205,7 @@ function ExpertiseSection({ treatments }: { treatments: TreatmentData[] }) {
 
 function FaqSection() {
   const { t } = useI18n();
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section className={styles.faqSection}>
@@ -213,12 +215,30 @@ function FaqSection() {
       </div>
 
       <div className={styles.faqList}>
-        {faqs.map((faq) => (
-          <details className={styles.faqItem} key={faq.question}>
-            <summary>{t(faq.question)}</summary>
-            <p>{t(faq.answer)}</p>
-          </details>
-        ))}
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+
+          return (
+            <div className={styles.faqItem} key={faq.question}>
+              <button
+                aria-expanded={isOpen}
+                className={styles.faqButton}
+                onClick={() => setOpenIndex(isOpen ? null : index)}
+                type="button"
+              >
+                <span>{t(faq.question)}</span>
+                <Image
+                  alt=""
+                  className={isOpen ? styles.chevronOpen : undefined}
+                  height={18}
+                  src="/assets/figma/patient-support/faq-chevron.svg"
+                  width={18}
+                />
+              </button>
+              {isOpen ? <p className={styles.faqAnswer}>{t(faq.answer)}</p> : null}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -235,7 +255,7 @@ export const getStaticProps: GetStaticProps<{
 export default function AboutUsPage({ treatments }: { treatments: TreatmentData[] }) {
   const title = "About Dr. Vikram Barua Kaushik | Urowellness Clinic";
   const description =
-    "Meet Dr. Vikram Barua Kaushik, urologist and robotic surgeon at Urowellness Clinic, Gurugram — expert care for kidney stones, prostate, and urinary health.";
+    "Meet Dr. Vikram Barua Kaushik, urologist and robotic surgeon at Urowellness Clinic, Gurugram, with expert care for kidney stones, prostate, and urinary health.";
 
   return (
     <>

@@ -5,6 +5,7 @@ import styles from "@/styles/Home.module.css";
 
 const revealSelectors = [
   "aboutSection",
+  "clinicSection",
   "expertsSection",
   "treatmentsSection",
   "symptomGuideSection",

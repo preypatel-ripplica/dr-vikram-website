@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import type { KeyboardEvent, TouchEvent } from "react";
+import type { TouchEvent } from "react";
 import { useMemo, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
 import styles from "@/styles/Home.module.css";
@@ -11,7 +10,6 @@ const testimonials = [
     name: "Arpana Mehalawat",
     meta: "Google review · 26 Nov 2022",
     rating: "5",
-    avatar: "/assets/figma/testimonials/rahul-gupta-figma.webp",
     quote:
       "Since 10 years, I have been following up with Dr. Vikram Barua. He explained my health issues so well and suggested the best decision every time I met him. Thank you for everything.",
   },
@@ -19,7 +17,6 @@ const testimonials = [
     name: "CA. Akshay Agarwal",
     meta: "Google review · 9 Dec 2022",
     rating: "5",
-    avatar: "/assets/figma/testimonials/raghav-chaddha.webp",
     quote:
       "Thanks Dr. Vikram for operating on my father. He and his urologist team are very supportive and very careful. The whole team explained the procedure and treatment to us in a very calm way.",
   },
@@ -27,7 +24,6 @@ const testimonials = [
     name: "Jasveer Sheoran",
     meta: "Google review · 18 Mar 2023",
     rating: "5",
-    avatar: "/assets/figma/testimonials/ayush-pareekh.webp",
     quote:
       "Dr. Vikram Barua did surgery for me. I am totally fine and getting discharged today. I am so comfortable here with Dr. Vikram and the whole urology team.",
   },
@@ -75,6 +71,17 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
       />
     </svg>
   );
+}
+
+function getInitials(name: string) {
+  return name
+    .replace(/^CA\.\s*/i, "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
 }
 
 export function TestimonialsSection() {
@@ -127,12 +134,6 @@ export function TestimonialsSection() {
     }
   }
 
-  function handleTestimonialKeyDown(event: KeyboardEvent<HTMLElement>, index: number) {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    focusTestimonial(index);
-  }
-
   return (
     <section className={styles.testimonialsSection} data-node-id="64:22228">
       <div className={styles.testimonialsHeader}>
@@ -166,21 +167,19 @@ export function TestimonialsSection() {
                   testimonial.featured ? styles.featuredTestimonial : ""
                 }`}
                 key={`${testimonial.name}-${testimonial.index}`}
-                onClick={() => focusTestimonial(testimonial.index)}
-                onFocus={() => focusTestimonial(testimonial.index)}
-                onKeyDown={(event) => handleTestimonialKeyDown(event, testimonial.index)}
-                role="button"
-                tabIndex={0}
               >
+                {!testimonial.featured ? (
+                  <button
+                    aria-label={t(`Show review from ${testimonial.name}`)}
+                    className={styles.testimonialCardButton}
+                    onClick={() => focusTestimonial(testimonial.index)}
+                    type="button"
+                  />
+                ) : null}
                 <div className={styles.testimonialReviewTop}>
                   <div className={styles.testimonialPerson}>
-                    <div className={styles.testimonialAvatar}>
-                      <Image
-                        alt=""
-                        fill
-                        sizes="60px"
-                        src={testimonial.avatar}
-                      />
+                    <div className={styles.testimonialAvatar} aria-hidden="true">
+                      {getInitials(testimonial.name)}
                     </div>
                     <div>
                       <h3>{t(testimonial.name)}</h3>

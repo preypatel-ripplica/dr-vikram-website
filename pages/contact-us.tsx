@@ -5,7 +5,15 @@ import { TestimonialsSection as HomeTestimonialsSection } from "@/components/hom
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { SeoHead } from "@/components/shared/SeoHead";
-import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
+import { useI18n } from "@/lib/i18n-context";
+import {
+  CLINIC_FULL_ADDRESS,
+  CLINIC_MAP_URL,
+  CLINIC_TIMING,
+  breadcrumbGraph,
+  itemListGraph,
+  pageGraph,
+} from "@/lib/seo";
 import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/ContactPage.module.css";
 
@@ -33,8 +41,7 @@ const contactCards = [
 
 const shalbyMapsUrl =
   "https://www.google.com/maps/place/SHALBY+International+Hospitals/data=!4m2!3m1!1s0x0:0xb400eb3f1185b675?sa=X&ved=1t:2428&ictx=111";
-const urowellnessMapsUrl =
-  "https://www.google.com/maps/place/Urowellness+Clinic/@28.4105879,77.0494974,15.49z/data=!4m6!3m5!1s0x390d2326e6cfc237:0xce7eb85b0e06c7ba!8m2!3d28.412509!4d77.054953!16s%2Fg%2F11nr0cx85r?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D";
+const urowellnessMapsUrl = CLINIC_MAP_URL;
 
 const visitLocations = [
   {
@@ -49,11 +56,10 @@ const visitLocations = [
   {
     name: "Urowellness Clinic",
     shortLabel: "Eros City Square Mall, Sector 49, Gurugram",
-    label:
-      "Urowellness Clinic, 1st floor, Eros City Square Mall, 117, Rosewood City, Sector 49, Gurugram, Haryana 122018",
+    label: CLINIC_FULL_ADDRESS,
     href: urowellnessMapsUrl,
     image: "/images/Clinic.webp",
-    timing: "Monday to Saturday 5:00PM - 8:00PM",
+    timing: CLINIC_TIMING,
   },
 ];
 
@@ -146,13 +152,17 @@ function ContactCard({ card }: { card: (typeof contactCards)[number] }) {
 }
 
 function ContactHero() {
+  const { t } = useI18n();
+
   return (
     <section className={styles.hero} data-node-id="103:39138">
       <div className={styles.heroHeading}>
-        <ShieldLabel>Contact us</ShieldLabel>
+        <ShieldLabel>{t("Contact Urowellness Clinic")}</ShieldLabel>
         <div className={styles.heroText}>
-          <h1>We are always eager to help</h1>
-          <p>Contact us for any concerns or if you notice any symptoms</p>
+          <h1>{t("Book urology consultation in Gurugram")}</h1>
+          <p>
+            {t("Visit Urowellness Clinic in Sector 49, Gurugram for kidney stones, prostate concerns, urinary symptoms, UTI care, men's health, and robotic urology guidance.")}
+          </p>
         </div>
       </div>
       <span className={styles.heroArrow}>
@@ -173,6 +183,7 @@ function ContactCardsSection() {
 }
 
 function VisitSection() {
+  const { t, localizeHref } = useI18n();
   const [activeLocation, setActiveLocation] = useState(0);
   const location = visitLocations[activeLocation];
 
@@ -202,8 +213,8 @@ function VisitSection() {
           <div className={styles.visitContent}>
             <div className={styles.visitHeading}>
               <ShieldLabel>Visit for consultation</ShieldLabel>
-              <h2>Dr. Vikram Barua</h2>
-              <p>Urologist &amp; Robotic Surgeon</p>
+              <h2>{location.name}</h2>
+              <p>{location.name === "Urowellness Clinic" ? t("Urology clinic in Sector 49, Gurugram") : t("Dr. Vikram Barua, Urologist & Robotic Surgeon")}</p>
             </div>
 
             <div className={styles.visitMeta}>
@@ -222,6 +233,11 @@ function VisitSection() {
               </span>
               <span>{location.label}</span>
             </a>
+            {location.name === "Urowellness Clinic" ? (
+              <a className={styles.visitClinicLink} href={localizeHref("/urowellness-clinic-gurugram")}>
+                {t("View Urowellness Clinic page")}
+              </a>
+            ) : null}
           </div>
 
           <div className={styles.locationControls}>
@@ -238,8 +254,9 @@ function VisitSection() {
 }
 
 export default function ContactUsPage() {
-  const title = "Contact Us | Dr. Vikram";
-  const description = "Contact Dr. Vikram's team for appointments, consultation details, locations, and patient support.";
+  const title = "Contact Urowellness Clinic Gurugram | Dr. Vikram";
+  const description =
+    "Contact Urowellness Clinic in Sector 49, Gurugram for urology appointments with Dr. Vikram Barua Kaushik, clinic timings, address, and map directions.";
 
   return (
     <>

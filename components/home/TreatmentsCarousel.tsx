@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { KeyboardEvent, MouseEvent, TouchEvent } from "react";
+import type { MouseEvent, TouchEvent } from "react";
 import { useMemo, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
 import styles from "@/styles/Home.module.css";
@@ -183,20 +183,8 @@ export function TreatmentsCarousel() {
     setActiveIndex(index);
   }
 
-  function handleTreatmentKeyDown(event: KeyboardEvent<HTMLElement>, index: number) {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    const treatment = treatments[index];
-    if (!treatment) return;
-    if (index === activeIndex) {
-      void router.push(localizeHref(treatment.href));
-      return;
-    }
-    focusTreatment(index);
-  }
-
   function handleTreatmentClick(
-    event: MouseEvent<HTMLElement>,
+    event: MouseEvent<HTMLButtonElement>,
     index: number,
     href: string,
   ) {
@@ -252,7 +240,12 @@ export function TreatmentsCarousel() {
           key={`${activeIndex}-${slideDirection}`}
         >
           {visibleTreatments.map((treatment) => (
-            <article
+            <button
+              aria-label={t(
+                treatment.featured
+                  ? `Open ${treatment.title}`
+                  : `Preview ${treatment.title}`,
+              )}
               className={`${styles.keyTreatmentCard} ${
                 treatment.featured ? styles.featuredTreatment : ""
               }`}
@@ -261,9 +254,7 @@ export function TreatmentsCarousel() {
                 handleTreatmentClick(event, treatment.index, treatment.href)
               }
               onFocus={() => focusTreatment(treatment.index)}
-              onKeyDown={(event) => handleTreatmentKeyDown(event, treatment.index)}
-              role="button"
-              tabIndex={0}
+              type="button"
             >
               <Image
                 alt=""
@@ -274,14 +265,12 @@ export function TreatmentsCarousel() {
               />
               <div className={styles.treatmentCardTitleRow}>
                 <h3>{t(treatment.title)}</h3>
-                <Link
-                  aria-label={t(`Open ${treatment.title}`)}
+                <span
+                  aria-hidden="true"
                   className={styles.treatmentArrow}
-                  href={localizeHref(treatment.href)}
-                  onClick={(event) => event.stopPropagation()}
                 >
                   <ArrowRightIcon />
-                </Link>
+                </span>
               </div>
               <div className={styles.treatmentBullets}>
                 {treatment.bullets.map((bullet) => (
@@ -291,7 +280,7 @@ export function TreatmentsCarousel() {
                   </p>
                 ))}
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </div>

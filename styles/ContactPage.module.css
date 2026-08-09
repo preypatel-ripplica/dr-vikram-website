@@ -318,6 +318,27 @@
   text-underline-position: from-font;
 }
 
+.visitClinicLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 20px;
+  border: 1px solid #3dc1be;
+  border-radius: 999px;
+  color: #178b99;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.visitClinicLink:hover,
+.visitClinicLink:focus-visible {
+  background: rgba(61, 193, 190, 0.08);
+  transform: translateY(-2px);
+}
+
 .locationIcon {
   position: relative;
   width: 28px;

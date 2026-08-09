@@ -9,6 +9,7 @@ import PatientSupportPage from "@/pages/international-patient-support";
 import TestimonialsPage from "@/pages/testimonials";
 import TreatmentJourneyPage from "@/pages/treatment-journey";
 import TreatmentPage from "@/pages/treatments/[slug]";
+import UrowellnessClinicPage from "@/pages/urowellness-clinic-gurugram";
 import VideoGalleryPage from "@/pages/video-gallery";
 import { getAllBlogs, getBlogBySlug, type BlogData } from "@/lib/blogs";
 import { isLocale, TARGET_LOCALES, type Locale } from "@/lib/i18n-config";
@@ -36,6 +37,7 @@ const staticPageComponents: Record<string, ComponentType<Record<string, unknown>
   "/international-patient-support": PatientSupportPage,
   "/testimonials": TestimonialsPage,
   "/treatment-journey": TreatmentJourneyPage,
+  "/urowellness-clinic-gurugram": UrowellnessClinicPage,
   "/video-gallery": VideoGalleryPage,
 };
 
@@ -100,6 +102,10 @@ const localizedRuntimeSources: Record<string, string[]> = {
     "components/home/TestimonialsSection.tsx",
     ...appointmentRuntimeSources,
     ...finalCtaRuntimeSources,
+  ],
+  "/urowellness-clinic-gurugram": [
+    "pages/urowellness-clinic-gurugram.tsx",
+    ...appointmentRuntimeSources,
   ],
   "/video-gallery": [
     "pages/video-gallery.tsx",

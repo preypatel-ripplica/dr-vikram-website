@@ -98,6 +98,7 @@ const routes = [
   "/international-patient-support",
   "/testimonials",
   "/treatment-journey",
+  "/urowellness-clinic-gurugram",
   "/video-gallery",
   ...treatmentSlugs.map((slug) => `/treatments/${slug}`),
   ...blogSlugs.map((slug) => `/blogs/${slug}`),

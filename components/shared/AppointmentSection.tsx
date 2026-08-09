@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { Fragment, FormEvent, useEffect, useState } from "react";
 import styles from "./AppointmentSection.module.css";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -165,7 +165,7 @@ export function AppointmentSection({
   phone = defaultPhone,
   locations = defaultLocations,
 }: AppointmentSectionProps) {
-  const { t } = useI18n();
+  const { t, localizeHref } = useI18n();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<FormStatus | null>(null);
   const [selectedFileName, setSelectedFileName] = useState("");
@@ -241,18 +241,25 @@ export function AppointmentSection({
             <div className={styles.locationContent}>
               <span>{t("Address")}</span>
               {locations.map((location) => (
-                <a
-                  href={location.href}
-                  key={location.name}
-                  rel={location.href.startsWith("http") ? "noreferrer" : undefined}
-                  target={location.href.startsWith("http") ? "_blank" : undefined}
-                  title={location.label}
-                >
-                  <span>
-                    {t(location.name)}, {t(location.shortLabel)}
-                  </span>
-                  <ExternalLinkIcon />
-                </a>
+                <Fragment key={location.name}>
+                  <a
+                    href={location.href}
+                    rel={location.href.startsWith("http") ? "noreferrer" : undefined}
+                    target={location.href.startsWith("http") ? "_blank" : undefined}
+                    title={location.label}
+                  >
+                    <span>
+                      {t(location.name)}, {t(location.shortLabel)}
+                    </span>
+                    <ExternalLinkIcon />
+                  </a>
+                  {location.name === "Urowellness Clinic" ? (
+                    <a href={localizeHref("/urowellness-clinic-gurugram")}>
+                      <span>{t("Urowellness Clinic page")}</span>
+                      <ExternalLinkIcon />
+                    </a>
+                  ) : null}
+                </Fragment>
               ))}
             </div>
           </div>

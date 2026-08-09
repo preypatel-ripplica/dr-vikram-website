@@ -48,8 +48,8 @@ export function FinalCtaSection() {
         <a className={styles.finalCtaPrimary} href={localizeHref("#contact")}>
           {t("Book appointment")}
         </a>
-        <a className={styles.finalCtaSecondary} href={localizeHref("#contact")}>
-          {t("Contact us")}
+        <a className={styles.finalCtaSecondary} href={localizeHref("/urowellness-clinic-gurugram")}>
+          {t("Visit Urowellness Clinic")}
         </a>
       </div>
     </section>

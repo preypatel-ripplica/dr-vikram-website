@@ -225,8 +225,8 @@
 
 .featuredCard {
   width: min(100%, 968.906px);
-  min-height: 400px;
-  display: flex;
+  min-height: 320px;
+  display: block;
   overflow: hidden;
   border: 1px solid #e9f0f2;
   border-radius: 24px;
@@ -235,38 +235,32 @@
   animation: featuredSlideIn 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.featuredImage {
-  position: relative;
-  width: 280px;
-  flex: 0 0 280px;
-  min-height: 398px;
-  overflow: hidden;
-}
-
-.featuredImage img {
-  object-fit: cover;
-  object-position: center;
-}
-
-.featuredImage::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 200px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-  opacity: 0.85;
+.featuredInitials {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(57, 195, 207, 0.34);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(57, 195, 207, 0.2), transparent 48%),
+    #eefcfc;
+  color: #209fa4;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .featuredPatient {
-  position: absolute;
-  z-index: 1;
-  left: 16px;
-  bottom: 16px;
-  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #2c2b3b;
 }
 
 .featuredPatient strong,
-.featuredPatient span {
+.featuredPatient small {
   display: block;
 }
 
@@ -276,11 +270,12 @@
   line-height: 20px;
 }
 
-.featuredPatient span {
+.featuredPatient small {
   margin-top: 2px;
   font-size: 12px;
+  font-weight: 400;
   line-height: 16px;
-  opacity: 0.9;
+  color: rgba(44, 43, 59, 0.58);
 }
 
 .featuredContent {
@@ -288,7 +283,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 36px 44px;
+  gap: 28px;
+  padding: 36px 44px 34px;
 }
 
 .featuredMeta {
@@ -350,6 +346,13 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 26.4px;
+}
+
+.featuredFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .featuredControls {
@@ -484,50 +487,55 @@
   box-shadow: 0 2px 12px rgba(44, 43, 59, 0.05);
 }
 
-.storyImage {
+.storyIdentity {
   position: relative;
-  height: 120px;
+  min-height: 88px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(57, 195, 207, 0.22), transparent 32%),
+    linear-gradient(135deg, #eefcfc 0%, #f5f3ff 100%);
 }
 
-.storyImage img {
-  object-fit: cover;
-  object-position: center;
+.storyInitials {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(57, 195, 207, 0.36);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #209fa4;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
 }
 
-.storyImage::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 82px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-  opacity: 0.8;
+.storyIdentityText {
+  min-width: 0;
 }
 
-.storyImageText {
-  position: absolute;
-  z-index: 1;
-  left: 16px;
-  bottom: 12px;
-  color: #ffffff;
-}
-
-.storyImageText strong,
-.storyImageText span {
+.storyIdentityText strong,
+.storyIdentityText span {
   display: block;
 }
 
-.storyImageText strong {
+.storyIdentityText strong {
+  color: #2c2b3b;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
 }
 
-.storyImageText span {
+.storyIdentityText span {
   margin-top: 1px;
+  color: rgba(44, 43, 59, 0.58);
   font-size: 11px;
   line-height: 14px;
-  opacity: 0.9;
 }
 
 .storyBody {
@@ -619,13 +627,6 @@
 
   .featuredCard {
     width: min(100%, 760px);
-    flex-direction: column;
-  }
-
-  .featuredImage {
-    width: 100%;
-    flex-basis: auto;
-    min-height: 280px;
   }
 
   .storiesHeader {
@@ -725,6 +726,12 @@
 
   .featuredContent {
     padding: 28px 22px;
+  }
+
+  .featuredFooter {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
   }
 
   .featuredMeta {

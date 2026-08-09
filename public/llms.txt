@@ -1,6 +1,6 @@
-# Dr. Vikram | Urology & Robotic Surgery
+# Dr. Vikram Barua Kaushik | Urologist & Robotic Surgeon
 
-> Official website for Dr. Vikram Barua, Urologist and Robotic Surgeon, and Urowellness Clinic in Gurugram, Haryana.
+> Dr. Vikram Barua Kaushik provides specialist urology care with clear diagnosis, personalised treatment planning, minimally invasive procedures and robotic surgery.
 
 This website provides patient-friendly information about urology consultation, kidney stones, prostate problems, urinary symptoms, bladder concerns, male infertility, erectile dysfunction, urethral stricture, urinary tract infection, urological cancer evaluation, robotic urology, treatment planning, appointment booking, and international patient support.
 
@@ -41,8 +41,8 @@ Urowellness Clinic is an advanced urology clinic in Sector 49, Gurugram.
 
 ## Identity Signals
 
-- Website name: Dr. Vikram | Urology & Robotic Surgery
-- Doctor: Dr. Vikram Barua
+- Website name: Dr. Vikram Barua Kaushik
+- Doctor: Dr. Vikram Barua Kaushik
 - Clinic: Urowellness Clinic
 - Specialty: Urology and robotic surgery
 - Location: Gurugram, Haryana, India

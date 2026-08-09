@@ -1,0 +1,605 @@
+.clinicPage {
+  overflow: hidden;
+  background: #ffffff;
+  color: #2c2b3b;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+.revealPending {
+  opacity: 0.001;
+  transform: translateY(56px) scale(0.97);
+  filter: blur(12px);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChild {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealChildVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.revealChildVisible:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+.revealChildVisible:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.sectionLabel {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(44, 43, 59, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  white-space: nowrap;
+}
+
+.shieldIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.hero {
+  position: relative;
+  width: min(100%, 1400px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 560px);
+  gap: 56px;
+  align-items: center;
+  margin: 0 auto;
+  padding: 88px 60px 48px;
+}
+
+.hero::before {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 0;
+  width: min(1800px, 112vw);
+  height: 476px;
+  content: "";
+  pointer-events: none;
+  background: url("/images/bg_2.svg") center top / 100% auto no-repeat;
+  transform: translateX(-50%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+.heroCopy,
+.heroImage {
+  position: relative;
+  z-index: 1;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.heroCopy h1 {
+  width: min(100%, 760px);
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 54px;
+  font-weight: 500;
+  letter-spacing: -1.4px;
+  line-height: 1.12;
+}
+
+.heroCopy p {
+  width: min(100%, 700px);
+  margin: 0;
+  color: rgba(44, 43, 59, 0.78);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.24px;
+  line-height: 1.58;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.primaryAction,
+.secondaryAction,
+.mapButton {
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 22px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.primaryAction,
+.mapButton {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #3dc1be 0%, #2b8886 100%);
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(17, 152, 163, 0.16);
+}
+
+.secondaryAction {
+  border: 1px solid #3dc1be;
+  color: #178b99;
+}
+
+.secondaryAction svg,
+.mapButton svg {
+  width: 19px;
+  height: 19px;
+}
+
+.primaryAction:hover,
+.secondaryAction:hover,
+.mapButton:hover,
+.textLink:hover {
+  transform: translateY(-2px);
+}
+
+.secondaryAction:hover {
+  background: rgba(61, 193, 190, 0.08);
+}
+
+.heroImage {
+  height: 520px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #f0fbfc;
+  box-shadow: 0 24px 60px rgba(24, 54, 68, 0.12);
+}
+
+.heroImage img,
+.doctorImage img {
+  object-fit: cover;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.sectionHeader h2 {
+  width: min(100%, 760px);
+  margin: 0;
+  color: #032126;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -1.1px;
+  line-height: 1.2;
+}
+
+.aboutSection,
+.conditionsSection,
+.whySection,
+.doctorSection,
+.visitSection,
+.faqSection {
+  width: min(100%, 1400px);
+  margin: 132px auto 0;
+  padding: 0 60px;
+}
+
+.aboutSection,
+.conditionsSection,
+.whySection,
+.faqSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+}
+
+.aboutGrid {
+  width: min(100%, 1040px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.aboutGrid p {
+  margin: 0;
+  padding: 28px;
+  border-radius: 24px;
+  background: #f8f9f9;
+  color: rgba(44, 43, 59, 0.76);
+  font-size: 17px;
+  line-height: 1.62;
+}
+
+.conditionGrid,
+.reasonGrid {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+
+.conditionGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.conditionCard {
+  min-height: 142px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 22px;
+  background: #f0fbfc;
+}
+
+.conditionCard svg {
+  width: 30px;
+  height: 30px;
+  color: #39c3cf;
+}
+
+.conditionCard h3,
+.reasonCard h3 {
+  margin: 0;
+  color: #032126;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  line-height: 1.25;
+}
+
+.reasonGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reasonCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+  border-radius: 24px;
+  background: #f8f9f9;
+}
+
+.reasonIcon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #39c3cf;
+  box-shadow: 0 12px 26px rgba(17, 152, 163, 0.12);
+}
+
+.reasonIcon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.reasonCard p {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.66);
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.doctorSection,
+.visitSection {
+  display: grid;
+  grid-template-columns: minmax(360px, 480px) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.doctorImage {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #d6f1f6;
+}
+
+.doctorImage img {
+  object-position: center top;
+}
+
+.doctorContent,
+.visitDetails,
+.journeyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.doctorContent h2,
+.visitDetails h2 {
+  margin: 0;
+  color: #2c2b3b;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.doctorContent p,
+.visitDetails dd,
+.journeyCard li {
+  margin: 0;
+  color: rgba(44, 43, 59, 0.74);
+  font-size: 17px;
+  line-height: 1.58;
+}
+
+.textLink {
+  display: inline-flex;
+  margin-top: 8px;
+  color: #178b99;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 180ms ease;
+}
+
+.visitSection {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  align-items: stretch;
+}
+
+.visitDetails,
+.journeyCard {
+  padding: 36px;
+  border-radius: 28px;
+  background: #f0fbfc;
+}
+
+.visitDetails dl {
+  display: grid;
+  gap: 18px;
+  margin: 8px 0 0;
+}
+
+.visitDetails dt {
+  margin-bottom: 5px;
+  color: rgba(3, 33, 38, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.visitDetails a {
+  color: #178b99;
+}
+
+.journeyCard {
+  background: #f8f9f9;
+}
+
+.journeyCard ol {
+  width: 100%;
+  display: grid;
+  gap: 14px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.journeyCard li {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.faqSection {
+  width: min(100%, 1000px);
+}
+
+.faqList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faqItem {
+  width: 100%;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: #f8f9f9;
+}
+
+.faqItem summary {
+  cursor: pointer;
+  color: #2c2b3b;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  list-style: none;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem p {
+  margin: 12px 0 0;
+  color: rgba(44, 43, 59, 0.7);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.sharedAppointment {
+  width: 100%;
+  margin-top: 132px;
+  padding-bottom: 150px;
+}
+
+.sharedAppointment > section {
+  margin-top: 0;
+}
+
+@media (max-width: 1080px) {
+  .hero,
+  .doctorSection,
+  .visitSection {
+    grid-template-columns: 1fr;
+  }
+
+  .heroImage,
+  .doctorImage {
+    width: 100%;
+  }
+
+  .conditionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reasonGrid,
+  .aboutGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .clinicPage {
+    overflow-x: hidden;
+  }
+
+  .hero,
+  .aboutSection,
+  .conditionsSection,
+  .whySection,
+  .doctorSection,
+  .visitSection,
+  .faqSection,
+  .sharedAppointment {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero {
+    gap: 32px;
+    padding-top: 70px;
+  }
+
+  .hero::before {
+    width: min(1500px, 170vw);
+    height: 430px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(34px, 10vw, 43px);
+    letter-spacing: -0.8px;
+    line-height: 1.15;
+  }
+
+  .heroCopy p,
+  .aboutGrid p,
+  .doctorContent p,
+  .visitDetails dd,
+  .journeyCard li {
+    font-size: 16px;
+  }
+
+  .heroImage,
+  .doctorImage {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 26px;
+  }
+
+  .sectionHeader h2,
+  .doctorContent h2,
+  .visitDetails h2 {
+    font-size: 30px;
+    letter-spacing: -0.5px;
+  }
+
+  .aboutSection,
+  .conditionsSection,
+  .whySection,
+  .doctorSection,
+  .visitSection,
+  .faqSection,
+  .sharedAppointment {
+    margin-top: 92px;
+  }
+
+  .conditionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .conditionCard {
+    min-height: 116px;
+  }
+
+  .visitDetails,
+  .journeyCard {
+    padding: 26px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero,
+  .aboutSection,
+  .conditionsSection,
+  .whySection,
+  .doctorSection,
+  .visitSection,
+  .faqSection,
+  .sharedAppointment {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .sectionLabel {
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  .heroActions {
+    width: 100%;
+  }
+
+  .primaryAction,
+  .secondaryAction,
+  .mapButton {
+    width: 100%;
+    white-space: normal;
+  }
+}

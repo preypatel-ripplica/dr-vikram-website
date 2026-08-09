@@ -10,6 +10,7 @@ const TARGET_LOCALES = ["hi", "ar", "ru"];
 const DEFAULT_SCOPES = [
   "shared-ui",
   "home",
+  "about",
   "contact",
   "blogs",
   "treatments",
@@ -29,8 +30,10 @@ const SKIPPED_KEYS = new Set([
   "fill",
   "height",
   "inputMode",
+  "collection_id",
   "key",
   "max",
+  "media_id",
   "method",
   "min",
   "name",
@@ -46,6 +49,7 @@ const SKIPPED_KEYS = new Set([
   "viewBox",
   "width",
   "slug",
+  "entry_id",
   "id",
   "href",
   "url",
@@ -60,6 +64,9 @@ const SKIPPED_KEYS = new Set([
   "bannerImage",
   "authorImage",
   "videoThumbnail",
+  "download_url",
+  "filename",
+  "preview_url",
   "publishedAt",
   "publishedLabel",
   "access_key",
@@ -229,6 +236,11 @@ const scopeFiles = {
     "components/home/RoboticMovementToggle.tsx",
     "components/home/RoboticVisionComparison.tsx",
   ],
+  about: [
+    "pages/about-us.tsx",
+    "components/home/TestimonialsSection.tsx",
+    "components/shared/AppointmentSection.tsx",
+  ],
   contact: ["pages/contact-us.tsx"],
   blogs: ["pages/blogs/index.tsx", "pages/blogs/[slug].tsx"],
   treatments: ["pages/treatments/[slug].tsx", "components/treatments"],
@@ -236,6 +248,11 @@ const scopeFiles = {
   "patient-support": ["pages/international-patient-support.tsx"],
   "video-gallery": ["pages/video-gallery.tsx", "data/video-gallery.json"],
   "treatment-journey": ["pages/treatment-journey.tsx"],
+};
+
+const scopeCmsCollections = {
+  blogs: ["blog"],
+  treatments: ["treatments"],
 };
 
 function loadEnvFile(filename) {
@@ -271,6 +288,12 @@ const scopes = scopeArg
 const batchSize = Number(process.env.TRANSLATION_BATCH_SIZE || 60);
 const geminiModel =
   process.env.GEMINI_TRANSLATION_MODEL || process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const maxTranslatableTextLength = Number(process.env.TRANSLATION_MAX_TEXT_LENGTH || 1600);
+const translationRetries = Number(process.env.TRANSLATION_RETRIES || 4);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function normalizeTranslationText(value) {
   return String(value)
@@ -299,7 +322,7 @@ function shouldSkipKey(key) {
 function isTranslatableString(value) {
   const text = normalizeTranslationText(value);
   if (!text) return false;
-  if (text.length > 500) return false;
+  if (text.length > maxTranslatableTextLength) return false;
   if (SKIPPED_EXACT_VALUES.has(text)) return false;
   if (/^[\d\s.,:+\-/%()]+$/.test(text)) return false;
   if (/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/.test(text)) return false;
@@ -339,6 +362,8 @@ function stripComments(source) {
 }
 
 function collectFromCode(source, strings) {
+  collectDirectTranslationCalls(source, strings);
+
   const sourceFile = ts.createSourceFile(
     "source.tsx",
     stripComments(source),
@@ -478,6 +503,34 @@ function collectFromCode(source, strings) {
   visit(sourceFile);
 }
 
+function collectDirectTranslationCalls(source, strings) {
+  const tCallPattern = /\bt\(\s*(["'`])((?:\\.|(?!\1).)*)\1/g;
+
+  for (const match of source.matchAll(tCallPattern)) {
+    const value = parseStringLiteral(match[1], match[2]);
+    const text = normalizeTranslationText(value);
+
+    if (isTranslatableString(text) && !text.includes("${")) {
+      strings.add(text);
+    }
+  }
+}
+
+function parseStringLiteral(quote, value) {
+  if (quote === "`") {
+    return value.replace(/\\`/g, "`").replace(/\\n/g, "\n");
+  }
+
+  try {
+    return JSON.parse(`${quote}${value}${quote}`);
+  } catch {
+    return value
+      .replace(/\\'/g, "'")
+      .replace(/\\"/g, '"')
+      .replace(/\\n/g, "\n");
+  }
+}
+
 function listFiles(entry) {
   const absolute = path.join(ROOT, entry);
   if (!fs.existsSync(absolute)) return [];
@@ -490,7 +543,38 @@ function listFiles(entry) {
   });
 }
 
-function collectScopeStrings(scope) {
+function requireCmsConfig() {
+  if (!process.env.CMS_API_URL || !process.env.CMS_API_TOKEN) {
+    throw new Error(
+      "CMS_API_URL and CMS_API_TOKEN must be set to collect CMS content for translation.",
+    );
+  }
+}
+
+async function fetchCmsCollection(collectionSlug) {
+  requireCmsConfig();
+
+  const response = await fetch(`${process.env.CMS_API_URL}/api/content.entries.list`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.CMS_API_TOKEN}`,
+      "ngrok-skip-browser-warning": "true",
+    },
+    body: JSON.stringify({ collection_slug: collectionSlug, page_size: 100 }),
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `CMS request for "${collectionSlug}" failed: ${response.status} ${response.statusText}`,
+    );
+  }
+
+  const data = await response.json();
+  return Array.isArray(data) ? data : data?.entries || data?.data || data?.items || [];
+}
+
+async function collectScopeStrings(scope) {
   const strings = new Set();
   const entries = scopeFiles[scope] || [];
 
@@ -502,6 +586,12 @@ function collectScopeStrings(scope) {
         collectFromCode(fs.readFileSync(file, "utf8"), strings);
       }
     }
+  }
+
+  const cmsCollections = scopeCmsCollections[scope] || [];
+  for (const collectionSlug of cmsCollections) {
+    const entries = await fetchCmsCollection(collectionSlug);
+    entries.forEach((item) => collectFromJson(item?.entry ?? item, strings));
   }
 
   return [...strings].sort((a, b) => a.localeCompare(b));
@@ -552,17 +642,29 @@ async function translateBatch(texts, locale) {
     JSON.stringify(texts),
   ].join("\n");
 
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: "application/json" },
-      }),
-    },
-  );
+  let response;
+
+  for (let attempt = 1; attempt <= translationRetries; attempt += 1) {
+    response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: "application/json" },
+        }),
+      },
+    );
+
+    if (response.ok || ![429, 500, 502, 503, 504].includes(response.status)) {
+      break;
+    }
+
+    if (attempt < translationRetries) {
+      await sleep(750 * attempt);
+    }
+  }
 
   if (!response.ok) {
     throw new Error(`Gemini request failed: ${response.status} ${await response.text()}`);
@@ -605,7 +707,7 @@ let memory = loadMemory();
 let totalMissing = 0;
 
 for (const scope of scopes) {
-  const strings = collectScopeStrings(scope);
+  const strings = await collectScopeStrings(scope);
   ensureEnglish(memory, strings);
   saveMemory(memory);
 

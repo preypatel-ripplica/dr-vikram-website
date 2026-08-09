@@ -51,7 +51,6 @@ type Story = {
   name: string;
   meta: string;
   badge: string;
-  image: string;
   quote: string;
 };
 
@@ -64,7 +63,6 @@ const stories: Story[] = [
     name: "Pushpender Kumar",
     meta: "Google review",
     badge: "Surgery · Google review",
-    image: "/assets/figma/testimonials/rahul-gupta-figma.webp",
     quote:
       "Dr. Vikram Barua sir is so professional and he performed my surgery very well. I am so satisfied with his treatment and his whole team is so excellent and caring for patients. Overall the service is good. I will refer to my friends.",
   },
@@ -76,7 +74,6 @@ const stories: Story[] = [
     name: "Khalifa Khalifa",
     meta: "Translated Google review · Iraq",
     badge: "International patient · Iraq",
-    image: "/images/testimonials/featured-david.webp",
     quote:
       "Peace be upon you. I am the Iraqi citizen Abdullah Aasi Al-Sanad from Anbar Governorate, Al-Qaim district. I was suffering from urinary tract blockage for more than 4 years and severe lung inflammation for more than 20 years. Through translator Mohammed Khalifa Abu Youssef, I travelled to India and underwent all tests at Artemis Hospital. The operation was successful, praise be to God. Now I feel a great improvement, noting that the operation was performed 4 days ago. I thank Dr. Vikram, the distinguished team, Dr. Shivan Shou, all nurses in the ward, and the cleaning staff for this excellent service. Greetings to everyone.",
   },
@@ -88,7 +85,6 @@ const stories: Story[] = [
     name: "Lawal Bello",
     meta: "Google review · Nigeria",
     badge: "Prostate · International patient",
-    image: "/assets/figma/testimonials/raghav-chaddha.webp",
     quote:
       "My name is Lawal Bello Musa from Nigeria. I had trilober enlargement lateral lobes, which my local doctor in my country was unable to treat, until I was referred to Dr. Vikram Barua's urology clinic in Artemis Hospital. After examination, Dr. Vikram advised me for UroLift placement, which was done successfully in February 2023. Now I can pass urine very well. I came back for follow-up this September 10, 2023. Now everything is okay and I am going back to my country happy. Thank you, Dr. Vikram Barua.",
   },
@@ -100,7 +96,6 @@ const stories: Story[] = [
     name: "Rupesh Kaushik",
     meta: "Google review",
     badge: "Kidney calculus · PCNL",
-    image: "/images/testimonials/figma-patient-1.webp",
     quote:
       "My father was operated for kidney calculus, which was quite bigger in size. Doctor Kaushik was very polite throughout the process, starting from the diagnosis till the PCNL and DJ stenting was done. He is equipped with all the technical expertise and reciprocates the most apt behaviour and patient-centric approach. We are very thankful to him as everything went smoothly. In addition, I wanted to thank everyone at the hospital, starting from housekeeping, Mr. Amit Jha, and the daily caretaking nursing and medical staff, Mr. Gautam, Mr. Amit, and Ms. Alice. They all assisted my dad in every way possible to make him feel comfortable during and even post surgery.",
   },
@@ -112,7 +107,6 @@ const stories: Story[] = [
     name: "Arpana Mehalawat",
     meta: "Google review",
     badge: "Follow-up care · Google review",
-    image: "/images/testimonials/story-george.webp",
     quote:
       "Since 10 years, I have been following up with Dr. Vikram Barua. He explained my health issues so well and suggested the best decision every time I met him. Thank you for everything.",
   },
@@ -124,7 +118,6 @@ const stories: Story[] = [
     name: "CA. Akshay Agarwal",
     meta: "Google review",
     badge: "Surgery · Google review",
-    image: "/images/testimonials/story-ramesh.webp",
     quote:
       "Thanks Dr. Vikram for operating on my father. He and his urologist team are very supportive and very careful. The Artemis nursing team is also very caring and intelligent. The whole team explained the procedure and treatment to us in a very calm way.",
   },
@@ -136,7 +129,6 @@ const stories: Story[] = [
     name: "Jasveer Sheoran",
     meta: "Google review",
     badge: "Surgery · Google review",
-    image: "/images/testimonials/figma-patient-2.webp",
     quote:
       "Dr. Vikram Barua did surgery for me. I am totally fine and getting discharged today. He treated me professionally and so well. I am so comfortable here with Dr. Vikram and the whole urology team. They are so professional and excellent. The nursing staff took good care of me during my hospital stay. Thank you to everyone.",
   },
@@ -148,7 +140,6 @@ const stories: Story[] = [
     name: "Carolyn Kyalo",
     meta: "Google review",
     badge: "Surgery · Google review",
-    image: "/images/testimonials/story-ahmed.webp",
     quote:
       "Dr. Vikram provided excellent service to my husband. We got immediate attention on the first appointment. The surgery was very successful and performed with professional service and updates. We were amazed by the quick recovery. My husband was up and moving 2 days after the surgery. He went out of his way to even visit on a Sabbath. His support team are proficient and knowledgeable about what is required. I would highly recommend him to anyone looking for a urologist.",
   },
@@ -160,13 +151,23 @@ const stories: Story[] = [
     name: "Ramautar Jhawar",
     meta: "Google review",
     badge: "RIRS · Kidney stone",
-    image: "/assets/figma/testimonials/ayush-pareekh.webp",
     quote:
       "Amazing experience. We did not feel any discomfort. It was great even though we underwent RIRS surgery and were discharged the very next day. Dr. Vikram Barua is a great doctor with a vision to make his patients feel good and comfortable, very down to earth, humble, and noble, serving in his field with the right noble vision. He has great hands. Our regards to him always, best wishes, and thank you to him and his team.",
   },
 ];
 
 const featuredStories = stories.filter((story) => story.featured);
+
+function getInitials(name: string) {
+  return name
+    .replace(/^CA\.\s*/i, "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
 
 function ShieldPlusIcon() {
   return (
@@ -220,19 +221,6 @@ function FeaturedStorySection({
   return (
     <section className={styles.featuredSection} data-node-id="148:24781" id="featured-story">
       <article className={styles.featuredCard} key={activeStory.id}>
-        <div className={styles.featuredImage}>
-          <Image
-            alt={`${activeStory.name} patient story`}
-            fill
-            sizes="280px"
-            src={activeStory.image}
-          />
-          <div className={styles.featuredPatient}>
-            <strong>{activeStory.name}</strong>
-            <span>{t(activeStory.meta)}</span>
-          </div>
-        </div>
-
         <div className={styles.featuredContent}>
           <div>
             <div className={styles.featuredMeta}>
@@ -245,24 +233,36 @@ function FeaturedStorySection({
             <blockquote>&quot;{t(activeStory.quote)}&quot;</blockquote>
           </div>
 
-          <div className={styles.featuredControls}>
-            <button aria-label={t("Previous testimonial")} onClick={onPrevious} type="button">
-              ‹
-            </button>
-            <span className={styles.progressPill} aria-hidden="true">
-              <span className={styles.progressTrack}>
-                <span
-                  className={styles.progressFill}
-                  style={{ width: `${((activeIndex + 1) / total) * 100}%` }}
-                />
+          <div className={styles.featuredFooter}>
+            <div className={styles.featuredPatient}>
+              <span className={styles.featuredInitials} aria-hidden="true">
+                {getInitials(activeStory.name)}
               </span>
-              {Array.from({ length: total - 1 }).map((_, index) => (
-                <span className={styles.progressDot} key={index} />
-              ))}
-            </span>
-            <button aria-label={t("Next testimonial")} onClick={onNext} type="button">
-              ›
-            </button>
+              <span>
+                <strong>{activeStory.name}</strong>
+                <small>{t(activeStory.meta)}</small>
+              </span>
+            </div>
+
+            <div className={styles.featuredControls}>
+              <button aria-label={t("Previous testimonial")} onClick={onPrevious} type="button">
+                ‹
+              </button>
+              <span className={styles.progressPill} aria-hidden="true">
+                <span className={styles.progressTrack}>
+                  <span
+                    className={styles.progressFill}
+                    style={{ width: `${((activeIndex + 1) / total) * 100}%` }}
+                  />
+                </span>
+                {Array.from({ length: total - 1 }).map((_, index) => (
+                  <span className={styles.progressDot} key={index} />
+                ))}
+              </span>
+              <button aria-label={t("Next testimonial")} onClick={onNext} type="button">
+                ›
+              </button>
+            </div>
           </div>
         </div>
       </article>
@@ -317,9 +317,11 @@ function AllTestimonialsSection({
       <div className={styles.storyGrid}>
         {filteredStories.map((story) => (
           <article className={styles.storyCard} key={story.id}>
-            <div className={styles.storyImage}>
-              <Image alt="" fill sizes="(max-width: 900px) 100vw, 410px" src={story.image} />
-              <div className={styles.storyImageText}>
+            <div className={styles.storyIdentity}>
+              <span className={styles.storyInitials} aria-hidden="true">
+                {getInitials(story.name)}
+              </span>
+              <div className={styles.storyIdentityText}>
                 <strong>{story.name}</strong>
                 <span>{t(story.meta)}</span>
               </div>
