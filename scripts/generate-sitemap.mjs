@@ -55,6 +55,8 @@ loadEnvFile(".env");
 
 const CMS_API_URL = process.env.CMS_API_URL;
 const CMS_API_TOKEN = process.env.CMS_API_TOKEN;
+const CMS_RETRY_ATTEMPTS = Number(process.env.CMS_RETRY_ATTEMPTS || 5);
+const CMS_RETRY_DELAY_MS = Number(process.env.CMS_RETRY_DELAY_MS || 700);
 
 if (!CMS_API_URL || !CMS_API_TOKEN) {
   throw new Error(
@@ -62,16 +64,57 @@ if (!CMS_API_URL || !CMS_API_TOKEN) {
   );
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isRetryableStatus(status) {
+  return status === 408 || status === 425 || status === 429 || status >= 500;
+}
+
+async function fetchWithRetry(url, init, label) {
+  let lastError;
+
+  for (let attempt = 1; attempt <= CMS_RETRY_ATTEMPTS; attempt += 1) {
+    try {
+      const res = await fetch(url, {
+        ...init,
+        headers: {
+          ...(init.headers || {}),
+          "ngrok-skip-browser-warning": "true",
+          Connection: "close",
+        },
+      });
+
+      if (res.ok || !isRetryableStatus(res.status) || attempt === CMS_RETRY_ATTEMPTS) {
+        return res;
+      }
+
+      lastError = new Error(`${label} failed: ${res.status} ${res.statusText}`);
+    } catch (error) {
+      lastError = error;
+      if (attempt === CMS_RETRY_ATTEMPTS) throw error;
+    }
+
+    await sleep(CMS_RETRY_DELAY_MS * attempt);
+  }
+
+  throw lastError;
+}
+
 async function fetchCollectionSlugs(collectionSlug) {
-  const res = await fetch(`${CMS_API_URL}/api/content.entries.list`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${CMS_API_TOKEN}`,
-      "ngrok-skip-browser-warning": "true",
+  const res = await fetchWithRetry(
+    `${CMS_API_URL}/api/content.entries.list`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${CMS_API_TOKEN}`,
+      },
+      body: JSON.stringify({ collection_slug: collectionSlug, page_size: 100 }),
     },
-    body: JSON.stringify({ collection_slug: collectionSlug, page_size: 100 }),
-  });
+    `CMS request for "${collectionSlug}"`,
+  );
 
   if (!res.ok) {
     throw new Error(`CMS request for "${collectionSlug}" failed: ${res.status} ${res.statusText}`);
@@ -87,7 +130,7 @@ async function fetchCollectionSlugs(collectionSlug) {
 
 const [treatmentSlugs, blogSlugs] = await Promise.all([
   fetchCollectionSlugs("treatments"),
-  fetchCollectionSlugs("blog"),
+  fetchCollectionSlugs("new-blogs"),
 ]);
 
 const routes = [

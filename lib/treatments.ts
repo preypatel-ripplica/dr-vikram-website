@@ -75,12 +75,34 @@ export type TreatmentData = {
     tabs: { label: string; items: string[] }[];
     note: string;
   };
+  ctaSection: {
+    eyebrow: string;
+    title: string;
+    body: string[];
+    primaryButtonLabel: string;
+    secondaryButtonLabel: string;
+  } | null;
   faqs: {
     eyebrow: string;
     title: string;
     items: { question: string; answer: string }[];
   };
 };
+
+export type TreatmentNavItem = {
+  slug: string;
+  title: string;
+};
+
+function mapTreatmentNavItem(item: unknown): TreatmentNavItem | null {
+  const e = asRecord(entryData(item));
+  const hero = asRecord(e.hero);
+  const slug = asString(e.slug);
+  const title = asString(hero.title);
+
+  if (!slug || !title) return null;
+  return { slug, title };
+}
 
 async function mapTreatment(item: unknown): Promise<TreatmentData | null> {
   const e = asRecord(entryData(item));
@@ -96,6 +118,7 @@ async function mapTreatment(item: unknown): Promise<TreatmentData | null> {
   const experience = asRecord(e.experience);
   const experienceVideo = asRecord(experience.video);
   const careGuide = asRecord(e.careGuide);
+  const ctaSection = asRecord(e.ctaSection);
   const faqs = asRecord(e.faqs);
 
   return {
@@ -181,6 +204,15 @@ async function mapTreatment(item: unknown): Promise<TreatmentData | null> {
       }),
       note: asString(careGuide.note),
     },
+    ctaSection: ctaSection.title
+      ? {
+          eyebrow: asString(ctaSection.eyebrow),
+          title: asString(ctaSection.title),
+          body: toStringArray(ctaSection.body),
+          primaryButtonLabel: asString(ctaSection.primaryButtonLabel),
+          secondaryButtonLabel: asString(ctaSection.secondaryButtonLabel),
+        }
+      : null,
     faqs: {
       eyebrow: asString(faqs.eyebrow),
       title: asString(faqs.title),
@@ -193,6 +225,7 @@ async function mapTreatment(item: unknown): Promise<TreatmentData | null> {
 }
 
 let cachedTreatments: Promise<TreatmentData[]> | null = null;
+let cachedTreatmentNavItems: Promise<TreatmentNavItem[]> | null = null;
 
 /** All treatments — CMS entries only, no local fallback. */
 export function getAllTreatments(): Promise<TreatmentData[]> {
@@ -205,6 +238,20 @@ export function getAllTreatments(): Promise<TreatmentData[]> {
   }
 
   return cachedTreatments;
+}
+
+/** Header treatment links only — avoid shipping full treatment content in every page's props. */
+export function getTreatmentNavItems(): Promise<TreatmentNavItem[]> {
+  if (!cachedTreatmentNavItems) {
+    cachedTreatmentNavItems = (async () => {
+      const entries = await fetchCollection("treatments");
+      return entries
+        .map(mapTreatmentNavItem)
+        .filter((item): item is TreatmentNavItem => item !== null);
+    })();
+  }
+
+  return cachedTreatmentNavItems;
 }
 
 export async function getTreatmentBySlug(slug: string): Promise<TreatmentData | null> {

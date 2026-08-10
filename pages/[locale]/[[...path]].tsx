@@ -11,11 +11,11 @@ import TreatmentJourneyPage from "@/pages/treatment-journey";
 import TreatmentPage from "@/pages/treatments/[slug]";
 import UrowellnessClinicPage from "@/pages/urowellness-clinic-gurugram";
 import VideoGalleryPage from "@/pages/video-gallery";
-import { getAllBlogs, getBlogBySlug, type BlogData } from "@/lib/blogs";
+import { getBlogCards, getBlogBySlug, type BlogCardData, type BlogData } from "@/lib/blogs";
 import { isLocale, TARGET_LOCALES, type Locale } from "@/lib/i18n-config";
 import { withLocaleProps } from "@/lib/page-i18n.server";
 import { getAllSiteRoutes } from "@/lib/routes";
-import { getAllTreatments, getTreatmentBySlug, type TreatmentData } from "@/lib/treatments";
+import { getAllTreatments, getTreatmentBySlug, getTreatmentNavItems, type TreatmentData, type TreatmentNavItem } from "@/lib/treatments";
 
 type LocalizedPageProps = {
   clientTranslations?: Record<string, string>;
@@ -25,8 +25,8 @@ type LocalizedPageProps = {
   treatment?: TreatmentData;
   blog?: BlogData;
   treatments?: TreatmentData[];
-  blogPosts?: BlogData[];
-  navTreatments?: TreatmentData[];
+  blogPosts?: BlogCardData[];
+  navTreatments?: TreatmentNavItem[];
 };
 
 const staticPageComponents: Record<string, ComponentType<Record<string, unknown>>> = {
@@ -159,7 +159,7 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
     return { notFound: true };
   }
 
-  const navTreatments = await getAllTreatments();
+  const navTreatments = await getTreatmentNavItems();
   const [section, slug] = pathSegments;
 
   if (section === "treatments" && slug) {
@@ -221,7 +221,7 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
   }
 
   if (canonicalPath === "/blogs") {
-    const blogPosts = await getAllBlogs();
+    const blogPosts = await getBlogCards();
 
     return {
       props: withLocaleProps(
@@ -241,13 +241,15 @@ export const getStaticProps: GetStaticProps<LocalizedPageProps> = async ({ param
   }
 
   if (canonicalPath === "/about-us") {
+    const treatments = await getAllTreatments();
+
     return {
       props: withLocaleProps(
         {
           locale,
           canonicalPath,
           pageKey: canonicalPath,
-          treatments: navTreatments,
+          treatments,
           navTreatments,
         },
         locale,

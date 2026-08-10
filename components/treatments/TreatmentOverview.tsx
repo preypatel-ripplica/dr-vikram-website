@@ -7,11 +7,20 @@ type TreatmentOverviewProps = {
 };
 
 export function TreatmentOverview({ overview }: TreatmentOverviewProps) {
+  const highlightAlreadyIncludesPrefix =
+    Boolean(overview.titlePrefix) && overview.titleHighlight.includes(overview.titlePrefix);
+
   return (
     <section className={styles.contentSection} data-node-id="76:33134" id="overview">
       <SectionEyebrow>{overview.eyebrow}</SectionEyebrow>
       <h2>
-        {overview.titlePrefix} <span>{overview.titleHighlight}</span>
+        {highlightAlreadyIncludesPrefix ? (
+          <span>{overview.titleHighlight}</span>
+        ) : (
+          <>
+            {overview.titlePrefix} <span>{overview.titleHighlight}</span>
+          </>
+        )}
       </h2>
       <div className={styles.richText}>
         {overview.body.map((paragraph) => (

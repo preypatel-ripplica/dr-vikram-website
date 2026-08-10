@@ -17,13 +17,13 @@ import {
   faqGraph,
   itemListGraph,
 } from "@/lib/seo";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getTreatmentNavItems, type TreatmentNavItem } from "@/lib/treatments";
 import styles from "@/styles/UrowellnessClinicPage.module.css";
 
 export const getStaticProps: GetStaticProps<{
-  navTreatments: TreatmentData[];
+  navTreatments: TreatmentNavItem[];
 }> = async () => {
-  return { props: { navTreatments: await getAllTreatments() } };
+  return { props: { navTreatments: await getTreatmentNavItems() } };
 };
 
 const pagePath = "/urowellness-clinic-gurugram";

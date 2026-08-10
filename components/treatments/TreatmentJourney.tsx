@@ -14,7 +14,11 @@ function JourneyCaret({ direction }: { direction: "left" | "right" }) {
 }
 
 export function TreatmentJourney({ journey }: TreatmentJourneyProps) {
-  const [activeStep, setActiveStep] = useState(journey.defaultActiveStep ?? 0);
+  const initialStep =
+    journey.defaultActiveStep >= 0 && journey.defaultActiveStep < journey.steps.length
+      ? journey.defaultActiveStep
+      : 0;
+  const [activeStep, setActiveStep] = useState(initialStep);
   const tabsRef = useRef<HTMLDivElement | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const currentStep = journey.steps[activeStep];
@@ -29,6 +33,10 @@ export function TreatmentJourney({ journey }: TreatmentJourneyProps) {
       left: tab.offsetLeft - (tabs.clientWidth - tab.offsetWidth) / 2,
     });
   }, [activeStep]);
+
+  if (!journey.steps.length || !currentStep) {
+    return null;
+  }
 
   function moveStep(direction: "previous" | "next") {
     setActiveStep((step) => {

@@ -16,7 +16,7 @@ import {
   absoluteUrl,
   identityGraphItems,
 } from "@/lib/seo";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getTreatmentNavItems, type TreatmentNavItem } from "@/lib/treatments";
 import styles from "@/styles/Home.module.css";
 
 const TreatmentsCarousel = dynamic(
@@ -54,9 +54,9 @@ const FinalCtaSection = dynamic(
 
 export const getStaticProps: GetStaticProps<{
   disableIdentityGraph: boolean;
-  navTreatments: TreatmentData[];
+  navTreatments: TreatmentNavItem[];
 }> = async () => {
-  return { props: { disableIdentityGraph: true, navTreatments: await getAllTreatments() } };
+  return { props: { disableIdentityGraph: true, navTreatments: await getTreatmentNavItems() } };
 };
 
 const homeSeoTitle = "Dr. Vikram Barua Kaushik | Urologist & Robotic Surgeon";

@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FinalCtaSection } from "@/components/home/FinalCtaSection";
 import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import type { TreatmentData } from "@/lib/treatments";
 import styles from "@/styles/TreatmentPage.module.css";
 import { TreatmentCareGuide } from "./TreatmentCareGuide";
+import { TreatmentCtaSection } from "./TreatmentCtaSection";
 import { TreatmentExperience } from "./TreatmentExperience";
 import { TreatmentFaq } from "./TreatmentFaq";
 import { TreatmentHero } from "./TreatmentHero";
@@ -21,6 +22,7 @@ export function TreatmentPageTemplate({ treatment }: TreatmentPageTemplateProps)
   const [activeSection, setActiveSection] = useState(
     treatment.sidebar.items[0]?.href.replace("#", "") ?? "overview",
   );
+  const clickedSectionLock = useRef<number | null>(null);
 
   const sectionIds = useMemo(
     () => treatment.sidebar.items.map((item) => item.href.replace("#", "")),
@@ -38,32 +40,40 @@ export function TreatmentPageTemplate({ treatment }: TreatmentPageTemplateProps)
   }, [treatment.slug]);
 
   useEffect(() => {
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section));
+    function updateActiveSection() {
+      if (clickedSectionLock.current && Date.now() < clickedSectionLock.current) {
+        return;
+      }
 
-    if (!sections.length) return;
+      const markerOffset = window.matchMedia("(max-width: 900px)").matches ? 120 : 150;
+      const marker = window.scrollY + markerOffset;
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((section): section is HTMLElement => Boolean(section));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      const currentSection = sections.reduce<HTMLElement | null>((current, section) => {
+        return section.offsetTop <= marker ? section : current;
+      }, sections[0] ?? null);
 
-        if (visibleEntry?.target.id) {
-          setActiveSection(visibleEntry.target.id);
-        }
-      },
-      {
-        rootMargin: "-32% 0px -55% 0px",
-        threshold: [0.08, 0.2, 0.4, 0.6],
-      },
-    );
+      if (currentSection?.id) {
+        setActiveSection(currentSection.id);
+      }
+    }
 
-    sections.forEach((section) => observer.observe(section));
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, [sectionIds]);
+
+  function handleSectionClick(sectionId: string) {
+    clickedSectionLock.current = Date.now() + 700;
+    setActiveSection(sectionId);
+  }
 
   return (
     <main className={styles.treatmentPage}>
@@ -73,6 +83,7 @@ export function TreatmentPageTemplate({ treatment }: TreatmentPageTemplateProps)
       <div className={styles.bodyShell} data-node-id="76:33070">
         <TreatmentSidebar
           activeSection={activeSection}
+          onSectionClick={handleSectionClick}
           sidebar={treatment.sidebar}
         />
 
@@ -82,6 +93,9 @@ export function TreatmentPageTemplate({ treatment }: TreatmentPageTemplateProps)
           <TreatmentJourney journey={treatment.journey} />
           <TreatmentExperience experience={treatment.experience} />
           <TreatmentCareGuide careGuide={treatment.careGuide} />
+          {treatment.ctaSection ? (
+            <TreatmentCtaSection ctaSection={treatment.ctaSection} />
+          ) : null}
           <TreatmentFaq faqs={treatment.faqs} />
         </article>
       </div>

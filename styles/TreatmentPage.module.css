@@ -906,6 +906,10 @@
   max-width: 100%;
 }
 
+.treatmentCtaSection {
+  padding-top: 80px;
+}
+
 .faqList {
   margin-top: 32px;
   overflow: hidden;
@@ -1068,24 +1072,35 @@
 
   .contentSection,
   .contentSection:first-child {
-    padding: 56px 0;
+    padding: 42px 0;
   }
 
   .article h2 {
-    font-size: clamp(28px, 8vw, 32px);
-    letter-spacing: -0.72px;
-    line-height: 1.22;
+    font-size: clamp(26px, 7.2vw, 30px);
+    letter-spacing: -0.4px;
+    line-height: 1.16;
+  }
+
+  .eyebrow {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .richText {
+    gap: 18px;
+    margin-top: 22px;
   }
 
   .richText p,
   .sectionIntro {
-    font-size: 15px;
-    line-height: 24.5px;
+    font-size: 14.5px;
+    line-height: 23.5px;
   }
 
   .conditionGroups {
-    gap: 32px;
-    margin-top: 32px;
+    gap: 34px;
+    margin-top: 40px;
   }
 
   .conditionGroup h3,

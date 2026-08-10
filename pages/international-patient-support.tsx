@@ -8,11 +8,11 @@ import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
 import { breadcrumbGraph, faqGraph, itemListGraph, pageGraph } from "@/lib/seo";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getTreatmentNavItems, type TreatmentNavItem } from "@/lib/treatments";
 import styles from "@/styles/PatientSupportPage.module.css";
 
-export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentData[] }> = async () => {
-  return { props: { navTreatments: await getAllTreatments() } };
+export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentNavItem[] }> = async () => {
+  return { props: { navTreatments: await getTreatmentNavItems() } };
 };
 
 const countries = [

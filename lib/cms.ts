@@ -12,6 +12,8 @@ import path from "node:path";
 
 const CMS_API_URL = process.env.CMS_API_URL;
 const CMS_API_TOKEN = process.env.CMS_API_TOKEN;
+const CMS_RETRY_ATTEMPTS = Number(process.env.CMS_RETRY_ATTEMPTS || 5);
+const CMS_RETRY_DELAY_MS = Number(process.env.CMS_RETRY_DELAY_MS || 700);
 
 function requireCmsConfig() {
   if (!CMS_API_URL || !CMS_API_TOKEN) {
@@ -21,18 +23,68 @@ function requireCmsConfig() {
   }
 }
 
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function retryDelay(attempt: number) {
+  return CMS_RETRY_DELAY_MS * attempt;
+}
+
+function isRetryableStatus(status: number) {
+  return status === 408 || status === 425 || status === 429 || status >= 500;
+}
+
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : String(error);
+}
+
+async function fetchWithRetry(url: string, init: RequestInit, label: string): Promise<Response> {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= CMS_RETRY_ATTEMPTS; attempt += 1) {
+    try {
+      const res = await fetch(url, {
+        ...init,
+        headers: {
+          ...(init.headers || {}),
+          "ngrok-skip-browser-warning": "true",
+          Connection: "close",
+        },
+      });
+
+      if (res.ok || !isRetryableStatus(res.status) || attempt === CMS_RETRY_ATTEMPTS) {
+        return res;
+      }
+
+      lastError = new Error(`${label} failed: ${res.status} ${res.statusText}`);
+    } catch (error) {
+      lastError = error;
+
+      if (attempt === CMS_RETRY_ATTEMPTS) {
+        throw new Error(`${label} failed after ${attempt} attempts: ${errorMessage(error)}`, {
+          cause: error,
+        });
+      }
+    }
+
+    await wait(retryDelay(attempt));
+  }
+
+  throw new Error(`${label} failed: ${errorMessage(lastError)}`);
+}
+
 async function cmsPost<T = unknown>(endpoint: string, body: object): Promise<T> {
   requireCmsConfig();
 
-  const res = await fetch(`${CMS_API_URL}/api/${endpoint}`, {
+  const res = await fetchWithRetry(`${CMS_API_URL}/api/${endpoint}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${CMS_API_TOKEN}`,
-      "ngrok-skip-browser-warning": "true",
     },
     body: JSON.stringify(body),
-  });
+  }, `CMS request to "${endpoint}"`);
 
   if (!res.ok) {
     throw new Error(`CMS request to "${endpoint}" failed: ${res.status} ${res.statusText}`);
@@ -47,20 +99,29 @@ type CmsEntriesResponse = {
   items?: unknown[];
 };
 
-const collectionCache = new Map<string, unknown[]>();
+const collectionCache = new Map<string, Promise<unknown[]>>();
 
 /** Fetch every entry in a collection. Cached per build so pages sharing a collection don't refetch. */
 export async function fetchCollection(slug: string): Promise<unknown[]> {
   if (collectionCache.has(slug)) return collectionCache.get(slug)!;
 
-  const data = await cmsPost<unknown[] | CmsEntriesResponse>("content.entries.list", {
-    collection_slug: slug,
-    page_size: 100,
-  });
+  const request = (async () => {
+    const data = await cmsPost<unknown[] | CmsEntriesResponse>("content.entries.list", {
+      collection_slug: slug,
+      page_size: 100,
+    });
 
-  const entries = Array.isArray(data) ? data : data?.entries ?? data?.data ?? data?.items ?? [];
-  collectionCache.set(slug, entries);
-  return entries;
+    return Array.isArray(data) ? data : data?.entries ?? data?.data ?? data?.items ?? [];
+  })();
+
+  collectionCache.set(slug, request);
+
+  try {
+    return await request;
+  } catch (error) {
+    collectionCache.delete(slug);
+    throw error;
+  }
 }
 
 /** Unwrap a CMS list item — entries come back as `{ entry_id, collection_id, entry: {...} }`. */
@@ -69,7 +130,12 @@ export function entryData<T = Record<string, unknown>>(item: unknown): T {
 }
 
 async function downloadTo(url: string, absPath: string): Promise<void> {
-  const res = await fetch(url, { headers: { "ngrok-skip-browser-warning": "true" } });
+  const res = await fetchWithRetry(
+    url,
+    { headers: { "ngrok-skip-browser-warning": "true" } },
+    `CMS media download from ${url}`,
+  );
+
   if (!res.ok) {
     throw new Error(`Failed to download CMS media from ${url}: ${res.status} ${res.statusText}`);
   }
@@ -81,7 +147,18 @@ async function downloadTo(url: string, absPath: string): Promise<void> {
 
 export type CmsMedia = { media_id?: string; alt_text?: string; name?: string } | string | null | undefined;
 
-const mediaCache = new Map<string, string>();
+const mediaCache = new Map<string, Promise<string>>();
+
+function findLocalMediaPath(mediaId: string): string {
+  const mediaDir = path.join(process.cwd(), "public", "cms-images");
+  if (!fs.existsSync(mediaDir)) return "";
+
+  const localFile = fs
+    .readdirSync(mediaDir)
+    .find((filename) => filename === mediaId || filename.startsWith(`${mediaId}.`));
+
+  return localFile ? `/cms-images/${localFile}` : "";
+}
 
 /**
  * Resolve a CMS image field to a local `/cms-images/...` path, downloading it
@@ -106,25 +183,45 @@ export async function resolveImage(field: CmsMedia): Promise<string> {
     return mediaCache.get(field.media_id)!;
   }
 
-  const media = await cmsPost<{ filename?: string; name?: string; download_url?: string; preview_url?: string; url?: string }>(
-    "content.media.get",
-    { media_id: field.media_id },
-  );
-
-  const ext = path.extname(media?.filename || media?.name || field.name || "") || ".jpg";
-  const localPath = `/cms-images/${field.media_id}${ext}`;
-  const absPath = path.join(process.cwd(), "public", "cms-images", `${field.media_id}${ext}`);
-
-  if (!fs.existsSync(absPath)) {
-    const signedUrl = media?.download_url ?? media?.preview_url ?? media?.url;
-    if (!signedUrl) {
-      throw new Error(`CMS media ${field.media_id} has no downloadable URL`);
-    }
-    await downloadTo(signedUrl, absPath);
+  const existingLocalPath = findLocalMediaPath(field.media_id);
+  if (existingLocalPath) {
+    const request = Promise.resolve(existingLocalPath);
+    mediaCache.set(field.media_id, request);
+    return request;
   }
 
-  mediaCache.set(field.media_id, localPath);
-  return localPath;
+  const request = (async () => {
+    const media = await cmsPost<{
+      filename?: string;
+      name?: string;
+      download_url?: string;
+      preview_url?: string;
+      url?: string;
+    }>("content.media.get", { media_id: field.media_id });
+
+    const ext = path.extname(media?.filename || media?.name || field.name || "") || ".jpg";
+    const localPath = `/cms-images/${field.media_id}${ext}`;
+    const absPath = path.join(process.cwd(), "public", "cms-images", `${field.media_id}${ext}`);
+
+    if (!fs.existsSync(absPath)) {
+      const signedUrl = media?.download_url ?? media?.preview_url ?? media?.url;
+      if (!signedUrl) {
+        throw new Error(`CMS media ${field.media_id} has no downloadable URL`);
+      }
+      await downloadTo(signedUrl, absPath);
+    }
+
+    return localPath;
+  })();
+
+  mediaCache.set(field.media_id, request);
+
+  try {
+    return await request;
+  } catch (error) {
+    mediaCache.delete(field.media_id);
+    throw error;
+  }
 }
 
 export function toStringArray(value: unknown): string[] {

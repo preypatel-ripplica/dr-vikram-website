@@ -12,6 +12,10 @@ export function TreatmentCareGuide({ careGuide }: TreatmentCareGuideProps) {
   const [activeTab, setActiveTab] = useState(0);
   const currentTab = careGuide.tabs[activeTab];
 
+  if (!careGuide.tabs.length || !currentTab) {
+    return null;
+  }
+
   return (
     <section
       className={`${styles.contentSection} ${styles.careSection}`}
@@ -47,7 +51,7 @@ export function TreatmentCareGuide({ careGuide }: TreatmentCareGuideProps) {
           </li>
         ))}
       </ul>
-      <p className={styles.careNote}>{careGuide.note}</p>
+      {careGuide.note ? <p className={styles.careNote}>{careGuide.note}</p> : null}
     </section>
   );
 }

@@ -251,7 +251,7 @@ const scopeFiles = {
 };
 
 const scopeCmsCollections = {
-  blogs: ["blog"],
+  blogs: ["new-blogs"],
   treatments: ["treatments"],
 };
 
@@ -326,12 +326,12 @@ function isTranslatableString(value) {
   if (SKIPPED_EXACT_VALUES.has(text)) return false;
   if (/^[\d\s.,:+\-/%()]+$/.test(text)) return false;
   if (/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/.test(text)) return false;
-  if (/^M[-+0-9A-Za-z.,\s]+Z?$/.test(text)) return false;
+  if (/^[Mm]\s*[-+]?\d/.test(text) && /^[MmZzLlHhVvCcSsQqTtAa0-9,.\s+-]+$/.test(text)) return false;
   if (/^(https?:|mailto:|tel:|#|\/)/.test(text)) return false;
   if (/^[\w.-]+@[\w.-]+$/.test(text)) return false;
   if (/\.(png|jpe?g|svg|webp|gif|pdf|docx?)$/i.test(text)) return false;
   if (/[{}<>]/.test(text)) return false;
-  if (/\b(import|export|function|const|let|return|className|styles|undefined|null)\b/.test(text)) {
+  if (/^(import|export|function|const|let|return|className|styles|undefined|null)$/.test(text)) {
     return false;
   }
   return /[A-Za-z]/.test(text);

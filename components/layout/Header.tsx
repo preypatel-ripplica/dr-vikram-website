@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
-import type { TreatmentData } from "@/lib/treatments";
+import type { TreatmentNavItem } from "@/lib/treatments";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import styles from "./Header.module.css";
 
@@ -45,7 +45,7 @@ function ChevronDown() {
 }
 
 type HeaderProps = {
-  treatments: TreatmentData[];
+  treatments: TreatmentNavItem[];
 };
 
 export default function Header({ treatments }: HeaderProps) {
@@ -55,7 +55,7 @@ export default function Header({ treatments }: HeaderProps) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const treatmentNavItems = treatments.map((treatment) => ({
-    label: treatment.hero.title.replace(/^Understanding\s+/i, ""),
+    label: treatment.title.replace(/^Understanding\s+/i, ""),
     href: `/treatments/${treatment.slug}`,
   }));
 

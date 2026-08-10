@@ -5,9 +5,9 @@ import { useState } from "react";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
-import { getAllBlogs, type BlogData } from "@/lib/blogs";
+import { getBlogCards, type BlogCardData } from "@/lib/blogs";
 import { breadcrumbGraph, faqGraph, itemListGraph, pageGraph } from "@/lib/seo";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getTreatmentNavItems, type TreatmentNavItem } from "@/lib/treatments";
 import styles from "@/styles/BlogsPage.module.css";
 
 const faqs = [
@@ -75,24 +75,24 @@ function BlogHero() {
   );
 }
 
-function BlogCard({ post }: { post: BlogData }) {
+function BlogCard({ post }: { post: BlogCardData }) {
   const { localizeHref, t } = useI18n();
 
   return (
     <article className={styles.blogCard}>
       <div className={styles.blogImage}>
         <Image
-          alt={post.title}
+          alt={post.cardAlt || post.title}
           className={styles.blogImageAsset}
           fill
           sizes="(max-width: 900px) 100vw, 347px"
-          src={post.hero.image}
+          src={post.cardImage}
         />
       </div>
 
       <div className={styles.cardBody}>
         <div className={styles.metaRow}>
-          <span className={`${styles.badge} ${styles.blue}`}>{t("Kidney Stones")}</span>
+          <span className={`${styles.badge} ${styles.blue}`}>{t(post.category)}</span>
           <span className={styles.dot}>·</span>
           <span className={styles.readTime}>{t(post.readTime)}</span>
         </div>
@@ -109,7 +109,7 @@ function BlogCard({ post }: { post: BlogData }) {
   );
 }
 
-function BlogGrid({ blogPosts }: { blogPosts: BlogData[] }) {
+function BlogGrid({ blogPosts }: { blogPosts: BlogCardData[] }) {
   return (
     <section className={styles.blogGridSection} data-node-id="103:37294">
       <div className={styles.blogGrid}>
@@ -167,14 +167,14 @@ function FaqSection() {
 }
 
 export const getStaticProps: GetStaticProps<{
-  blogPosts: BlogData[];
-  navTreatments: TreatmentData[];
+  blogPosts: BlogCardData[];
+  navTreatments: TreatmentNavItem[];
 }> = async () => {
-  const [blogPosts, navTreatments] = await Promise.all([getAllBlogs(), getAllTreatments()]);
+  const [blogPosts, navTreatments] = await Promise.all([getBlogCards(), getTreatmentNavItems()]);
   return { props: { blogPosts, navTreatments } };
 };
 
-export default function BlogsPage({ blogPosts }: { blogPosts: BlogData[] }) {
+export default function BlogsPage({ blogPosts }: { blogPosts: BlogCardData[] }) {
   const { t } = useI18n();
   const title = t("Blogs | Dr. Vikram");
   const description = t("Read Dr. Vikram's latest guidance on treatment, recovery, and patient care.");

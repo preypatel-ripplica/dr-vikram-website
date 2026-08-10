@@ -7,11 +7,11 @@ import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { SeoHead } from "@/components/shared/SeoHead";
 import videoGallery from "@/data/video-gallery.json";
 import { breadcrumbGraph, itemListGraph, pageGraph } from "@/lib/seo";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getTreatmentNavItems, type TreatmentNavItem } from "@/lib/treatments";
 import styles from "@/styles/VideoGalleryPage.module.css";
 
-export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentData[] }> = async () => {
-  return { props: { navTreatments: await getAllTreatments() } };
+export const getStaticProps: GetStaticProps<{ navTreatments: TreatmentNavItem[] }> = async () => {
+  return { props: { navTreatments: await getTreatmentNavItems() } };
 };
 
 type CategoryKey = "all" | "education" | "robotic" | "testimonials" | "qa";

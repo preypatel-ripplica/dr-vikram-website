@@ -8,7 +8,7 @@ import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { PageSectionReveal } from "@/components/shared/PageSectionReveal";
 import { SeoHead } from "@/components/shared/SeoHead";
 import { useI18n } from "@/lib/i18n-context";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getAllTreatments, getTreatmentNavItems, type TreatmentData, type TreatmentNavItem } from "@/lib/treatments";
 import {
   breadcrumbGraph,
   faqGraph,
@@ -246,10 +246,10 @@ function FaqSection() {
 
 export const getStaticProps: GetStaticProps<{
   treatments: TreatmentData[];
-  navTreatments: TreatmentData[];
+  navTreatments: TreatmentNavItem[];
 }> = async () => {
-  const treatments = await getAllTreatments();
-  return { props: { treatments, navTreatments: treatments } };
+  const [treatments, navTreatments] = await Promise.all([getAllTreatments(), getTreatmentNavItems()]);
+  return { props: { treatments, navTreatments } };
 };
 
 export default function AboutUsPage({ treatments }: { treatments: TreatmentData[] }) {

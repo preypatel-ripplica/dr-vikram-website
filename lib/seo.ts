@@ -46,7 +46,7 @@ type FaqItem = {
 };
 
 export function absoluteUrl(path = "/") {
-  const cleanPath = path.split("#")[0]?.split("?")[0] || "/";
+  const cleanPath = path.split("?")[0] || "/";
   return `${SITE_URL}${cleanPath === "/" ? "/" : cleanPath}`;
 }
 
@@ -271,6 +271,9 @@ export function treatmentGraphs(treatment: TreatmentData): JsonLd[] {
   const path = `/treatments/${treatment.slug}`;
   const title = treatment.metaTitle;
   const description = treatment.metaDescription;
+  const procedureName = /treatment$/i.test(treatment.hero.title)
+    ? treatment.hero.title
+    : `${treatment.hero.title} treatment`;
 
   return withoutNulls([
     pageGraph({
@@ -291,9 +294,9 @@ export function treatmentGraphs(treatment: TreatmentData): JsonLd[] {
     },
     {
       "@context": "https://schema.org",
-      "@type": "MedicalProcedure",
+      "@type": ["MedicalProcedure", "MedicalTherapy"],
       "@id": `${absoluteUrl(path)}#procedure`,
-      name: `${treatment.hero.title} treatment`,
+      name: procedureName,
       description: treatment.experience.body.join(" "),
       provider: { "@id": `${SITE_URL}/#doctor` },
     },
@@ -308,7 +311,11 @@ export function treatmentGraphs(treatment: TreatmentData): JsonLd[] {
 
 export function blogGraphs(blog: BlogData): JsonLd[] {
   const path = `/blogs/${blog.slug}`;
-  const title = `${blog.title} | Dr. Vikram`;
+  const title = blog.metaTitle || `${blog.title} | Dr. Vikram`;
+  const keywords = [
+    blog.seo.primaryKeyword,
+    ...blog.seo.secondaryKeywords,
+  ].filter(Boolean);
 
   return withoutNulls([
     {
@@ -321,7 +328,10 @@ export function blogGraphs(blog: BlogData): JsonLd[] {
       image: imageUrl(blog.hero.image),
       author: { "@id": `${SITE_URL}/#doctor` },
       publisher: { "@id": `${SITE_URL}/#organization` },
-      about: "Kidney stones",
+      about: blog.seo.primaryKeyword || blog.category || blog.title,
+      keywords: keywords.length ? keywords.join(", ") : undefined,
+      datePublished: blog.publishedAt || undefined,
+      dateModified: blog.publishedAt || undefined,
       inLanguage: "en",
     },
     pageGraph({
@@ -330,7 +340,12 @@ export function blogGraphs(blog: BlogData): JsonLd[] {
       description: blog.metaDescription,
       image: blog.hero.image,
     }),
-    faqGraph(blog.faqs.items),
+    faqGraph(
+      blog.faqs.items.map((item) => ({
+        question: item.question,
+        answer: item.answer.join(" "),
+      })),
+    ),
     breadcrumbGraph([
       { name: "Home", path: "/" },
       { name: "Blogs", path: "/blogs" },

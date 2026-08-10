@@ -6,42 +6,25 @@ import { AppointmentSection } from "@/components/shared/AppointmentSection";
 import { SeoHead } from "@/components/shared/SeoHead";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n-config";
 import { withLocaleProps } from "@/lib/page-i18n.server";
-import { getAllBlogs, getBlogBySlug, type BlogData } from "@/lib/blogs";
+import { getAllBlogs, getBlogBySlug, type BlogContentBlock, type BlogData, type BlogParagraph } from "@/lib/blogs";
 import { blogGraphs } from "@/lib/seo";
-import { getAllTreatments, type TreatmentData } from "@/lib/treatments";
+import { getTreatmentNavItems, type TreatmentNavItem } from "@/lib/treatments";
 import styles from "@/styles/BlogDetailPage.module.css";
 
 type BlogPageProps = {
   blog: BlogData;
   canonicalPath: string;
   locale: Locale;
-  navTreatments: TreatmentData[];
+  navTreatments: TreatmentNavItem[];
 };
 
-// Sections always render in this fixed order in this template — the CMS's
-// `sidebar.items` only supplies label text overrides, never order, so a
-// misordered CMS entry can no longer put the sidebar out of sync with the
-// actual section order on the page.
-const BLOG_SECTION_ORDER: { href: string; defaultLabel: string }[] = [
-  { href: "#overview", defaultLabel: "Overview" },
-  { href: "#about", defaultLabel: "About the condition" },
-  { href: "#size-guide", defaultLabel: "Size guide" },
-  { href: "#treatment-options", defaultLabel: "Treatment options" },
-  { href: "#symptom-check", defaultLabel: "Symptom check" },
-  { href: "#experience", defaultLabel: "Our experience" },
-  { href: "#faq", defaultLabel: "Common questions" },
-];
-
 function buildSidebarItems(blog: BlogData): BlogData["sidebar"]["items"] {
-  const labelByHref = new Map(blog.sidebar.items.map((item) => [item.href, item.label]));
-
-  return BLOG_SECTION_ORDER.map(({ href, defaultLabel }) => ({
-    href,
-    label: labelByHref.get(href) || defaultLabel,
-  }));
+  return blog.sidebar.items.filter((item) => item.href && item.label);
 }
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
+  if (!children) return null;
+
   return (
     <p className={styles.sectionLabel}>
       <span className={styles.shieldIcon}>
@@ -57,27 +40,11 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SectionHeading({
-  eyebrow,
-  title,
-  highlight,
-}: {
-  eyebrow: string;
-  title: string;
-  highlight?: string;
-}) {
+function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <div className={styles.sectionHeading}>
       <SectionLabel>{eyebrow}</SectionLabel>
-      <h2>
-        {title}
-        {highlight ? (
-          <>
-            {" "}
-            <span>{highlight}</span>
-          </>
-        ) : null}
-      </h2>
+      <h2>{title}</h2>
     </div>
   );
 }
@@ -90,7 +57,7 @@ function BlogHero({ blog }: { blog: BlogData }) {
       <p className={styles.heroSummary}>{blog.hero.summary}</p>
       <div className={styles.heroImage}>
         <Image
-          alt=""
+          alt={blog.hero.alt}
           fill
           priority
           sizes="(max-width: 900px) 100vw, 1280px"
@@ -136,224 +103,110 @@ function Sidebar({
   );
 }
 
-function OverviewSection({ blog }: { blog: BlogData }) {
+function Paragraph({ paragraph }: { paragraph: BlogParagraph }) {
+  if (typeof paragraph === "string") {
+    return <p>{paragraph}</p>;
+  }
+
   return (
-    <section className={styles.contentSection} id="about" data-node-id="135:10337">
-      <SectionHeading
-        eyebrow={blog.overview.eyebrow}
-        highlight={blog.overview.highlight}
-        title={blog.overview.titlePrefix}
-      />
+    <p>
+      {paragraph.map((part, index) =>
+        part.type === "link" ? (
+          <a href={part.href} key={`${part.text}-${index}`}>
+            {part.text}
+          </a>
+        ) : (
+          <span key={`${part.text}-${index}`}>{part.text}</span>
+        ),
+      )}
+    </p>
+  );
+}
+
+function IntroSection({ blog }: { blog: BlogData }) {
+  return (
+    <section className={styles.contentSection} id="overview" data-node-id="135:10337">
+      <div className={styles.richText}>
+        <Paragraph paragraph={blog.content.intro} />
+      </div>
+    </section>
+  );
+}
+
+function SectionBlock({ block }: { block: Extract<BlogContentBlock, { type: "section" }> }) {
+  const ListTag = block.list?.type === "ol" ? "ol" : "ul";
+
+  return (
+    <section className={styles.contentSection} id={block.id}>
+      <SectionHeading eyebrow="" title={block.heading} />
 
       <div className={styles.richText}>
-        {blog.overview.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+        {block.paragraphs.map((paragraph, index) => (
+          <Paragraph key={index} paragraph={paragraph} />
         ))}
       </div>
 
-      <div className={styles.articleSubsection}>
-        <h3>{blog.overview.subheading}</h3>
-        <div className={styles.richText}>
-          {blog.overview.subParagraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+      {block.list ? (
+        <ListTag className={styles.articleList}>
+          {block.list.items.map((item) => (
+            <li key={item}>{item}</li>
           ))}
-        </div>
-      </div>
+        </ListTag>
+      ) : null}
+
+      {block.quote ? <blockquote className={styles.inlineQuote}>{block.quote}</blockquote> : null}
     </section>
   );
 }
 
-function SizeGuideSection({ blog }: { blog: BlogData }) {
+function ImageBlock({ block }: { block: Extract<BlogContentBlock, { type: "image" }> }) {
   return (
-    <section className={styles.contentSection} id="size-guide" data-node-id="135:10349">
-      <SectionHeading eyebrow={blog.sizeGuide.eyebrow} title={blog.sizeGuide.title} />
-
-      <div className={styles.sizeGrid}>
-        {blog.sizeGuide.items.map((item) => (
-          <article className={styles.sizeCard} key={item.size}>
-            <div className={styles.sizeCardHeader}>
-              <span className={styles.sizeIcon}>
-                <Image alt="" height={28} src={item.icon} width={28} />
-              </span>
-              <strong>{item.size}</strong>
-            </div>
-            <p>{item.copy}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function TreatmentOptionsSection({ blog }: { blog: BlogData }) {
-  return (
-    <section
-      className={styles.contentSection}
-      id="treatment-options"
-      data-node-id="135:10395"
-    >
-      <SectionHeading
-        eyebrow={blog.treatmentOptions.eyebrow}
-        title={blog.treatmentOptions.title}
+    <figure className={styles.contentImage}>
+      <Image
+        alt={block.alt}
+        fill
+        sizes="(max-width: 900px) 100vw, 916px"
+        src={block.src}
       />
-
-      <div className={styles.optionList}>
-        {blog.treatmentOptions.items.map((item) => (
-          <article className={styles.optionCard} key={item.title}>
-            <span className={styles.optionIcon}>
-              <Image alt="" height={24} src={item.icon} width={24} />
-            </span>
-            <div className={styles.optionContent}>
-              <div className={styles.optionHeader}>
-                <h3>{item.title}</h3>
-                <span>{item.bestFor}</span>
-                <span>{item.duration}</span>
-              </div>
-              <p>{item.copy}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <p className={styles.noteBox}>{blog.treatmentOptions.note}</p>
-    </section>
+      {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+    </figure>
   );
 }
 
-function SymptomChecker({ blog }: { blog: BlogData }) {
-  const [activeStep, setActiveStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, string>>({});
-  const currentStep = blog.symptomCheck.steps[activeStep];
-  const isFinalStep = activeStep === blog.symptomCheck.steps.length - 1;
-  const selectedAnswer = answers[activeStep];
-  const progress = `${((activeStep + 1) / blog.symptomCheck.steps.length) * 100}%`;
+function ContentBlock({ block }: { block: BlogContentBlock }) {
+  if (block.type === "image") return <ImageBlock block={block} />;
 
-  function startOver() {
-    setActiveStep(0);
-    setAnswers({});
-  }
-
-  function chooseOption(option: string) {
-    setAnswers((current) => ({ ...current, [activeStep]: option }));
-  }
-
-  function continueGuide() {
-    if (!selectedAnswer) return;
-
-    if (isFinalStep) {
-      document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-      return;
-    }
-
-    setActiveStep((step) => step + 1);
-  }
-
-  return (
-    <section className={styles.symptomSection} id="symptom-check" data-node-id="135:10449">
-      <SectionHeading eyebrow={blog.symptomCheck.eyebrow} title={blog.symptomCheck.title} />
-
-      <div className={styles.symptomPanel}>
-        <div className={styles.symptomCard}>
-          <div className={styles.symptomMeta}>
-            <span>
-              Step {activeStep + 1} of {blog.symptomCheck.steps.length}
-            </span>
-            <button onClick={startOver} type="button">
-              Start over
-            </button>
-          </div>
-          <div className={styles.symptomProgress}>
-            <span style={{ width: progress }} />
-          </div>
-
-          <div className={styles.symptomBody}>
-            <h3>{currentStep.question}</h3>
-            <div className={styles.symptomOptions}>
-              {currentStep.options.map((option) => (
-                <button
-                  aria-pressed={selectedAnswer === option}
-                  className={selectedAnswer === option ? styles.selectedSymptomOption : ""}
-                  key={option}
-                  onClick={() => chooseOption(option)}
-                  type="button"
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <button
-            className={styles.continueButton}
-            disabled={!selectedAnswer}
-            onClick={continueGuide}
-            type="button"
-          >
-            {isFinalStep ? "Book appointment" : "Continue"}
-          </button>
-        </div>
-      </div>
-
-      <p className={styles.smallNote}>{blog.symptomCheck.note}</p>
-    </section>
-  );
+  return <SectionBlock block={block} />;
 }
 
-function ExperienceSection({ blog }: { blog: BlogData }) {
+function ResourcesSection({ blog }: { blog: BlogData }) {
+  if (!blog.resources.length) return null;
+
   return (
-    <section className={styles.contentSection} id="experience" data-node-id="135:10491">
-      <SectionHeading eyebrow={blog.experience.eyebrow} title={blog.experience.title} />
-
-      <div className={styles.richText}>
-        {blog.experience.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+    <section className={styles.contentSection} id="resources">
+      <SectionHeading eyebrow="" title="Resources" />
+      <ul className={styles.resourceList}>
+        {blog.resources.map((resource) => (
+          <li key={resource.href}>
+            <a href={resource.href} rel="noreferrer" target="_blank">
+              {resource.title}
+            </a>
+            {resource.source ? <span>{resource.source}</span> : null}
+          </li>
         ))}
-      </div>
-
-      <div className={styles.articleSubsection}>
-        <h3>{blog.experience.subheading}</h3>
-        <div className={styles.richText}>
-          {blog.experience.subParagraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.experienceCard}>
-        <div className={styles.experienceImage}>
-          <Image
-            alt=""
-            fill
-            sizes="(max-width: 900px) 100vw, 916px"
-            src={blog.experience.image}
-          />
-        </div>
-        <blockquote>{blog.experience.quote}</blockquote>
-        <p>{blog.experience.byline}</p>
-      </div>
-
-      <div className={styles.statsGrid}>
-        {blog.experience.stats.map((stat) => (
-          <article className={styles.statCard} key={stat.label}>
-            <span className={styles.statIcon}>
-              <Image alt="" height={20} src={stat.icon} width={20} />
-            </span>
-            <div>
-              <strong>{stat.value}</strong>
-              <p>{stat.label}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+      </ul>
     </section>
   );
 }
 
 function FaqSection({ blog }: { blog: BlogData }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const defaultOpenIndex = blog.faqs.items.findIndex((item) => item.openByDefault);
+  const [openIndex, setOpenIndex] = useState<number | null>(
+    defaultOpenIndex >= 0 ? defaultOpenIndex : null,
+  );
 
   return (
-    <section className={styles.faqSection} id="faq" data-node-id="135:10546">
+    <section className={styles.faqSection} id={blog.faqs.id} data-node-id="135:10546">
       <SectionHeading eyebrow={blog.faqs.eyebrow} title={blog.faqs.title} />
 
       <div className={styles.faqList}>
@@ -376,7 +229,9 @@ function FaqSection({ blog }: { blog: BlogData }) {
                   width={18}
                 />
               </button>
-              {isOpen ? <p>{item.answer}</p> : null}
+              {isOpen
+                ? item.answer.map((answer) => <p key={answer}>{answer}</p>)
+                : null}
             </div>
           );
         })}
@@ -428,7 +283,7 @@ export default function BlogDetailPage({ blog }: BlogPageProps) {
   return (
     <>
       <SeoHead
-        title={`${blog.title} | Dr. Vikram`}
+        title={blog.metaTitle || `${blog.title} | Dr. Vikram`}
         description={blog.metaDescription}
         image={blog.hero.image}
         ogType="article"
@@ -442,12 +297,11 @@ export default function BlogDetailPage({ blog }: BlogPageProps) {
           <Sidebar activeSection={activeSection} items={sidebarItems} />
 
           <article className={styles.article}>
-            <section className={styles.overviewAnchor} id="overview" />
-            <OverviewSection blog={blog} />
-            <SizeGuideSection blog={blog} />
-            <TreatmentOptionsSection blog={blog} />
-            <SymptomChecker blog={blog} />
-            <ExperienceSection blog={blog} />
+            <IntroSection blog={blog} />
+            {blog.content.blocks.map((block, index) => (
+              <ContentBlock key={`${block.type}-${index}`} block={block} />
+            ))}
+            <ResourcesSection blog={blog} />
             <FaqSection blog={blog} />
           </article>
         </div>
@@ -472,7 +326,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<BlogPageProps> = async ({ params }) => {
   const slug = typeof params?.slug === "string" ? params.slug : "";
-  const [blog, navTreatments] = await Promise.all([getBlogBySlug(slug), getAllTreatments()]);
+  const [blog, navTreatments] = await Promise.all([getBlogBySlug(slug), getTreatmentNavItems()]);
 
   if (!blog) {
     return { notFound: true };

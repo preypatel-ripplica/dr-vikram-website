@@ -9,6 +9,8 @@ type TreatmentExperienceProps = {
 };
 
 export function TreatmentExperience({ experience }: TreatmentExperienceProps) {
+  const hasStats = experience.stats.length > 0;
+
   return (
     <section
       className={styles.contentSection}
@@ -43,19 +45,21 @@ export function TreatmentExperience({ experience }: TreatmentExperienceProps) {
         ) : null}
       </div>
 
-      <div className={styles.statsGrid}>
-        {experience.stats.map((stat) => (
-          <article key={stat.label}>
-            <span className={styles.statIcon} aria-hidden="true">
-              <SiteIcon name={stat.icon} />
-            </span>
-            <span>
-              <strong>{stat.value}</strong>
-              <em>{stat.label}</em>
-            </span>
-          </article>
-        ))}
-      </div>
+      {hasStats ? (
+        <div className={styles.statsGrid}>
+          {experience.stats.map((stat) => (
+            <article key={stat.label}>
+              <span className={styles.statIcon} aria-hidden="true">
+                <SiteIcon name={stat.icon} />
+              </span>
+              <span>
+                <strong>{stat.value}</strong>
+                <em>{stat.label}</em>
+              </span>
+            </article>
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }
